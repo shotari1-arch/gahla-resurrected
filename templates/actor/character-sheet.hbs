@@ -1,0 +1,359 @@
+<div class="gahla-sheet gahla-character-sheet">
+  <header class="gahla-character-header">
+    <div class="gahla-portrait-wrap">
+      <img class="gahla-portrait" src="{{actor.img}}" alt="{{actor.name}}">
+    </div>
+    <div class="gahla-title-block">
+      <input class="gahla-name" name="name" value="{{actor.name}}" />
+      <div class="gahla-subtitle">{{#if isNPC}}{{npcTypeLabel}}{{#if system.npc.archetypeName}} · {{system.npc.archetypeName}}{{/if}} · Tier {{system.npc.tier}} · Lvl bojowy {{system.npc.combatLevel}}{{else}}{{speciesLabel}} · {{archetypeLabel}} · {{system.lifePath}}{{/if}}</div>
+      <div class="gahla-header-badges">
+        <span>Poziom {{system.level}}</span><span>Tier {{system.derived.tier}}</span><span>{{talentCount}} talentów</span>
+      </div>
+    </div>
+    <div class="gahla-header-resources">
+      <span class="wounds"><small>{{#if usesHP}}HP{{else}}Rany{{/if}}</small><b>{{#if usesHP}}{{system.combat.hp.value}} / {{system.combat.hp.max}}{{else}}{{system.combat.wounds.value}} / {{system.stats.zyw}}{{/if}}</b></span>
+      <span><small>Aura</small><b>{{system.combat.aura.value}} / {{system.combat.aura.max}}</b></span><span><small>Los</small><b>{{system.fate.personal}}</b></span><span><small>Los grupowy</small><b>{{groupFate}}</b></span>
+      <div class="gahla-sheet-menus">
+        <details class="gahla-tools-menu"><summary><i class="fas fa-toolbox"></i> Narzędzia</summary><div class="gahla-tool-menu-items">
+          {{#unless isNPC}}<button type="button" data-action="openTalentTree">Drzewko talentów</button>{{/unless}}
+          <button type="button" data-action="openTracker">Tracker</button><button type="button" data-action="openAbilityBuilder" data-mode="maneuver">Kreator manewru</button>
+          {{#if canCreateMagic}}<button type="button" data-action="openAbilityBuilder" data-mode="spell">Kreator zaklęcia / cudu</button>{{/if}}
+          {{#if hasActiveTalents}}<button type="button" data-action="sheetTool" data-sheet-tool="active">Aktywne talenty</button>{{/if}}
+          {{#unless isNPC}}<button type="button" data-action="sheetTool" data-sheet-tool="development">Rozwój postaci</button>{{/unless}}
+        </div></details>
+        {{#if isGM}}<details class="gahla-tools-menu gm"><summary><i class="fas fa-crown"></i> Narzędzia GM</summary><div class="gahla-tool-menu-items">
+          <button type="button" data-action="sheetTool" data-sheet-tool="audit">Audyt buildu</button><button type="button" data-action="sheetTool" data-sheet-tool="session">Panel sesji MG</button><button type="button" data-action="sheetTool" data-sheet-tool="boss">Boss Dashboard</button><button type="button" data-action="sheetTool" data-sheet-tool="library">Biblioteka systemu</button>
+          <button type="button" data-action="toggleDarkness">Istota Mroku: {{#if creatureOfDarkness}}TAK{{else}}NIE{{/if}}</button>
+        </div></details>{{/if}}
+      </div>
+    </div>
+  </header>
+
+  {{#unless isNPC}}
+    {{#unless creationComplete}}
+    <section class="gahla-panel gahla-warning-panel">
+      <h2>Postać nie została utworzona kreatorem</h2>
+      <p>Statystyki Gahli są wyliczane z danych bazowych: rasa + Ścieżka Życia + rzuty + rozwój. Ręczna zmiana wartości wynikowej zostałaby nadpisana.</p>
+      <button type="button" data-action="openCreator" class="gahla-primary">Uruchom kreator nowej postaci</button>
+    </section>
+    {{/unless}}
+  {{/unless}}
+
+  <section class="gahla-summary">
+    {{#if usesHP}}
+    <div class="resource vital"><small>HP</small><b>{{system.combat.hp.value}} / {{system.combat.hp.max}}</b><span>{{npcTypeLabel}}</span></div>
+    {{else}}
+    <div class="resource vital"><small>ŻYW</small><b>{{system.stats.zyw}}</b><span>{{#if isNPC}}{{system.combat.wounds.value}} / {{system.combat.wounds.max}} Ran{{else}}{{system.combat.wounds.value}} Ran{{/if}}</span></div>
+    {{/if}}
+    <div class="resource combat"><small>SZ</small><b>{{system.derived.speedBase}}</b><span>Szybkość</span></div>
+    <div class="resource combat"><small>OBRONA</small><b>{{system.derived.defense}}</b><span>aktualna</span></div>
+    <div class="resource combat"><small>BGŁ</small><b>{{system.stats.bgl}}</b><span>biegłość</span></div>
+    <div class="resource aura"><small>AURA</small><b>{{system.combat.aura.value}} / {{system.combat.aura.max}}</b><span>{{#if auraAccess.allowed}}dostępna / max{{else}}{{auraAccess.reason}}{{/if}}</span></div>
+    <div class="resource fate gahla-fate-resource"><small>LOS</small><div class="gahla-fate-adjust"><button type="button" data-action="adjustFate" data-delta="-1" title="Odejmij osobisty Punkt Losu">−</button><b>{{system.fate.personal}}</b><button type="button" data-action="adjustFate" data-delta="1" title="Dodaj osobisty Punkt Losu">+</button></div><span>osobisty</span></div>
+
+  </section>
+
+  {{#unless usesHP}}
+  <section class="gahla-wound-strip gahla-threshold-cards" aria-label="Progi obrażeń">
+    <h2 class="gahla-wound-strip-title"><i class="fas fa-shield-halved"></i> Progi obrażeń</h2>
+    {{#each woundBands}}<article class="gahla-threshold-card {{key}}">
+      <h3><i class="fas {{#if (eq key 'physical')}}fa-shield-halved{{else}}{{#if (eq key 'magical')}}fa-wand-sparkles{{else}}fa-sun{{/if}}{{/if}}"></i> {{label}}</h3>
+      <div class="gahla-threshold-values"><div><span>2 RANY</span><b>{{one}}</b></div><div><span>3 RANY</span><b>{{two}}</b></div></div>
+      <p>ŻYW {{life}} · Odp. {{resistance}} (+{{resistanceBonus}}) · bonusy {{bonus}}</p>
+      <details><summary>Źródła i dalsze progi</summary><table><thead><tr><th>Źródło</th><th>I</th><th>II</th></tr></thead><tbody>{{#each sources}}<tr><th>{{label}}</th><td>{{one}}</td><td>{{two}}</td></tr>{{/each}}</tbody></table><p class="gahla-catastrophic">3 Rany: {{two}}+ · 5 Ran: {{five}}+ · 6 Ran: {{six}}+ · 7 Ran: {{seven}}+</p><p>Brak standardowego pasma 4 Ran.</p></details>
+    </article>{{/each}}
+  </section>
+  {{/unless}}
+
+
+  {{#if art.has}}<section class="gahla-panel"><b>Uzdolnienie Artystyczne: {{art.label}}</b>{{#if art.missing}}<p>Wybierz Śpiew albo Taniec. Do wyboru nie nalicza się bonusu T3.</p>{{/if}}{{#if art.canChoose}}<button type="button" data-action="chooseArt">{{#if art.missing}}Wybierz sztukę{{else}}Korekta sztuki (MG){{/if}}</button>{{/if}}</section>{{/if}}
+  {{#if monk.has}}<section class="gahla-panel"><b>Broń Mnicha: {{monk.name}}</b>{{#if monk.missing}}<p>Szkolenie Mnicha wymaga wyboru Broni Mnicha.</p>{{/if}}{{#if monk.canChoose}}<button type="button" data-action="chooseMonk">{{#if monk.missing}}Wybierz Broń Mnicha{{else}}Korekta Broni Mnicha (MG){{/if}}</button>{{/if}}</section>{{/if}}
+<nav class="gahla-tabs gahla-main-tabs">
+    <button type="button" data-gahla-tab="character"><i class="fas fa-user"></i> {{#if isNPC}}NPC{{else}}Postać{{/if}}</button>
+    <button type="button" data-gahla-tab="combat"><i class="fas fa-khanda"></i> Walka</button>
+    <button type="button" data-gahla-tab="equipment"><i class="fas fa-shield-halved"></i> Ekwipunek</button>
+    <button type="button" data-gahla-tab="maneuvers"><i class="fas fa-person-running"></i> Manewry</button>
+    <button type="button" data-gahla-tab="talents"><i class="fas fa-sitemap"></i> Talenty</button>
+    <button type="button" data-gahla-tab="magic"><i class="fas fa-wand-sparkles"></i> Magia / Cuda</button>
+    {{#unless isNPC}}<button type="button" data-gahla-tab="development"><i class="fas fa-arrow-trend-up"></i> Rozwój</button>{{/unless}}
+    {{#if isNPC}}<button type="button" data-gahla-tab="npcEdit"><i class="fas fa-sliders"></i> Edycja NPC</button>{{/if}}
+  </nav>
+
+  <section class="gahla-tab-content" data-tab="character">
+    <div class="gahla-character-layout">
+      <div class="gahla-panel gahla-stats-panel">
+        <div class="gahla-section-heading"><div><h2>Statystyki</h2><p class="gahla-note">{{#if isNPC}}Kliknij kość, aby wykonać test. Wartości przeciwnika możesz awaryjnie zmienić w ostatniej zakładce „Edycja NPC”.{{else}}Kliknij kość, aby wykonać test. Przyrosty kupujesz w zakładce Rozwój.{{/if}}</p></div></div>
+        <div class="gahla-stat-grid">
+          {{#each stats}}
+            <article class="gahla-stat">
+              <div class="gahla-stat-value"><span>{{label}}</span><b>{{value}}</b></div>
+              <div class="gahla-stat-actions">
+                <button type="button" data-action="rollStat" data-stat="{{key}}" title="Test {{label}}"><i class="fas fa-dice-d20"></i></button>
+              </div>
+              <small class="gahla-stat-breakdown">{{#if ../isNPC}}Bazowa cecha przeciwnika{{else}}rasa {{race}} · ścieżka {{path}} · rzut {{roll}}{{#if upgrades}} · rozwój {{upgrades}}×{{growth}}{{/if}}{{/if}}</small>
+            </article>
+          {{/each}}
+        </div>
+      </div>
+
+      <aside class="gahla-character-side">
+        <div class="gahla-panel">
+          <h2>Postać</h2>{{#unless isNPC}}<p>Poziom {{system.level}} — zmiana w Rozwoju</p>{{/unless}}
+          <dl class="gahla-data-list">
+            <dt>Rasa</dt><dd>{{speciesLabel}}</dd>
+            <dt>Płeć</dt><dd>{{system.sex}}</dd>
+            <dt>Archetyp</dt><dd>{{archetypeLabel}}</dd>
+            <dt>Ścieżka Życia</dt><dd>{{system.lifePath}}</dd>
+            <dt>Bóstwo</dt><dd>{{system.deity}}</dd>
+          </dl>
+          {{#if (eq system.species "vampir")}}
+          <label class="gahla-field-line">Faza <select name="system.phase"><option value="day" {{#if (eq system.phase "day")}}selected{{/if}}>Dzień</option><option value="night" {{#if (eq system.phase "night")}}selected{{/if}}>Noc</option></select></label>
+          {{else}}{{#if (eq system.species "therian")}}
+          <label class="gahla-field-line">Wyzwalacz Jaźni<textarea name="flags.gahla-resurrected.selfTrigger" placeholder="Personalny bodziec ustalony z MG">{{actor.flags.gahla-resurrected.selfTrigger}}</textarea></label><p class="gahla-note">Bestialska Hybryda i Zmiennokształtny wymagają spełnienia tego wyzwalacza. Zmianę Jaźni zadeklaruj zgodnie z jego opisem.</p>
+          <label class="gahla-field-line">Jaźń <select name="system.phase"><option value="human" {{#if (eq system.phase "human")}}selected{{/if}}>Ludzka</option><option value="beast" {{#if (eq system.phase "beast")}}selected{{/if}}>Bestia</option></select></label>
+          {{/if}}{{/if}}
+        </div>
+      </aside>
+    </div>
+
+    <div class="gahla-panel">
+      <h2>Wartości wynikowe</h2>
+      <div class="gahla-derived-sections">
+        <section><h3>Odporności</h3><div class="gahla-derived-grid">
+          <div><small>Fizyczna</small><b>{{system.derived.physicalResistance}}</b></div>
+          <div><small>Psychiczna</small><b>{{system.derived.mentalResistance}}</b></div>
+          <div><small>Magiczna</small><b>{{system.derived.magicalResistance}}</b></div>
+          <div><small>Duchowa</small><b>{{system.derived.spiritualResistance}}</b></div>
+        </div></section>
+        <section><h3>Walka</h3><div class="gahla-derived-grid">
+          <div><small>Trafienie wręcz</small><b>{{system.derived.hitMelee}}</b></div>
+          <div><small>Trafienie dystans</small><b>{{system.derived.hitRanged}}</b></div>
+          <div><small>Obrona</small><b>{{system.derived.defense}}</b></div>
+          <div><small>Szybkość</small><b>{{system.derived.speedBase}}</b></div>
+        </div></section>
+        <section><h3>Sloty</h3><div class="gahla-derived-grid three">
+          <div><small>Manewry</small><b>{{system.derived.maneuverSlots}}</b></div>
+          <div><small>Czary</small><b>{{system.derived.spellSlotsMage}}</b></div>
+          <div><small>Cuda</small><b>{{system.derived.spellSlotsCleric}}</b></div>
+        </div></section>
+      </div>
+    </div>
+  </section>
+
+  <section class="gahla-tab-content" data-tab="combat">
+    <div class="gahla-combat-top">
+      <div class="gahla-panel gahla-combat-primary">
+        <h2>Akcje bojowe</h2>
+        <div class="gahla-combat-action-grid">
+          <button type="button" class="gahla-primary gahla-big-action" data-action="attack" data-gahla-macro-action="attack" data-gahla-macro-label="{{actor.name}} — Atak / manewr" title="Kliknij: wykonaj. Przeciągnij na pasek makr: utwórz makro."><i class="fas fa-khanda"></i><span><b>Atak / manewr</b><small>wybierz broń, manewr i modyfikator</small></span></button>
+          {{#if hasMagicAction}}<button type="button" class="gahla-big-action gahla-magic-action" data-action="castSpell" data-gahla-macro-action="spell" data-gahla-macro-label="{{actor.name}} — Zaklęcie / cud" title="Kliknij: rzuć. Przeciągnij na pasek makr: utwórz makro."><i class="fas fa-wand-sparkles"></i><span><b>{{#if isCleric}}Rzuć cud{{else}}{{#if isMage}}Rzuć zaklęcie{{else}}Rzuć zaklęcie / cud{{/if}}{{/if}}</b><small>wybierz przygotowaną zdolność i zobacz opis</small></span></button>{{/if}}
+        </div>
+        <div class="gahla-combat-loadout">
+          <div><small>Wyposażona broń</small>{{#each equippedWeapons}}<span class="gahla-loadout-chip">{{name}} · {{damage}} · OP {{delay}}</span>{{else}}<span class="gahla-loadout-empty">brak</span>{{/each}}</div>
+          <div><small>Przygotowane manewry</small>{{#each preparedManeuvers}}<span class="gahla-loadout-chip">{{name}}</span>{{else}}<span class="gahla-loadout-empty">brak</span>{{/each}}</div>
+          {{#if hasMagicAction}}<div><small>{{#if isCleric}}Przygotowane cuda{{else}}{{#if isMage}}Przygotowane zaklęcia{{else}}Przygotowana magia{{/if}}{{/if}}</small>{{#each preparedMagic}}<span class="gahla-loadout-chip">{{name}}</span>{{else}}<span class="gahla-loadout-empty">brak</span>{{/each}}</div>{{/if}}
+        </div>
+        <div class="gahla-resource-inputs">
+          {{#if usesHP}}<label><span>HP</span><input name="system.combat.hp.value" type="number" min="0" max="{{system.combat.hp.max}}" value="{{system.combat.hp.value}}"><small>/ {{system.combat.hp.max}}</small></label>{{else}}<label><span>Rany</span><input name="system.combat.wounds.value" type="number" min="0" value="{{system.combat.wounds.value}}"><small>/ {{#if isNPC}}{{system.combat.wounds.max}}{{else}}{{system.stats.zyw}}{{/if}}</small></label>{{/if}}
+          <label><span>Aura</span><input name="system.combat.aura.value" type="number" min="0" max="{{system.combat.aura.max}}" value="{{system.combat.aura.value}}"><small>/ {{system.combat.aura.max}}</small></label>
+          <label><span>Transfer segmentów</span><input name="system.combat.transferSegments" type="number" min="0" value="{{system.combat.transferSegments}}"></label>
+        </div>
+        <div class="gahla-action-row"><button type="button" data-action="spendFate">Wydaj Punkt Losu</button><button type="button" data-action="longRest">Długi odpoczynek</button></div>
+      </div>
+      <div class="gahla-panel">
+        <h2>Stany</h2>
+        <div class="gahla-condition-grid">
+          {{#each conditions}}<button type="button" class="{{#if active}}active{{/if}}" data-action="toggleCondition" data-condition="{{key}}" title="{{description}}">{{label}}</button>{{/each}}
+        </div>
+      </div>
+    </div>
+
+    <div class="gahla-panel gahla-threshold-panel">
+      <div class="gahla-section-heading"><div><h2>Progi obrażeń</h2><p class="gahla-note">Dziesiątki Odporności zwiększają progi, nie odejmują obrażeń. Rany kumulują się aż do wyleczenia.</p></div><div class="gahla-threshold-life">ŻYW <b>{{system.stats.zyw}}</b>{{#if system.derived.thresholdBonus}} <span>+{{system.derived.thresholdBonus}} próg</span>{{/if}}</div></div>
+      <table class="gahla-effective-thresholds"><thead><tr><th>Typ</th><th>2 Rany od</th><th>3 Rany od</th></tr></thead><tbody>{{#each woundBands}}<tr><th>{{label}}</th><td>{{one}}</td><td>{{two}}</td></tr>{{/each}}</tbody></table>
+    </div>
+  </section>
+
+  <section class="gahla-tab-content" data-tab="equipment">
+    <div class="gahla-section-heading gahla-page-heading"><div><h2>Ekwipunek</h2><p class="gahla-note">Pancerz jest liczony osobno dla każdej trafianej części ciała. Wyposażone elementy są podświetlone.</p></div></div>
+
+    <div class="gahla-panel gahla-armor-overview">
+      <div class="gahla-section-heading"><div><h3>Aktywny pancerz — lokacje</h3><p class="gahla-note">Wartości wynikają wyłącznie z wyposażonych zbroi, tarczy, metalu i run pancerza.</p></div><span class="gahla-count-badge">Obrona z pancerza {{system.derived.armorDefense}}</span></div>
+      <div class="gahla-body-armor-grid">
+        {{#each armorLocations}}<div class="gahla-body-location {{key}}"><small>{{label}}</small><b>{{value}}</b><span>Pancerz</span></div>{{/each}}
+      </div>
+    </div>
+
+    <div class="gahla-inventory-grid">
+      <div class="gahla-panel"><h3>Broń</h3>
+        {{#each weapons}}<article class="gahla-inventory-row {{#if equipped}}equipped{{/if}}"><div><b>{{name}}</b><small>{{damage}}{{#if delay}} · OP {{delay}}{{/if}}</small></div><div class="gahla-row-actions"><button type="button" data-action="toggleEquip" data-item-id="{{id}}">{{#if equipped}}Zdejmij{{else}}Wyposaż{{/if}}</button><button type="button" data-action="itemRoll" data-item-id="{{id}}">Użyj</button>{{#if isRanged}}<button type="button" data-action="reload" data-item-id="{{id}}">Przeładuj</button>{{/if}}<button type="button" data-action="openItem" data-item-id="{{id}}" title="Edytuj"><i class="fas fa-pen"></i></button><button type="button" data-action="removeItem" data-item-id="{{id}}" title="Usuń"><i class="fas fa-trash"></i></button></div></article>{{else}}<p>Brak broni.</p>{{/each}}
+      </div>
+      <div class="gahla-panel"><h3>Pancerz i tarcze</h3>
+        {{#each armors}}
+          <article class="gahla-inventory-row armor-row {{#if equipped}}equipped{{/if}}">
+            <div><b>{{name}}</b><div class="gahla-location-badges">{{#each armorLocations}}<span>{{label}} {{value}}</span>{{/each}}{{#if ignoreLow}}<span class="gahla-ignore-badge">kości ≤{{ignoreLow}} → 0</span>{{/if}}</div></div>
+            <div class="gahla-row-actions"><button type="button" data-action="toggleEquip" data-item-id="{{id}}">{{#if equipped}}Zdejmij{{else}}Wyposaż{{/if}}</button>{{#if isShield}}<button type="button" data-action="moveShield" data-item-id="{{id}}"><i class="fas fa-arrows-up-down-left-right"></i> Lokacja</button>{{/if}}<button type="button" data-action="openItem" data-item-id="{{id}}" title="Edytuj"><i class="fas fa-pen"></i></button><button type="button" data-action="removeItem" data-item-id="{{id}}" title="Usuń"><i class="fas fa-trash"></i></button></div>
+          </article>
+        {{else}}<p>Brak pancerza.</p>{{/each}}
+      </div>
+      <div class="gahla-panel"><h3>Źródła Mocy</h3>
+        {{#each powerSources}}<article class="gahla-inventory-row {{#if equipped}}equipped{{/if}}"><div><b>{{name}}</b><small>{{#if element}}{{element}}{{/if}}</small></div><div class="gahla-row-actions"><button type="button" data-action="toggleEquip" data-item-id="{{id}}">{{#if equipped}}Odłącz{{else}}Aktywuj{{/if}}</button><button type="button" data-action="openItem" data-item-id="{{id}}" title="Edytuj"><i class="fas fa-pen"></i></button><button type="button" data-action="removeItem" data-item-id="{{id}}" title="Usuń"><i class="fas fa-trash"></i></button></div></article>{{else}}<p>Brak źródeł mocy.</p>{{/each}}
+      </div>
+      <div class="gahla-panel"><h3>Pozostałe</h3>
+        {{#each otherEquipment}}{{#if isRune}}<button type="button" data-action="bodyRune" data-item-id="{{id}}">{{name}} — wszczep w ciało</button>{{/if}}<article class="gahla-inventory-row {{#if equipped}}equipped{{/if}}"><div><b>{{name}}</b><small>{{typeLabel}}{{#if equipped}} · wyposażone{{/if}}</small></div><div class="gahla-row-actions">{{#if (eq type "equipment")}}<button type="button" data-action="toggleEquip" data-item-id="{{id}}">{{#if equipped}}Zdejmij{{else}}Wyposaż{{/if}}</button>{{/if}}<button type="button" data-action="openItem" data-item-id="{{id}}"><i class="fas fa-pen"></i></button><button type="button" data-action="removeItem" data-item-id="{{id}}"><i class="fas fa-trash"></i></button></div></article>{{else}}<p>Brak pozostałego ekwipunku.</p>{{/each}}
+      </div>
+    </div>
+  </section>
+
+  <section class="gahla-tab-content" data-tab="maneuvers">
+    <div class="gahla-panel gahla-magic-toolbar">
+      <div><h2>Manewry</h2><p class="gahla-note">Manewr jest nakładką na zwykły atak. Bazowe OP, obrażenia i Penetracja zawsze pochodzą z broni wybranej przy wykonaniu.</p></div>
+      <div class="gahla-action-row"><button type="button" class="gahla-primary" data-action="attack"><i class="fas fa-khanda"></i> Atak / manewr</button><button type="button" data-action="openAbilityBuilder" data-mode="maneuver">+ Nowy manewr</button></div>
+    </div>
+    <div class="gahla-panel">
+      <p>Plan po Długim Odpoczynku: {{preparationPlanNames}}</p><h3>Znane manewry <span class="gahla-count-badge">{{preparedManeuvers.length}} / {{system.derived.maneuverSlots}} przygotowanych</span></h3>
+      <div class="gahla-maneuver-list">
+        {{#each maneuvers}}
+          <article class="gahla-ability-row gahla-maneuver-row {{#if prepared}}prepared{{/if}}">
+            <div>
+              <div class="gahla-maneuver-title"><b>{{name}}</b>{{#if prepared}}<span class="gahla-ready-badge">PRZYGOTOWANY</span>{{/if}}</div>
+              <div class="gahla-maneuver-mods"><span>{{maneuverDamageText}}</span><span>{{maneuverDelayText}}</span><span>{{maneuverHitText}}</span><span>{{maneuverPenText}}</span>{{#if maneuverHalfWeaponDice}}<span>+½ kości broni</span>{{/if}}{{#if maneuverExtraTargets}}<span>+{{maneuverExtraTargets}} cel</span>{{/if}}</div>
+              {{#if maneuverReferenceWeapon}}<small>Broń referencyjna kreatora: {{maneuverReferenceWeapon}} — tylko podgląd, nie blokada użycia.</small>{{/if}}
+            </div>
+            <details class="gahla-inline-description"><summary>Opis</summary><p>{{description}}</p></details>
+            <div class="gahla-row-actions"><button type="button" data-action="togglePrepared" data-item-id="{{id}}">Zmień plan po odpoczynku</button><button type="button" class="gahla-primary" data-action="useManeuver" data-item-id="{{id}}">Wykonaj</button><button type="button" data-action="editAbility" data-item-id="{{id}}"><i class="fas fa-pen"></i> Edytuj</button><button type="button" data-action="removeItem" data-item-id="{{id}}" title="Usuń"><i class="fas fa-trash"></i></button></div>
+          </article>
+        {{else}}<p>Brak manewrów. Utwórz pierwszy manewr w kreatorze.</p>{{/each}}
+      </div>
+    </div>
+  </section>
+
+  <section class="gahla-tab-content" data-tab="talents">
+    <div class="gahla-panel gahla-talent-summary">
+      <div class="gahla-section-heading">
+        <div><h2>Talenty postaci</h2><p class="gahla-note">Karta ładuje wyłącznie posiadane talenty. Cała biblioteka i zakup/ulepszanie są w osobnym oknie.</p></div>
+        {{#unless isNPC}}<button type="button" class="gahla-primary" data-action="openTalentTree"><i class="fas fa-sitemap"></i> Otwórz drzewko talentów</button>{{/unless}}
+      </div>
+      <div class="gahla-talent-filters" aria-label="Filtry talentów"><button type="button" data-talent-filter="all">Wszystkie</button><button type="button" data-talent-filter="active">Aktywne</button><button type="button" data-talent-filter="passive">Pasywne</button><button type="button" data-talent-filter="racial">Rasowe</button><button type="button" data-talent-filter="general">Ogólne</button><button type="button" data-talent-filter="archetype">Archetypowe</button><button type="button" data-talent-filter="special">Specjalne</button><button type="button" data-talent-filter="deity">Boskie</button></div><div class="gahla-talent-groups compact">
+        {{#each talentGroups}}
+          <section class="gahla-talent-group">
+            <header><h3>{{label}}</h3><span class="gahla-count-badge">{{count}}</span></header>
+            <div class="gahla-talent-cards">
+              {{#each talents}}
+                <article class="gahla-talent-card" data-sheet-talent data-category="{{category}}" data-active-talent="{{active}}">
+                  <div class="gahla-talent-card-head"><div><b>{{name}}</b><span>ranga {{rank}} · efekt T{{effectTier}}</span></div><span class="gahla-category-badge">{{categoryLabel}}</span></div>
+                  {{#if deity}}<small class="gahla-requirement">Bóstwo: {{deity}}</small>{{/if}}
+                  {{#if requirements}}<small class="gahla-requirement">Wymóg: {{requirements}}</small>{{/if}}
+                  <p class="gahla-talent-effect">{{shortEffect}}</p><p class="gahla-talent-status">{{automationLabel}} · {{usesLabel}} · {{resetLabel}}</p>{{#if canActivate}}<button type="button" data-action="useActiveTalent" data-item-id="{{id}}">{{useLabel}}</button>{{/if}}<details><summary>Pełny opis</summary><p>{{description}}</p></details>
+                </article>
+              {{/each}}
+            </div>
+          </section>
+        {{else}}<p>Postać nie ma jeszcze talentów.</p>{{/each}}
+      </div>
+    </div>
+  </section>
+
+  <section class="gahla-tab-content" data-tab="magic">
+    <div class="gahla-panel gahla-magic-toolbar">
+      <div><h2>{{#if isCleric}}Cuda{{else}}Magia{{/if}}</h2><p class="gahla-note">Ta zakładka zawiera wyłącznie zaklęcia/cuda. Manewry bojowe mają własną zakładkę.</p></div>
+      <div class="gahla-action-row"><button type="button" class="gahla-primary" data-action="castSpell"><i class="fas fa-wand-sparkles"></i> {{#if isCleric}}Rzuć cud{{else}}Rzuć zaklęcie{{/if}}</button><button type="button" data-action="openAbilityBuilder" data-mode="spell">Kreator zaklęcia / cudu</button></div>
+    </div>
+    <div class="gahla-panel">
+      <p>Plan po Długim Odpoczynku: {{preparationPlanNames}}</p><h3>{{#if isCleric}}Cuda{{else}}Zaklęcia{{/if}} <span class="gahla-count-badge">{{#if isCleric}}{{preparedMiracles.length}} / {{system.derived.spellSlotsCleric}}{{else}}{{preparedSpells.length}} / {{system.derived.spellSlotsMage}}{{/if}}</span></h3>
+      {{#each spells}}
+        <article class="gahla-ability-row gahla-spell-row {{#if prepared}}prepared{{/if}}">
+          <div><div class="gahla-maneuver-title"><b>{{name}}</b>{{#if prepared}}<span class="gahla-ready-badge">PRZYGOTOWANE</span>{{/if}}</div><small>Koszt {{spellCost}}{{#if delay}} · OP {{delay}}{{/if}}</small><details class="gahla-inline-description"><summary>Opis</summary><p>{{description}}</p></details></div>
+          <div class="gahla-row-actions"><button type="button" data-action="togglePrepared" data-item-id="{{id}}">Zmień plan po odpoczynku</button><button type="button" class="gahla-primary" data-action="itemRoll" data-item-id="{{id}}">Rzuć</button><button type="button" data-action="editAbility" data-item-id="{{id}}"><i class="fas fa-pen"></i> Edytuj</button><button type="button" data-action="removeItem" data-item-id="{{id}}" title="Usuń"><i class="fas fa-trash"></i></button></div>
+        </article>
+      {{else}}<p>Brak zapisanych {{#if isCleric}}cudów{{else}}zaklęć{{/if}}.</p>{{/each}}
+    </div>
+  </section>
+
+  <section class="gahla-tab-content" data-tab="development">
+<section class="gahla-panel gahla-level-progression"><h2>Poziom postaci</h2><p>Tier {{levelProgress.tier}}</p><div class="gahla-action-row"><button type="button" data-action="changeLevel" data-delta="-1" {{#unless levelProgress.canLower}}disabled{{/unless}}>−</button><strong>Poziom {{levelProgress.level}} / 11</strong><button type="button" data-action="changeLevel" data-delta="1" {{#unless levelProgress.canRaise}}disabled{{/unless}}>+</button></div>{{#if levelProgress.hasNext}}<h3>Następny poziom: {{levelProgress.next}}</h3><p>+{{levelProgress.zyw}} ŻYW · +{{levelProgress.bgl}} BGŁ · +{{levelProgress.defense}} Obrony{{#if levelProgress.speed}} · +{{levelProgress.speed}} SZ{{/if}}</p>{{#if levelProgress.milestone}}<p>Nowe Doświadczenie · Nowa Cecha Specjalna Ścieżki</p>{{/if}}{{else}}<p>Osiągnięto maksymalny poziom.</p>{{/if}}<p class="gahla-note">Bonusy wynikają z poziomu. EXP, zakupy i wpisy historii pozostają zachowane.</p></section><section class="gahla-panel"><h2>Trwałe Rany</h2>{{#if dead}}<p class="gahla-note"><strong>Postać nie żyje.</strong> MG: edytuj lub usuń śmiertelny skutek po rozstrzygnięciu leczenia.</p>{{/if}}<p class="gahla-note">Maksymalny ruch: ×{{movementFactor}}. Niesprawne lokacje i kary czynności wybierasz przed odpowiednim testem.</p><p>Stabilizacja zatrzymuje Ryzyko Śmierci. Leczenie skutków zatwierdza MG.</p>{{#if isGM}}<button type="button" data-action="injury" data-kind="stabilize">Stabilizuj po właściwym leczeniu</button><button type="button" data-action="injury" data-kind="round">Minęła pełna runda (ręcznie)</button>{{/if}}{{#each injuries}}<article class="gahla-injury"><h3>{{title}} · {{locationLabel}} · LW {{score}}</h3><p>{{effect}}</p><p>{{#if active}}Skutki aktywne{{else}}Skutki oczekują na zastosowanie{{/if}}{{#if deathRisk}} · Ryzyko Śmierci: {{remaining}} pełne rundy{{#if stabilized}} — ustabilizowano{{/if}}{{/if}}{{#if terminal}} · Śmierć{{/if}}</p>{{#unless active}}<button type="button" data-action="injury" data-kind="apply" data-id="{{id}}">Zastosuj skutek</button>{{/unless}}{{#if ../isGM}}<button type="button" data-action="injury" data-kind="edit" data-id="{{id}}">Edytuj / lecz</button><button type="button" data-action="injury" data-kind="remove" data-id="{{id}}">Usuń po leczeniu</button>{{/if}}</article>{{else}}<p>Brak Trwałych Ran.</p>{{/each}}</section><button type="button" data-action="runecraft">Test Runotwórstwa</button>
+    <div class="gahla-development-top">
+      <div class="gahla-panel">
+        <div class="gahla-development-xp"><div><small>EXP do wydania</small><b>{{system.xp}}</b></div></div>
+        <h2>Rozwój poziomu</h2>
+        <p>Poziom zmienia MG lub właściciel postaci; EXP jest osobną walutą.</p>
+        <p class="gahla-note">Bonusy liczbowe są doliczane automatycznie po zmianie poziomu. EXP nie zmienia poziomu — przyciski powyżej są dostępne dla MG i właściciela.</p>
+        
+      </div>
+      <div class="gahla-panel">
+        <h2>Rozwój statystyk</h2>
+        <p class="gahla-note">Wybierz legalne przyrosty Ścieżki Życia. Koszt pakietu: 50 EXP.</p>
+        <button type="button" data-action="spendXp">Kup przyrosty — 50 EXP</button><div class="gahla-growth-preview">
+          {{#each stats}}{{#if growth}}<span class="gahla-tag">{{label}} +{{growth}} · {{upgrades}}×</span>{{/if}}{{/each}}
+        </div>
+      </div>
+    </div>
+
+
+    <section class="gahla-panel gahla-xp-ledger">
+      <h2>EXP za sesje i historia zakupów</h2>
+      <p>Saldo początkowe: <b>{{developmentLedger.opening}}</b> · EXP za sesje: <b>{{developmentLedger.earned}}</b> · do wydania: <b>{{system.xp}}</b></p>
+      <div class="gahla-xp-award"><label>Sesja / opis<input data-session-name type="text" placeholder="np. Sesja 12 — Powrót do miasta"></label><label>EXP<input data-session-xp type="number" min="1" step="1" value="50"></label><button type="button" data-action="awardSessionXP">Dodaj EXP za sesję</button></div>
+      <p class="gahla-note">Zakupy zapisują się automatycznie. Cofaj od najnowszego — zwrot przywraca EXP i poprzedni stan zakupu. Starsze zakupy sprzed tej wersji nie mają odtwarzalnej historii.</p>
+      <div class="gahla-xp-table-scroll"><table><thead><tr><th>Data</th><th>Operacja</th><th>EXP</th><th></th></tr></thead><tbody>
+        {{#each developmentLedger.rows}}<tr><td>{{dateLabel}}</td><td>{{label}}{{#if reverted}} <small>(cofnięty)</small>{{/if}}</td><td>{{amount}}</td><td>{{#if canUndo}}<button type="button" data-action="undoPurchase" data-id="{{id}}">Cofnij zakup</button>{{/if}}</td></tr>{{else}}<tr><td colspan="4">Brak wpisów. Obecne EXP jest saldem początkowym.</td></tr>{{/each}}
+      </tbody></table></div>
+    </section>
+    <div class="gahla-panel gahla-development-editor">
+      <div class="gahla-section-heading"><div><h2>Doświadczenia fabularne (Experience)</h2><p class="gahla-note">To nie punkty EXP: opis doświadczenia pozwala wykonać powiązany test z Ułatwieniem. Zapis po opuszczeniu pola.</p></div><button type="button" data-action="addExperience">+ Experience</button></div>
+      <div class="gahla-editable-list">
+        {{#each system.experiences}}
+          <div class="gahla-editable-row"><input type="text" data-edit-array="experiences" data-index="{{@index}}" value="{{this}}" placeholder="Wpisz Experience"><button type="button" data-action="rollExperience" data-index="{{@index}}" title="Test z Ułatwieniem"><i class="fas fa-dice"></i></button><button type="button" data-action="removeExperience" data-index="{{@index}}" title="Usuń"><i class="fas fa-trash"></i></button></div>
+        {{else}}<p>Brak Experience.</p>{{/each}}
+      </div>
+      <div class="gahla-section-heading gahla-development-subheading"><div><h2>Special Features</h2><p class="gahla-note">Special Feature jest wymyślany przez gracza / ustalany z MG. System zapisuje tekst, ale nie wymyśla jego mechaniki.</p></div><button type="button" data-action="addFeature">+ Special Feature</button></div>
+      <div class="gahla-editable-list">
+        {{#each classFeatures}}
+          <div class="gahla-editable-row feature"><textarea rows="2" data-edit-array="classFeatures" data-index="{{@index}}" placeholder="Opisz Special Feature">{{this}}</textarea><button type="button" data-action="removeFeature" data-index="{{@index}}" title="Usuń"><i class="fas fa-trash"></i></button></div>
+        {{else}}<p>Brak Special Features.</p>{{/each}}
+      </div>
+    </div>
+  </section>
+  {{#if isNPC}}
+  <section class="gahla-tab-content" data-tab="npcEdit">
+    <div class="gahla-panel gahla-npc-editor">
+    <div class="gahla-section-heading">
+      <div><h2>Awaryjna edycja NPC</h2><p class="gahla-note">Generator Starć ustawia te wartości automatycznie. Zmieniaj je ręcznie tylko wtedy, gdy konkretny przeciwnik ma odbiegać od profilu archetypu i Tieru.</p></div>
+      <button type="button" data-action="npcBasicAttack"><i class="fas fa-khanda"></i> Utwórz / odśwież atak bazowy</button>
+    </div>
+    <div class="gahla-npc-stat-grid">
+      <label><span>Tier tagów</span><input name="system.npc.tier" type="number" min="1" max="4" value="{{system.npc.tier}}"></label>
+      <label><span>Poziom bojowy</span><input name="system.npc.combatLevel" type="number" min="1" max="11" value="{{system.npc.combatLevel}}"><small>informacyjny dla profilu generatora</small></label>
+      <label><span>BGŁ</span><input name="system.stats.bgl" type="number" min="0" value="{{system.stats.bgl}}"></label>
+      <label><span>SZ</span><input name="system.stats.sz" type="number" min="1" value="{{system.stats.sz}}"></label>
+      <label><span>Obrona</span><input name="system.npc.defense" type="number" value="{{system.npc.defense}}"></label>
+      <label><span>Kości ataku</span><input name="system.npc.damageDice" type="number" min="1" value="{{system.npc.damageDice}}"><small>k10</small></label>
+      <label><span>ŻYW progów</span><input name="system.stats.zyw" type="number" min="1" value="{{system.stats.zyw}}"></label>
+      <label><span>SF</span><input name="system.stats.sf" type="number" min="0" value="{{system.stats.sf}}"></label>
+      <label><span>ZR</span><input name="system.stats.zr" type="number" min="0" value="{{system.stats.zr}}"></label>
+      <label><span>PER</span><input name="system.stats.per" type="number" min="0" value="{{system.stats.per}}"></label>
+      <label><span>ER</span><input name="system.stats.er" type="number" min="0" value="{{system.stats.er}}"></label>
+      <label><span>UM</span><input name="system.stats.um" type="number" min="0" value="{{system.stats.um}}"></label>
+      <label><span>OG</span><input name="system.stats.og" type="number" min="0" value="{{system.stats.og}}"></label>
+      <label><span>WIA</span><input name="system.stats.wia" type="number" min="0" value="{{system.stats.wia}}"></label>
+      {{#if usesHP}}<label><span>Max HP</span><input name="system.npc.hpMax" type="number" min="1" value="{{system.npc.hpMax}}"></label>{{else}}<label><span>Pula Ran</span><input name="system.npc.woundMax" type="number" min="1" value="{{system.npc.woundMax}}"></label>{{/if}}
+      <label><span>Bonus progów</span><input name="system.npc.thresholdBonus" type="number" value="{{system.npc.thresholdBonus}}"></label>
+      {{#if isGM}}<label><span>Limit Ran / trafienie</span><input name="system.npc.singleHitWoundCap" type="number" min="0" value="{{system.npc.singleHitWoundCap}}"><small>0 = brak; Boss z generatora = 3</small></label>{{/if}}
+      <label><span>Aura max</span><input name="system.npc.auraMax" type="number" min="0" value="{{system.npc.auraMax}}"></label>
+      <label><span>Naturalny pancerz</span><input name="system.npc.armor" type="number" min="0" value="{{system.npc.armor}}"></label>
+      <label><span>Reakcje</span><input name="system.combat.reactionMax" type="number" min="0" max="3" value="{{system.combat.reactionMax}}"></label>
+    </div>
+    <div class="gahla-npc-resist-grid">
+      <label>Odp. Fiz. <input name="system.resistanceBases.physical" type="number" value="{{system.resistanceBases.physical}}"></label>
+      <label>Odp. Psych. <input name="system.resistanceBases.mental" type="number" value="{{system.resistanceBases.mental}}"></label>
+      <label>Odp. Mag. <input name="system.resistanceBases.magical" type="number" value="{{system.resistanceBases.magical}}"></label>
+      <label>Odp. Duch. <input name="system.resistanceBases.spiritual" type="number" value="{{system.resistanceBases.spiritual}}"></label>
+    </div>
+    {{#if system.npc.generated}}
+      <p class="gahla-note"><b>Generator:</b> {{system.npc.category}} · {{system.npc.archetypeName}} · TP {{system.npc.tagSpent}}/{{system.npc.tagBudget}}</p>
+    {{/if}}
+    </div>
+  </section>
+  {{/if}}
+
+</div>

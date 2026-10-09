@@ -1,0 +1,16 @@
+<div class="gahla-chat">
+  <b>{{attacker}} → {{targetName}}</b><br>
+  {{weapon}} | Trafienie: {{final}} / {{target}}
+  <div>{{#if criticalSuccess}}KRYTYCZNY SUKCES{{else if bonus}}SUKCES Z BONUSEM{{else if success}}SUKCES{{else if criticalFailure}}KRYTYCZNA PORAŻKA{{else}}PORAŻKA{{/if}}</div>
+  {{#if location}}<div>Lokacja: {{location}}</div>{{/if}}
+</div>
+
+{{#if success}}
+<button type="button" data-action="gahla-roll-damage"
+  data-attacker-uuid="{{attackerUuid}}"
+  data-target-uuid="{{targetUuid}}"
+  data-weapon-uuid="{{weaponUuid}}"
+  data-bonus="{{bonus}}"
+  data-critical="{{criticalSuccess}}"
+  data-location="{{location}}">Rzuć obrażenia</button>
+{{/if}}

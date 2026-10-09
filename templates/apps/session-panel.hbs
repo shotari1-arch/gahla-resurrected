@@ -1,0 +1,27 @@
+<section class="gahla-session-content">
+  <h2>{{title}}{{#if actorName}} — {{actorName}}{{/if}}</h2>
+  <nav class="gahla-center-nav">{{#each tools}}<button type="button" data-action="tool" data-tool="{{key}}">{{label}}</button>{{/each}}</nav>
+  <p class="gahla-note">Przeciągnij narzędzie lub aktywny talent na hotbar.</p>
+  {{#if development}}
+    <h3>Rozwój — {{xp}} EXP</h3><p>Pakiet za {{offer.cost}} EXP: wybierz {{offer.count}} różne cechy. Limit każdej cechy: {{offer.limit}}.</p>
+    {{#if offer.versatile}}<p>Wszechstronny dostępny: zakup wykorzysta premię na obecnym poziomie.</p>{{/if}}
+    {{#each offer.choices}}<label><input type="checkbox" name="growth" value="{{key}}">{{label}} +{{growth}} (kupiono {{count}})</label>{{/each}}
+    <button type="button" data-action="growth">Wydaj 50 EXP</button>
+    <h3>Talenty — następny poziom</h3><p>Zakupy z nauczycielem są dostępne w istniejącym Drzewku Talentów.</p>
+    <table><thead><tr><th>Talent</th><th>Ranga / Tier / koszt</th><th>Legalność</th></tr></thead><tbody>{{#each talents}}<tr><td>{{name}}</td><td>R{{level}} · Tier {{requiredTier}} · ×{{costLevel}} = {{cost}} EXP</td><td>{{#if available}}<button type="button" data-action="talent" data-name="{{name}}" data-level="{{level}}">Kup</button>{{else}}{{errors}}{{/if}}</td></tr>{{/each}}</tbody></table>
+  {{/if}}
+  {{#if audit}}<h3>Audyt</h3><p>„review” oznacza wymaganie opisowe do sprawdzenia przez MG. Audyt niczego nie odbiera postaci.</p>{{#each issues}}<p><b>{{severity}}</b> — {{message}}</p>{{else}}<p>Brak naruszeń w regułach obsługiwanych przez audyt.</p>{{/each}}{{/if}}
+  {{#if showActors}}{{#each rows}}
+    <article><h3>{{name}}</h3><button type="button" data-action="conditionDetails" data-uuid="{{uuid}}">Parametry stanów</button>{{#if ../isGM}}<button type="button" data-action="configure" data-uuid="{{uuid}}">Dodaj zasób / Legendarną Odporność według zasady MG</button>{{/if}}<p>Reakcje {{reactions}}/{{reactionMax}} · SZ {{speed}}{{#if ../isGM}} · limit Ran/trafienie {{cap}}{{/if}}</p><p>{{join tags ", "}}</p>
+    <div class="gahla-center-nav">{{#each conditions}}{{#if ../../isGM}}<button type="button" data-action="condition" data-key="{{key}}" data-uuid="{{../uuid}}">{{#if active}}✓ {{/if}}{{label}}</button>{{else}}{{#if active}}<span>{{label}}</span>{{/if}}{{/if}}{{/each}}</div>
+    {{#each active}}{{#if canUse}}<button type="button" data-action="use" data-item-id="{{id}}" data-actor-uuid="{{actorUuid}}" data-talent-drag="{{id}}">{{name}} · {{remaining}}/{{max}} · {{rule.reset}}</button>{{else}}<span>{{name}} — włącza MG</span>{{/if}}{{/each}}
+    <details><summary>Zdolności opisowe / WIP</summary>{{#each manual}}<p><b>{{name}}</b> — {{description}}</p>{{/each}}</details></article>
+  {{/each}}{{/if}}
+  {{#if session}}
+    <h3>Sesja</h3>{{#if fateXPOptional}}<button type="button" data-action="fateXP">Opcjonalne EXP za Punkt Losu — zatwierdź nagrodę</button>{{/if}}<p>Grupowe Punkty Losu: <b>{{groupFate}}</b> <button type="button" data-action="fate" data-delta="-1">−1</button><button type="button" data-action="fate" data-delta="1">+1</button></p>
+    <button type="button" data-action="reset" data-scope="session">Nowa sesja — odnów zasoby sesyjne</button><button type="button" data-action="reset" data-scope="scene">Zakończ bieżącą scenę — wygaś jej pule</button>
+    {{#if combat}}<h3>{{combat.name}} · Runda {{combat.round}}</h3><button type="button" data-action="report">Raport aktywnego starcia</button>{{else}}<p>Brak aktywnego starcia.</p>{{/if}}
+    <h3>Szablony starć</h3><p>Odtworzenie używa zapisanych statystyk. Każde rozstawienie tworzy osobną scenę i nowych przeciwników.</p>{{#each templates}}<p>{{name}} <button type="button" data-action="deploy" data-id="{{id}}">Rozstaw</button><button type="button" data-action="removeTemplate" data-id="{{id}}">Usuń szablon</button></p>{{else}}<p>Zapisz pierwszy szablon w Generatorze Starć.</p>{{/each}}
+    <h3>Archiwalne raporty</h3>{{#each reports}}<button type="button" data-action="report" data-id="{{id}}">{{name}}</button>{{/each}}
+  {{/if}}
+</section>

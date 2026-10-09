@@ -1,0 +1,139 @@
+<div class="gahla-ability-builder-form">
+  <header class="gahla-tool-header gahla-builder-header">
+    <div class="gahla-tool-title">
+      <span class="gahla-tool-icon"><i class="fas fa-wand-magic-sparkles"></i></span>
+      <div>
+        <h2>Kreator zdolności</h2>
+        <div class="gahla-note">Buduj zdolność krok po kroku. Podgląd pokazuje kartę zdolności zapisywaną w systemie.</div>
+      </div>
+    </div>
+    <div class="gahla-tool-actions">
+      <button type="button" data-action="mode" data-mode="spell" class="{{#unless (eq state.mode "maneuver")}}active{{/unless}}"><i class="fas fa-sparkles"></i> Zaklęcie / Cud</button>
+      <button type="button" data-action="mode" data-mode="maneuver" class="{{#if (eq state.mode "maneuver")}}active{{/if}}"><i class="fas fa-swords"></i> Manewr</button>
+      <button type="button" data-action="print"><i class="fas fa-print"></i></button>
+      <button type="button" data-action="save" class="gahla-primary"><i class="fas fa-floppy-disk"></i> {{#if editing}}Zapisz{{else}}Utwórz{{/if}}</button>
+    </div>
+  </header>
+
+  <section class="gahla-builder-context-bar">
+    <label><span>Docelowy aktor</span>
+      <select id="builder-actor"><option value="">— światowa biblioteka —</option>{{#each actors}}<option value="{{id}}" {{#if (eq ../currentActorId id)}}selected{{/if}}>{{name}}</option>{{/each}}</select>
+    </label>
+    {{#if editing}}<span class="gahla-builder-editing"><i class="fas fa-pen"></i> Edycja: <b>{{editingName}}</b></span>{{/if}}
+  </section>
+
+<section class="gahla-builder-summary" aria-label="Podsumowanie kosztu i OP" aria-live="polite"><div><span>Koszt / limit</span><strong id="summary_cost">—</strong></div><div><span>Końcowe OP</span><strong id="summary_op">—</strong></div><div><span>Minimum OP</span><strong id="summary_min">—</strong></div><a href="#builder-validation" data-builder-validation-link>Walidacja: <b id="summary_validation">—</b></a><button type="button" data-action="save" class="gahla-primary">{{#if editing}}Zapisz{{else}}Utwórz{{/if}}</button></section>
+  <section class="gahla-builder-layout">
+    <div class="gahla-builder-workspace">
+      <div class="gahla-builder-mode {{#if (eq state.mode "maneuver")}}hidden{{/if}}">
+<section class="gahla-builder-section" data-builder-section="basic"><header><h3>Podstawowe dane</h3><p>Nazwa, szkoła, Tier i Źródło Mocy.</p></header><div class="gahla-creator-grid"><label>Nazwa <input id="s_name" value="{{state.name}}"></label>
+<label>Klasa <select id="s_class"><option {{#if (eq state.spellClass "Półmag")}}selected{{/if}}>Półmag</option><option {{#if (eq state.spellClass "Kapłan")}}selected{{/if}}>Kapłan</option></select></label>
+<label>Tier <select id="s_tier">{{#each (array 1 2 3 4)}}<option value="{{this}}" {{#if (eq ../state.tier this)}}selected{{/if}}>Tier {{this}} · max {{multiply this 5}}</option>{{/each}}</select></label>
+<label class="wide">Opis fabularny <textarea id="s_desc" rows="2">{{state.desc}}</textarea></label><div class="gahla-extra-slot" data-extra-slot="source"></div></div></section>
+<section class="gahla-builder-section" data-builder-section="target"><header><h3>Cel i zasięg</h3><p>Liczba celów i obszar mają osobne koszty.</p></header><div class="gahla-creator-grid"><label>Zasięg <select id="s_range"><option value="0" {{#if (eq state.range 0)}}selected{{/if}}>Dotyk (0)</option><option value="1" {{#if (eq state.range 1)}}selected{{/if}}>Bliski (1)</option><option value="2" {{#if (eq state.range 2)}}selected{{/if}}>Średni (2)</option><option value="3" {{#if (eq state.range 3)}}selected{{/if}}>Daleki (3)</option></select></label>
+<label class="gahla-check-card"><span>Cel obszarowy <small class="gahla-field-hint">3 / 10 m²</small></span><input id="s_aoe" type="checkbox" {{checked state.aoe}}></label><div class="gahla-extra-slot" data-extra-slot="target"></div></div></section>
+<section class="gahla-builder-section" data-builder-section="duration"><header><h3>Czas trwania</h3><p>Stany z czaru trwają zgodnie z wykupioną Długością.</p></header><div class="gahla-creator-grid"><label>Czas trwania (rundy) <small class="gahla-field-hint">1 / runda; 0 = natychmiast</small><input id="s_duration" type="number" min="0" value="{{state.duration}}"></label></div></section>
+<section class="gahla-builder-section" data-builder-section="damage"><header><h3>Obrażenia</h3><p>Kapłan: +1 kosztu za obecny aspekt obrażeń i penetracji.</p></header><div class="gahla-creator-grid"><label>Obrażenia <span class="gahla-field-hint">1 koszt = 1k10</span><input id="s_dmg" type="number" min="0" value="{{state.dmg}}"></label>
+<label>Penetracja <span class="gahla-field-hint">3 koszt / punkt</span><input id="s_pen" type="number" min="0" value="{{state.pen}}"></label>
+<label class="gahla-check-card"><span>Dodaj dziesiątkę UM/WIA do obrażeń <small class="gahla-field-hint">1 · maksymalnie raz</small></span><input id="s_statdmg" type="checkbox" {{checked state.statdmg}}></label></div></section>
+<section class="gahla-builder-section" data-builder-section="support"><header><h3>Pomoc / wzmocnienia</h3><p>Koszty dodatkowych aspektów widoczne przy każdym polu.</p></header><div class="gahla-creator-grid"><label>Leczenie ran <small class="gahla-field-hint">3 + 1 / Rana</small><input id="s_heal" type="number" min="0" value="{{state.heal}}"></label>
+<label>Tymczasowe ŻYW <small class="gahla-field-hint">2 / punkt ŻYW</small><input id="s_temphp" type="number" min="0" value="{{state.temphp}}"></label>
+<label>Bonus trafienia (+10) <small class="gahla-field-hint">1 / +10</small><input id="s_hitbonus" type="number" min="0" value="{{state.hitbonus}}"></label>
+<label class="gahla-check-card"><span>Nadanie Przyspieszenia <small class="gahla-field-hint">5 · normalne minimum OP pozostaje</small></span><input id="s_haste" type="checkbox" {{checked state.haste}}></label><div class="gahla-extra-slot" data-extra-slot="support"></div></div></section>
+<section class="gahla-builder-section" data-builder-section="debuff"><header><h3>Utrudnienia / osłabienia</h3><p>Wybierz tylko potrzebne efekty.</p></header><div class="gahla-creator-grid"><label>Redukcja pancerza <small class="gahla-field-hint">3 / punkt</small><input id="s_armorminus" type="number" min="0" value="{{state.armorminus}}"></label>
+<label>Redukcja trafienia (−10) <small class="gahla-field-hint">1 / −10</small><input id="s_hitminus" type="number" min="0" value="{{state.hitminus}}"></label>
+<label>Redukcja ODP (−10) <small class="gahla-field-hint">2 / −10</small><input id="s_odpminus" type="number" min="0" value="{{state.odpminus}}"></label><div class="gahla-extra-slot" data-extra-slot="debuff"></div></div></section>
+<section class="gahla-builder-section" data-builder-section="conditions"><header><h3>Stany</h3><p>Koszty stanów Kapłana są wyższe o 1.</p></header><div class="gahla-creator-grid"><label>Stan <select id="s_state"><option value="0">Brak</option><option value="2" {{#if (eq state.state "2")}}selected{{/if}}>Powalenie / Podpalenie (2)</option><option value="3" {{#if (eq state.state "3")}}selected{{/if}}>Krwawienie / Oszołomienie (3)</option><option value="4" {{#if (eq state.state "4")}}selected{{/if}}>Zatrucie / Przerażenie (4)</option><option value="5" {{#if (eq state.state "5")}}selected{{/if}}>Spowolnienie (5)</option></select></label><div class="gahla-extra-slot" data-extra-slot="conditions"></div></div></section>
+<section class="gahla-builder-section" data-builder-section="elements"><header><h3>Elementy</h3><p>Światło i Cień: tylko Kapłan. Kapłan płaci +1 za aspekt elementu.</p></header><div class="gahla-creator-grid"><label>Element — poziom <small class="gahla-field-hint">Poziomy: 2 / 5 / 9</small><input id="s_element" type="number" min="0" max="3" value="{{state.element}}"></label>
+<label>Element — nazwa <input id="s_el_name" placeholder="np. Ogień" value="{{state.elName}}"></label><div class="gahla-extra-slot" data-extra-slot="elements"></div></div></section>
+<section class="gahla-builder-section" data-builder-section="casting"><header><h3>Sposób rzucania i OP</h3><p>Redukcje respektują normalne minimum OP.</p></header><div class="gahla-creator-grid"><label>Odjęcie OP <span class="gahla-field-hint">2 koszt → −3 OP</span><input id="s_minusop" type="number" min="0" value="{{state.minusop}}"></label>
+<label class="gahla-check-card"><span>Rzucone jako reakcja <small class="gahla-field-hint">5 · wymagane końcowe OP 4</small></span><input id="s_reaction" type="checkbox" {{checked state.reaction}}></label>
+<label class="gahla-check-card"><span>Z księgi / zwoju <small class="gahla-field-hint">+1 OP</small></span><input id="s_book" type="checkbox" {{checked state.book}}></label><div class="gahla-extra-slot" data-extra-slot="casting"></div></div></section>
+<section class="gahla-builder-section" data-builder-section="custom"><header><h3>Własny efekt MG</h3><p>Opis i koszt wymagają ustalenia z prowadzącym.</p></header><div class="gahla-creator-grid"><label class="wide">Własny efekt <input id="s_custom_desc" placeholder="Opis efektu ustalonego z MG" value="{{state.customDesc}}"></label>
+<label>Własny koszt <input id="s_custom_cost" type="number" min="0" value="{{state.customCost}}"></label></div></section>
+<section class="gahla-builder-section risk" data-mage-risks>
+          <header><div><h3>Ryzyka Półmaga</h3></div><p>Obniżają koszt, ale dodają konkretną wadę.</p></header>
+          <div class="gahla-risk-grid">
+            <label><span><b>Dublet = Pech</b><small>−2 kosztu</small></span><input id="r_double" type="checkbox" {{checked state.risks.r_double}}></label>
+            <label><span><b>8, 9, 10 → 7</b><small>−2 kosztu</small></span><input id="r_dmg7" type="checkbox" {{checked state.risks.r_dmg7}}></label>
+            <label><span><b>Wybrana cyfra = Pech</b><small>−1 kosztu</small></span><input id="r_numpech" type="checkbox" {{checked state.risks.r_numpech}}></label>
+            <label><span><b>1 rani rzucającego</b><small>−1 kosztu</small></span><input id="r_1dmg" type="checkbox" {{checked state.risks.r_1dmg}}></label>
+            <label><span><b>Wyczerpanie Aury</b><small>−2 kosztu</small></span><input id="r_aura" type="checkbox" {{checked state.risks.r_aura}}></label>
+            <label><span><b>Mega Skupienie</b><small>−2 kosztu</small></span><input id="r_focus" type="checkbox" {{checked state.risks.r_focus}}></label>
+            <label><span><b>Destabilizacja Mocy</b><small>−3 kosztu</small></span><input id="r_destab" type="checkbox" {{checked state.risks.r_destab}}></label>
+            <label><span><b>Zmęczenie po rzuceniu</b><small>−4 kosztu</small></span><input id="r_fatigue" type="checkbox" {{checked state.risks.r_fatigue}}></label>
+            <label><span><b>Nadmierne OP</b><small>max 2</small></span><input id="r_delay" type="number" min="0" max="2" value="{{state.risks.r_delay}}"></label>
+            <label><span><b>Własne Ryzyko MG</b><small>ustal z MG</small></span><input id="r_custom_cost" type="number" min="0" value="{{state.risks.r_custom_cost}}"></label>
+          </div>
+        </section>
+        <div id="s_balance" class="balance gahla-builder-balance">—</div>
+      </div>
+
+      <div class="gahla-builder-mode {{#unless (eq state.mode "maneuver")}}hidden{{/unless}}">
+        <section class="gahla-builder-section hero">
+          <header><div><span class="gahla-step">START</span><h2>Manewr</h2></div><p>Zaczynasz od czystego ataku wyposażoną bronią. Nic nie jest dodawane automatycznie.</p></header>
+          {{#if hasManeuverWeapons}}
+            <div class="gahla-builder-weapon-base">
+              <label><span>Założona broń bazowa</span>
+                <select id="m_weapon_id">{{#each maneuverWeapons}}<option value="{{id}}" {{#if selected}}selected{{/if}}>{{name}} — {{damage}}, OP {{delay}}, ręce {{hands}}</option>{{/each}}</select>
+              </label>
+            </div>
+          {{else}}
+            <div class="gahla-item-world-note"><i class="fas fa-triangle-exclamation"></i> Brak wyposażonej broni. Możesz wpisać bazę ręcznie.</div>
+          {{/if}}
+          <div class="gahla-creator-grid">
+            <label>Nazwa <input id="m_name" value="{{state.name}}"></label>
+            <label>Broń <input id="m_w_name" value="{{state.w_name}}" {{#if hasManeuverWeapons}}readonly{{/if}}></label>
+            <label>OP bazowe <input id="m_w_op" type="number" min="1" value="{{state.w_op}}" {{#if hasManeuverWeapons}}readonly{{/if}}></label>
+            <label>DMG bazowe <input id="m_w_dmg" type="number" min="1" value="{{state.w_dmg}}" {{#if hasManeuverWeapons}}readonly{{/if}}></label>
+          </div>
+          {{#if state.weaponHeavy}}<div class="gahla-rule-callout"><i class="fas fa-hammer"></i><span><b>Broń Ciężka</b> — Powalający i Ogłuszający kosztują o 1* mniej.</span></div>{{/if}}
+        </section>
+
+        <section class="gahla-builder-section">
+          <header><div><span class="gahla-step">1</span><h3>Kup efekty za gwiazdki *</h3></div><p>Ta sekcja tworzy wymagany koszt. Jeszcze niczego nim nie płacisz.</p></header>
+          <div class="gahla-effect-grid">
+            <label><span><b>Silny</b><small>1* → +1k10 · max 2</small></span><input id="m_strong" type="number" min="0" max="2" value="{{state.strong}}"></label>
+            <label><span><b>Celny</b><small>1* → +10 traf. · max 2</small></span><input id="m_accurate" type="number" min="0" max="2" value="{{state.accurate}}"></label>
+            <label><span><b>Penetrujący</b><small>2* → +1 Pen. · max 2</small></span><input id="m_pen" type="number" min="0" max="2" value="{{state.pen}}"></label>
+            <label><span><b>Powalający</b><small>3*</small></span><input id="m_knockdown" type="checkbox" {{checked state.knockdown}}></label>
+            <label><span><b>Krwawy</b><small>4*</small></span><input id="m_bloody" type="checkbox" {{checked state.bloody}}></label>
+            <label><span><b>Ogłuszający</b><small>4*</small></span><input id="m_stun" type="checkbox" {{checked state.stun}}></label>
+            <label><span><b>Zamaszysty</b><small>2* / dodatkowy cel</small></span><input id="m_sweep" type="number" min="0" max="3" value="{{state.sweep}}"></label>
+            <label><span><b>Kreatywny</b><small>koszt ustala MG</small></span><input id="m_custom_cost" type="number" min="0" value="{{state.customCost}}"></label>
+          </div>
+          <label class="gahla-wide-field">Opis własnego efektu <input id="m_custom_desc" value="{{state.customDesc}}"></label>
+        </section>
+
+        <section class="gahla-builder-section">
+          <header><div><span class="gahla-step">2</span><h3>Modyfikacje niezależne od *</h3></div><p>Bezpośrednio zmieniają atak i nie płacą gwiazdek.</p></header>
+          <div class="gahla-effect-grid">
+            <label class="{{#unless state.weaponTwoHandCapable}}disabled{{/unless}}"><span><b>Użycie obu rąk</b><small>+2 OP, +½ bazowych kości</small></span><input id="m_2h" type="checkbox" {{checked state.twoHanded}} {{#unless state.weaponTwoHandCapable}}disabled{{/unless}}></label>
+            <label><span><b>Szybki</b><small>−1k10 → −1 OP · max 2</small></span><input id="m_fast" type="number" min="0" max="2" value="{{state.fast}}"></label>
+          </div>
+          {{#unless state.weaponTwoHandCapable}}<p class="gahla-note">Użycie obu rąk wymaga broni 1,5-ręcznej lub 2-ręcznej.</p>{{/unless}}
+        </section>
+
+        <section class="gahla-builder-section payment">
+          <header><div><span class="gahla-step">3</span><h3>Zapłać wymagane gwiazdki</h3></div><p>Każda 1* = dokładnie jedna z trzech walut. Możesz je mieszać.</p></header>
+          <div class="gahla-payment-grid">
+            <label><span>−1k10 obrażeń</span><input id="pay_dmg" type="number" min="0" value="{{state.pay_dmg}}"><small>= 1*</small></label>
+            <label><span>+1 OP</span><input id="pay_op" type="number" min="0" value="{{state.pay_op}}"><small>= 1*</small></label>
+            <label><span>−10 trafienia</span><input id="pay_hit" type="number" min="0" value="{{state.pay_hit}}"><small>= 1*</small></label>
+          </div>
+          <div id="m_balance" class="balance gahla-builder-balance">—</div>
+        </section>
+      </div>
+    </div>
+
+    <aside class="gahla-panel gahla-builder-preview-panel" data-gahla-scroll="ability-preview">
+      <div class="gahla-preview-heading"><div><span>NA ŻYWO</span><h2>Podgląd wyniku</h2></div><small>Tak zostanie zapisana zdolność</small></div>
+      <section id="builder-validation" class="gahla-builder-validation" data-automation-validation aria-live="polite"></section>
+      <div id="builder-card" class="gahla-card-preview">
+        <div class="c-header"><div><div class="c-type" id="c_type">CZAR</div><div class="c-title" id="c_title">Zaklęcie</div></div></div>
+        <div data-preview="spell"><div class="c-stats"><div class="c-stat"><div class="c-stat-label">Koszt</div><div class="c-stat-val" id="c_cost">0</div></div><div class="c-stat"><div class="c-stat-label">OP</div><div class="c-stat-val" id="c_op">4</div></div><div class="c-stat"><div class="c-stat-label">Zasięg</div><div class="c-stat-val" id="c_range">Daleki</div></div><div class="c-stat"><div class="c-stat-label">Cel</div><div class="c-stat-val" id="c_target">1</div></div></div><div class="c-section"><div class="c-label">Efekt główny</div><div class="c-effect" id="c_effect"></div></div><div class="c-section"><div class="c-label">Aspekty / składowe</div><div class="c-bullets" id="c_bullets"></div></div><div class="c-section" id="c_risks_box"><div class="c-label risk">Podjęte ryzyka</div><div class="c-bullets" id="c_risks"></div></div><div class="c-section"><div class="c-desc" id="c_desc"></div></div></div>
+        <div data-preview="maneuver" class="hidden"><div class="c-stats"><div class="c-stat"><div class="c-stat-label">Fin. OP</div><div class="c-stat-val" id="c_m_final_op">0</div></div><div class="c-stat"><div class="c-stat-label">Fin. DMG</div><div class="c-stat-val" id="c_m_final_dmg">0k10</div></div><div class="c-stat"><div class="c-stat-label">Mod. Traf.</div><div class="c-stat-val" id="c_m_hit">0</div></div><div class="c-stat"><div class="c-stat-label">*</div><div class="c-stat-val" id="c_m_stars">0</div></div></div><div class="c-section"><div class="c-label">Efekt główny</div><div class="c-effect" id="c_m_effect"></div></div><div class="c-section"><div class="c-label">Aspekty</div><div class="c-bullets" id="c_m_bullets"></div></div><div class="c-section"><div class="c-desc" id="c_m_desc"></div></div></div>
+      </div>
+    </aside>
+  </section>
+</div>

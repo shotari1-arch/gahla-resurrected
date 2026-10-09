@@ -1,0 +1,90 @@
+<div class="gahla-tracker-form">
+  <header class="gahla-tracker-header gahla-tool-header">
+    <div class="gahla-tool-title">
+      <span class="gahla-tool-icon"><i class="fas fa-stopwatch"></i></span>
+      <div>
+        <h2>Tracker Inicjatywy</h2>
+        {{#if hasCombat}}
+          <div class="gahla-note">{{combatName}} · Runda <b>{{round}}</b> · {{combatantCount}} uczestników</div>
+        {{else}}
+          <div class="gahla-note">Brak aktywnego Encounteru Foundry.</div>
+        {{/if}}
+      </div>
+    </div>
+    <div class="gahla-action-row gahla-tool-actions">
+      {{#if hasCombat}}<button type="button" data-action="newRound" class="gahla-primary"><i class="fas fa-forward-step"></i> Nowa runda</button>{{/if}}
+      {{#if hasCombat}}<button type="button" data-action="sync"><i class="fas fa-arrows-rotate"></i> Synchronizuj</button>{{/if}}
+      <button type="button" data-action="undo"><i class="fas fa-rotate-left"></i> Cofnij</button>
+      <button type="button" data-action="refresh"><i class="fas fa-refresh"></i></button>
+    </div>
+  </header>
+
+  {{#if hasCombat}}
+    <section class="gahla-tracker-overview">
+      <div><small>Aktywny</small><b>{{activeName}}</b></div>
+      <div><small>Runda</small><b>{{round}}</b></div>
+      <div><small>Encounter</small><b>{{combatantCount}}</b></div>
+      <div class="{{#unless allInSync}}warn{{/unless}}"><small>Foundry ↔ Gahla</small><b>{{#if allInSync}}ZSYNCHRONIZOWANE{{else}}WYMAGA SYNC{{/if}}</b></div>
+    </section>
+
+    <section class="gahla-panel gahla-tracker-help">
+      <i class="fas fa-circle-info"></i>
+      <div><b>Initiative = aktualna pozycja segmentowa.</b> Reakcje spalają dolne segmenty bez zmiany pozycji, a ataki i czary odejmują OP automatycznie. Ten pełny tracker służy głównie do akcji własnych, przenoszenia i akcji długich.</div>
+    </section>
+
+    <section class="gahla-tracker-list">
+      {{#each characters}}
+        <article class="gahla-tracker-card {{#if active}}active{{/if}} {{#if isBoss}}boss{{/if}} {{#if paused}}paused{{/if}}">
+          <header class="gahla-tracker-card-header">
+            <div class="gahla-tracker-name-block">
+              <div class="gahla-tracker-name"><b>{{name}}</b>{{#if isBoss}} <span class="gahla-tracker-badge">BOSS</span>{{/if}}</div>
+              <small>ZR {{zr}} · initiative Foundry {{initiative}} {{#unless inSync}}<span class="gahla-sync-warning">≠ {{currentSegments}}</span>{{/unless}}</small>
+            </div>
+            <div class="gahla-tracker-meta">
+              <span>Baza SZ</span>
+              <button type="button" data-action="adjustBase" data-actor="{{uuid}}" data-amt="-1">−</button>
+              <b>{{baseSZ}}</b>
+              <button type="button" data-action="adjustBase" data-actor="{{uuid}}" data-amt="1">+</button>
+              <button type="button" data-action="toggleBoss" data-actor="{{uuid}}" class="gahla-quiet-button">{{#if isBoss}}Usuń BOSS{{else}}BOSS{{/if}}</button>
+            </div>
+          </header>
+
+          <div class="gahla-tracker-main">
+            <div class="gahla-tracker-sz-ring">
+              <strong>{{effective}}</strong>
+              <span>dostępna SZ</span>
+              <small>Pozycja {{currentSegments}}</small>
+            </div>
+            <div class="gahla-tracker-derived">
+              <div><span>Spalone od dołu</span><b>{{reservedSZ}}</b><small>reakcje</small></div>
+              <div><span>Reakcje</span><b>{{reactionLeft}} / {{reactionMax}}</b><small>ta runda</small></div>
+              
+              {{#if transferSegments}}<div>Zaliczka pierwszej akcji: {{transferSegments}} OP (min. 2)</div>{{/if}}{{#if longReady}}<div>Akcja Długa: oczekiwanie na pozycję {{currentSegments}} <button type="button" data-action="cancelLong" data-actor="{{uuid}}">Przerwij</button></div>{{/if}}{{#if longDebt}}<div class="long"><span>Akcja długa</span><b>{{longDebt}} OP</b><button type="button" data-action="cancelLong" data-actor="{{uuid}}">Przerwij</button></div>{{/if}}
+              {{#if done}}<div class="done"><span>Stan</span><b>KONIEC DZIAŁAŃ</b><small>do następnej rundy</small></div>{{/if}}
+            </div>
+          </div>
+
+          <div class="gahla-tracker-controls">
+            <div class="gahla-tracker-control-title"><b>Rozlicz inną akcję</b><small>Ataki i czary rozliczają OP automatycznie</small></div>{{#if isBoss}}<label><input type="checkbox" name="gahla-offensive-{{actorId}}"> Główna akcja ofensywna — Pauza Bossa</label>{{/if}}
+            <div class="gahla-tracker-modes">
+              <label><input type="radio" name="gahla-mode-{{actorId}}" value="n" checked> Zwykła</label>
+              <label><input type="radio" name="gahla-mode-{{actorId}}" value="c"> Zakończ rundę / zaliczka <small>(−1 reakcja)</small></label>
+              <label><input type="radio" name="gahla-mode-{{actorId}}" value="l"> Akcja długa</label>
+            </div>
+            <div class="gahla-tracker-buttons">
+              <label class="gahla-cost-field"><span>Koszt OP</span><input type="number" id="gahla-cost-{{actorId}}" min="1" step="1" value="{{costPlaceholder}}" placeholder="np. 3"></label>
+              <button type="button" data-action="act" data-actor="{{uuid}}" class="gahla-primary"><i class="fas fa-bolt"></i> Akcja</button>
+              <button type="button" class="gahla-tracker-reaction" data-action="react" data-actor="{{uuid}}" {{#if (eq reactionLeft 0)}}disabled{{/if}}><i class="fas fa-shield-halved"></i> Reakcja ({{reactionLeft}})</button>
+            </div>
+          </div>
+        </article>
+      {{/each}}
+    </section>
+  {{else}}
+    <section class="gahla-panel gahla-empty-tool">
+      <i class="fas fa-swords"></i>
+      <h3>Najpierw utwórz Encounter</h3>
+      <p>Dodaj tokeny do natywnego Combat Trackera Foundry i rozpocznij walkę. Gahla przejmie initiative jako dostępne segmenty SZ.</p>
+    </section>
+  {{/if}}
+</div>

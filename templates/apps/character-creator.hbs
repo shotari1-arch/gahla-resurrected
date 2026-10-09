@@ -1,0 +1,161 @@
+<div class="gahla-creator-form">
+  <header class="gahla-tool-header gahla-creator-header">
+    <div class="gahla-tool-title">
+      <i class="fa-solid fa-user-pen"></i>
+      <div><small>GAHLA RESURRECTED</small><h1>Kreator postaci</h1><p>{{sourceNote}}</p></div>
+    </div>
+    <div class="gahla-creator-progress" aria-label="Etapy tworzenia postaci">
+      <span>1 Tożsamość</span><span>2 Statystyki</span><span>3 Talenty</span><span>4 Ekwipunek</span>
+    </div>
+  </header>
+  <div class="gahla-creator-grid">
+    <section class="gahla-panel gahla-creator-step-panel">
+      <h2><span class="gahla-step">1</span> Tożsamość</h2>
+      <label>Imię <input name="name" value="{{state.name}}" placeholder="Nowa Postać"></label>
+      <label>Rasa
+        <select name="species">
+          {{#each raceOptions}}<option value="{{key}}" {{#if (eq ../state.species key)}}selected{{/if}}>{{label}}{{#if wip}} — WIP{{/if}}</option>{{/each}}
+        </select>
+      </label>
+      {{#if raceIdentity}}<div class="gahla-creator-race-summary"><b>{{raceIdentity.name}}</b><p>{{raceIdentity.description}}</p></div>{{/if}}
+      <div class="gahla-creator-base-summary"><small>Bazowe statystyki rasy (dla wybranej płci)</small><div class="gahla-creator-base-chips">{{#each raceBaseStats}}<span><em>{{label}}</em><b>{{value}}</b></span>{{/each}}</div></div>
+      <label>Płeć
+        <select name="sex">
+          <option value="M" {{#if (eq state.sex "M")}}selected{{/if}}>M</option>
+          <option value="K" {{#if (eq state.sex "K")}}selected{{/if}}>K</option>
+        </select>
+      </label>
+      <label>Archetyp
+        <select name="archetype">
+          {{#each archetypeOptions}}<option value="{{key}}" {{#if (eq ../state.archetype key)}}selected{{/if}}>{{label}}</option>{{/each}}
+        </select>
+      </label>
+      <label>Ścieżka Życia
+        <select name="lifePath">
+          {{#each pathOptions}}<option value="{{lifePath}}" {{#if (eq ../state.lifePath lifePath)}}selected{{/if}}>{{lifePath}}{{#if special}} — specjalna, wymaga rytuału{{/if}}</option>{{/each}}
+        </select>
+      </label>
+      <div class="gahla-creator-base-summary"><small>Bazowe statystyki Ścieżki Życia</small><div class="gahla-creator-base-chips">{{#each pathBaseStats}}<span><em>{{label}}</em><b>{{value}}</b></span>{{/each}}</div></div>
+      {{#if hasDeity}}
+      <label>Bóstwo
+        <select name="deity">
+          <option value="">— wybierz bóstwo —</option>
+          {{#each deities}}<option value="{{key}}" {{#if (eq ../state.deity key)}}selected{{/if}}>{{label}}</option>{{/each}}
+        </select>
+      </label>
+      <label>Darmowy talent bóstwa
+        <select name="deityTalent">
+          <option value="">— wybierz —</option>
+          {{#each deityTalentOptions}}<option value="{{name}}" {{#if (eq ../state.deityTalent name)}}selected{{/if}}>{{name}}</option>{{/each}}
+        </select>
+      </label>
+      {{/if}}
+      {{#if (eq state.species "therian")}}<label>Wyzwalacz Jaźni <textarea name="selfTrigger" placeholder="Personalny bodziec ustalony z MG">{{state.selfTrigger}}</textarea></label>{{/if}}
+      <label>Doświadczenie <input name="experience" value="{{state.experience}}" placeholder="np. żeglarz"></label>
+      {{#if (or (eq state.archetype "polmag") (eq state.archetype "kaplan"))}}
+      <label>Pakiet Źródła Mocy
+        <select name="powerSourcePackage">
+          {{#each powerSourcePackages}}<option value="{{key}}" {{#if (eq ../state.powerSourcePackage key)}}selected{{/if}}>{{label}}</option>{{/each}}
+        </select>
+      </label>
+      <label>Żywioł dla pakietu +5
+        <select name="powerElement">
+          {{#each elements}}<option value="{{key}}" {{#if (eq ../state.powerElement key)}}selected{{/if}}>{{label}}</option>{{/each}}
+        </select>
+      </label>
+      {{/if}}
+    </section>
+
+    <section class="gahla-panel gahla-creator-step-panel">
+      <h2><span class="gahla-step">2</span> Rzuty i wynik bazowy</h2>
+      <div class="gahla-creator-roll-tools">
+        <button type="button" data-action="randomize">Rzuć wszystkie dodatkowe kości</button>
+        <label class="gahla-check-line"><span>Tryb ręczny / korekta rzutów</span><input type="checkbox" name="manualRolls" {{#if state.manualRolls}}checked{{/if}}></label>
+      </div>
+      {{#if state.manualRolls}}
+      <div class="gahla-roll-grid editable">
+        <label><span>ŻYW</span><input type="number" name="roll_zyw" min="0" max="99" value="{{state.rolls.zyw}}"></label>
+        <label><span>SF</span><input type="number" name="roll_sf" min="0" max="99" value="{{state.rolls.sf}}"></label>
+        <label><span>ZR</span><input type="number" name="roll_zr" min="0" max="99" value="{{state.rolls.zr}}"></label>
+        <label><span>PER</span><input type="number" name="roll_per" min="0" max="99" value="{{state.rolls.per}}"></label>
+        <label><span>ER</span><input type="number" name="roll_er" min="0" max="99" value="{{state.rolls.er}}"></label>
+        <label><span>UM</span><input type="number" name="roll_um" min="0" max="99" value="{{state.rolls.um}}"></label>
+        <label><span>OG</span><input type="number" name="roll_og" min="0" max="99" value="{{state.rolls.og}}"></label>
+        <label><span>WIA</span><input type="number" name="roll_wia" min="0" max="99" value="{{state.rolls.wia}}"></label>
+      </div>
+      <p class="gahla-note">Tryb ręczny służy do wpisania własnych wyników lub korekty uzgodnionej z MG. Wartości są zapisywane jako składnik „rzut”.</p>
+      {{else}}
+      <div class="gahla-roll-grid">
+        {{#each state.rolls}}<div><span>{{@key}}</span><b>{{this}}</b></div>{{/each}}
+      </div>
+      <p class="gahla-note">1k3 dla ŻYW; 1k10 dla SF/ZR/PER/ER/UM/OG/WIA. SZ nie jest rzucana.</p>
+      {{/if}}
+      <h3>Wynik po rasie + Ścieżce + rzucie</h3>
+      <div class="gahla-preview">
+        <span>ŻYW <b>{{previewStats.zyw}}</b></span><span>SF <b>{{previewStats.sf}}</b></span><span>ZR <b>{{previewStats.zr}}</b></span><span>SZ <b>{{previewStats.sz}}</b></span><span>PER <b>{{previewStats.per}}</b></span><span>ER <b>{{previewStats.er}}</b></span><span>UM <b>{{previewStats.um}}</b></span><span>OG <b>{{previewStats.og}}</b></span><span>WIA <b>{{previewStats.wia}}</b></span><span>BGŁ <b>{{previewStats.bgl}}</b></span>
+      </div>
+      <h3>Przyrosty tej Ścieżki Życia</h3>
+      <div class="gahla-preview gahla-growth-preview">
+        <span>SF <b>+{{previewGrowth.sf}}</b></span><span>ZR <b>+{{previewGrowth.zr}}</b></span><span>PER <b>+{{previewGrowth.per}}</b></span><span>ER <b>+{{previewGrowth.er}}</b></span><span>UM <b>+{{previewGrowth.um}}</b></span><span>OG <b>+{{previewGrowth.og}}</b></span><span>WIA <b>+{{previewGrowth.wia}}</b></span>
+      </div>
+    </section>
+
+    <section class="gahla-panel gahla-creator-step-panel">
+      <h2><span class="gahla-step">3</span> Talenty startowe</h2>
+      <label>1 talent rasowy
+        <select name="racialTalent">
+          <option value="">— wybierz —</option>
+          {{#each racialTalents}}<option value="{{name}}" {{#if (eq ../state.racialTalent name)}}selected{{/if}}>{{name}} — {{requirements}}</option>{{/each}}
+        </select>
+      </label>
+      <p class="gahla-note">{{racialTalentNote}}</p>
+      {{#if selectedRacialTalent}}<div class="gahla-creator-talent-preview"><b>{{selectedRacialTalent.name}}</b><span>{{selectedRacialTalent.requirements}}</span><p>{{selectedRacialTalent.description}}</p></div>{{/if}}
+      {{#if isTherian}}
+      <label>Darmowy talent przemiany Therianina
+        <select name="therianFormTalent">
+          <option value="">— wybierz —</option>
+          {{#each therianFormTalents}}<option value="{{name}}" {{#if (eq ../state.therianFormTalent name)}}selected{{/if}}>{{name}}</option>{{/each}}
+        </select>
+      </label>
+      <p class="gahla-note">Ten wybór wynika z Jestestwa Therianina i nie zużywa normalnego wyboru talentu rasowego.</p>
+      {{/if}}
+      <label>1 talent archetypowy T1 albo 2 ogólne
+        <select name="archetypeTalent">
+          <option value="">Brak — wybiorę 2 ogólne</option>
+          {{#each archetypeTalents}}<option value="{{name}}" {{#if (eq ../state.archetypeTalent name)}}selected{{/if}}>{{name}} — {{requirements}}</option>{{/each}}
+        </select>
+      </label>
+      {{#if selectedArchetypeTalent}}<div class="gahla-creator-talent-preview"><b>{{selectedArchetypeTalent.name}}</b><span>{{selectedArchetypeTalent.requirements}}</span><p>{{selectedArchetypeTalent.description}}</p></div>{{/if}}
+      <label>Talent ogólny #1
+        <select name="generalTalent"><option value="">—</option>{{#each generalTalents}}<option value="{{name}}" {{#if (eq ../state.generalTalent1 name)}}selected{{/if}}>{{name}}</option>{{/each}}</select>
+      </label>
+      <label>Talent ogólny #2
+        <select name="generalTalent"><option value="">—</option>{{#each generalTalents}}<option value="{{name}}" {{#if (eq ../state.generalTalent2 name)}}selected{{/if}}>{{name}}</option>{{/each}}</select>
+      </label>
+      <p class="gahla-note">W kreatorze startowym lista pokazuje tylko bazowe talenty archetypowe dostępne na Tierze 1. Wybierz dokładnie 1 talent archetypowy albo 2 ogólne. Człowiek otrzymuje dodatkowe 2 losowe talenty ogólne, Olag 1. Kapłan wybiera 1 darmowy talent swojego bóstwa. Premie z Jestestwa rasy są dodawane automatycznie.</p>
+    </section>
+
+    <section class="gahla-panel gahla-creator-step-panel">
+      <h2><span class="gahla-step">4</span> Ekwipunek startowy</h2>
+      {{#if isCombat}}
+      <label>Broń #1
+        <select name="weapon1">{{#each weapons}}<option value="{{name}}" {{#if (eq ../state.weapon1 name)}}selected{{/if}}>{{name}} — {{system.damage}}</option>{{/each}}</select>
+      </label>
+      <label>Broń / tarcza #2
+        <select name="weapon2">{{#each startingWeapons}}<option value="{{name}}" {{#if (eq ../state.weapon2 name)}}selected{{/if}}>{{name}}{{#if system.damage}} — {{system.damage}}{{/if}}</option>{{/each}}</select>
+      </label>
+      <label>Zbroja
+        <select name="armor">{{#each armors}}<option value="{{name}}" {{#if (eq ../state.armor name)}}selected{{/if}}>{{name}}</option>{{/each}}</select>
+      </label>
+      {{else}}
+      <p>Półmag i Kapłan otrzymują szaty oraz Źródło Mocy T1. Konfigurację Źródła wybierasz w sekcji tożsamości.</p>
+      {{/if}}
+    </section>
+  </div>
+
+  <section class="gahla-panel gahla-creator-finish">
+    <h2><i class="fa-solid fa-circle-check"></i> Gotowa postać</h2>
+    <p>Po zatwierdzeniu kreator zapisze dane bazowe, utworzy talenty i ekwipunek, wyliczy statystyki oraz dopiero wtedy otworzy kartę postaci.</p>
+    <div class="gahla-action-row"><button type="button" data-action="create" class="gahla-primary">Utwórz gotową postać</button></div>
+  </section>
+</div>

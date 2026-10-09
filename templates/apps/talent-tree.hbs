@@ -1,0 +1,64 @@
+<div class="gahla-talent-tree-app">
+  <header class="gahla-tree-header">
+    <div>
+      <h2>Drzewko talentów — {{actor.name}}</h2>
+      <p>Tier {{tree.tier}} · EXP {{tree.xp}} · posiadane {{tree.knownCount}} · pasujące do postaci {{tree.relevantCount}} / {{tree.totalCount}}</p>
+    </div>
+    <button type="button" data-action="close"><i class="fas fa-xmark"></i></button>
+  </header>
+
+  <section class="gahla-tree-toolbar">
+    <input type="search" data-talent-search placeholder="Szukaj talentu, wymagania lub opisu…">
+    <label><input type="checkbox" data-only-available> Tylko możliwe do kupienia teraz</label>
+    <label><input type="checkbox" data-only-known> Tylko posiadane</label>
+    <label><input type="checkbox" data-show-all> Pokaż także talenty spoza mojej rasy/archetypu</label>
+  </section>
+
+  <nav class="gahla-tree-categories">
+    <button type="button" class="active" data-tree-category="all">Wszystkie</button>
+    {{#each groups}}<button type="button" data-tree-category="{{key}}">{{label}} <span>{{relevantCount}}/{{count}}</span></button>{{/each}}
+  </nav>
+
+  <div class="gahla-tree-scroll" data-gahla-scroll="talent-tree">
+    {{#each groups}}
+      <section class="gahla-tree-group" data-tree-group="{{key}}">
+        <header><h3>{{label}}</h3><span>{{count}}</span></header>
+        <div class="gahla-tree-branch">
+          {{#each nodes}}
+            <article class="gahla-tree-node {{depthClass}} {{#if current}}learned{{/if}} {{#if canAttempt}}available{{/if}} {{#unless relevant}}irrelevant{{/unless}}" data-talent-node data-search="{{search}}" data-available="{{canAttempt}}" data-level="{{current}}" data-relevant="{{relevant}}">
+              <div class="gahla-tree-node-main">
+                <div class="gahla-tree-node-title">
+                  <b>{{name}}</b>
+                  {{#if current}}<span class="gahla-tree-level">Ranga {{current}}</span>{{else}}<span class="gahla-tree-level muted">Nieznany</span>{{/if}}
+                  <span class="gahla-tree-category-badge">{{categoryLabel}}</span>
+                  {{#if deity}}<span class="gahla-tree-deity">{{deity}}</span>{{/if}}
+                </div>
+                <div class="gahla-tree-node-meta">
+                  {{#if requirements}}<span><i class="fas fa-lock"></i> {{requirements}}</span>{{/if}}
+                  {{#if prereqText}}<span><i class="fas fa-code-branch"></i> {{prereqText}}</span>{{/if}}
+                </div>
+                <p class="gahla-tree-desc">{{descriptionShort}}</p>
+                {{#unless (eq descriptionShort description)}}<details><summary>Pełny opis</summary><p>{{description}}</p></details>{{/unless}}
+              </div>
+              <div class="gahla-tree-node-actions">
+                {{#if maxed}}
+                  <b class="gahla-tree-ok">MAX</b>
+                {{else}}
+                  <span>{{cost}} EXP → ranga {{next}} (koszt ×{{costLevel}})</span>
+                  {{#if missingText}}<small>Brakuje: {{missingText}}</small>{{/if}}
+                  {{#if deityLocked}}<small>Inne bóstwo</small>{{/if}}
+                  {{#if rankNeedsDecision}}<small>Dalsza progresja wymaga decyzji projektowej.</small>{{/if}}{{#if tierLocked}}<small>Wymaga Tier {{requiredTier}}</small>{{/if}}
+                  <button type="button" data-action="buy" data-name="{{name}}" data-current="{{current}}" data-cost="{{cost}}" data-max-level="{{maxLevel}}" {{#unless canAttempt}}disabled{{/unless}}>{{#if current}}Ulepsz{{else}}Kup{{/if}}</button>
+                {{/if}}
+              </div>
+            </article>
+          {{/each}}
+        </div>
+      </section>
+    {{/each}}
+  </div>
+
+  <footer class="gahla-tree-footer">
+    <p>Cztery gałęzie są układem wizualnym: Rasa, Ogólne, Archetyp i Specjalne. {{#if tree.isCleric}}Kapłan widzi tu dodatkowo Talenty Boskie wyłącznie swojego bóstwa.{{else}}Talenty Boskie są ukryte, ponieważ są dostępne wyłącznie dla Kapłanów.{{/if}} „Pokaż także…” odsłania inne legalne talenty spoza bieżącej rasy/archetypu, ale nie omija ograniczeń Talentów Boskich. Połączenia powstają wyłącznie z jawnych wymagań źródłowych.</p>
+  </footer>
+</div>

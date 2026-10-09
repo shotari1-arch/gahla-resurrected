@@ -1,0 +1,45 @@
+<div class="gahla-setup-form">
+  <header class="gahla-tool-header gahla-setup-header">
+    <div class="gahla-tool-title">
+      <i class="fa-solid fa-dice-d20"></i>
+      <div><small>GAHLA RESURRECTED</small><h1>Narzędzia MG</h1><p>Wersja {{version}} · narzędzia świata i biblioteki.</p></div>
+    </div>
+  </header>
+
+  <section class="gahla-panel gahla-setup-intro">
+    <div><i class="fa-solid fa-book-open"></i></div>
+    <p>System korzysta z dostarczonego Kompendium Mechanicznego i Przewodnika Gracza Sesja 0. Miejsca oznaczone WIP pozostają WIP — narzędzia nie dopowiadają brakujących reguł.</p>
+  </section>
+
+  <section class="gahla-grid gahla-setup-grid">
+    <div class="gahla-panel gahla-setup-card">
+      <h2><i class="fa-solid fa-wand-magic-sparkles"></i> Szybki start</h2>
+      <p class="gahla-note">Najczęściej używane aplikacje systemu.</p>
+      <div class="gahla-setup-actions">
+        <button type="button" data-action="creator" class="gahla-primary"><i class="fa-solid fa-user-plus"></i> Kreator postaci</button>
+        <button type="button" data-action="tracker"><i class="fa-solid fa-list-ol"></i> Tracker inicjatywy</button>
+        <button type="button" data-action="builder"><i class="fa-solid fa-hammer"></i> Czar / Manewr</button>
+        <button type="button" data-action="encounter"><i class="fa-solid fa-dragon"></i> Generator Starć / NPC</button>
+      </div>
+    </div>
+
+    <div class="gahla-panel gahla-setup-card">
+      <h2><i class="fa-solid fa-box-archive"></i> Biblioteka</h2>
+      <p class="gahla-note">Porządkuje źródłową broń, zbroje i talenty w światowej kolekcji Itemów.</p>
+      <button type="button" data-action="seed"><i class="fa-solid fa-download"></i> Wczytaj / uporządkuj bibliotekę</button>
+      <p class="gahla-note">Folder docelowy: „Gahla — Biblioteka”.</p>
+    </div>
+
+    <div class="gahla-panel gahla-setup-card">
+      <h2><i class="fa-solid fa-clover"></i> Grupowe Punkty Losu</h2>
+      <label><span>Pula drużyny</span><input type="number" name="groupFate" value="{{groupFate}}" min="0"></label>
+      <button type="button" data-action="updateFate"><i class="fa-solid fa-floppy-disk"></i> Zapisz pulę</button>
+    </div>
+  </section>
+
+  <section class="gahla-panel gahla-setup-wip">
+    <h2><i class="fa-solid fa-triangle-exclamation"></i> Jawne WIP / luki źródłowe</h2>
+    <p class="gahla-note">Te punkty pozostają świadomie niezaimplementowane albo wymagają potwierdzenia zasad.</p>
+    <ul>{{#each wip}}<li>{{this}}</li>{{/each}}</ul>
+  </section>
+</div>

@@ -1,0 +1,196 @@
+<div class="gahla-item-sheet">
+  <header class="gahla-header gahla-item-header">
+    <div class="gahla-item-title-block">
+      <input class="gahla-name" name="name" value="{{item.name}}" {{#unless isEditable}}disabled{{/unless}}>
+      <div class="gahla-note"><b>{{typeLabel}}</b>{{#if embedded}} · na karcie postaci{{else}} · przedmiot świata / biblioteki{{/if}}</div>
+    </div>
+    <div class="gahla-action-row">
+      {{#if isEditable}}<button type="button" class="gahla-primary" data-action="saveItem"><i class="fas fa-floppy-disk"></i> Zapisz</button>{{/if}}
+      {{#if canEquip}}<button type="button" data-action="equip">{{#if system.equipped}}Zdejmij{{else}}Wyposaż{{/if}}</button>{{/if}}
+      {{#if canPrepare}}<button type="button" data-action="prepare">Zmień plan po Długim Odpoczynku</button>{{/if}}
+      {{#if canUse}}<button type="button" data-action="roll">Rzuć / użyj</button>{{/if}}
+      {{#if (or (eq type "spell") (eq type "maneuver"))}}<button type="button" data-action="openBuilder"><i class="fas fa-wand-magic-sparkles"></i> Kreator</button>{{/if}}
+      {{#if isEditable}}<button type="button" class="gahla-danger" data-action="deleteItem"><i class="fas fa-trash"></i> Usuń</button>{{/if}}
+    </div>
+  </header>
+
+  {{#unless embedded}}
+    <div class="gahla-item-world-note"><i class="fas fa-circle-info"></i> Ten Item jest szablonem w świecie. Przeciągnij go na kartę postaci, aby można go było wyposażyć, przygotować lub używać.</div>
+  {{/unless}}
+
+  <section class="gahla-panel">
+    <h2>Opis</h2>{{#if monkItem}}<p><b>Broń Mnicha: {{monkWeaponLabel}}</b> — wybór/korekta na karcie postaci.</p>{{/if}}
+    <textarea name="system.description" rows="5" placeholder="Opis przedmiotu / zdolności">{{system.description}}</textarea>
+  </section>
+
+  {{#if (eq type "weapon")}}
+  <section class="gahla-grid">
+    <div class="gahla-panel"><h2>Parametry broni</h2>{{#if isGM}}<label>Profil broni <select name="system.profileId"><option value="">Własny / nierozpoznany</option><option value="unarmed" {{#if (eq system.profileId "unarmed")}}selected{{/if}}>Systemowa walka bez broni</option><option value="claws" {{#if (eq system.profileId "claws")}}selected{{/if}}>Atak naturalny — Pazury</option><option value="fangs" {{#if (eq system.profileId "fangs")}}selected{{/if}}>Atak naturalny — Kły</option>{{#each weaponProfiles}}<option value="{{id}}" {{#if (eq ../system.profileId id)}}selected{{/if}}>{{label}}</option>{{/each}}</select></label>{{/if}}
+      <label>Obrażenia <input name="system.damage" value="{{system.damage}}" placeholder="np. 4k10"></label>
+      <label>Typ obrażeń <input name="system.damageType" value="{{system.damageType}}" placeholder="physical / magical"></label>
+      <label>Element <input name="system.element" value="{{system.element}}"></label>
+      <label>Tabela Trwałej Rany <select name="system.woundProfile">{{#each woundProfiles}}<option value="{{key}}" {{#if (eq ../system.woundProfile key)}}selected{{/if}}>{{label}}</option>{{/each}}</select></label>
+      <p class="gahla-note">„Automatycznie” rozpoznaje typ po nazwie/cechach broni. Możesz wymusić Sieczną, Kłutą, Obuchową, Strzałę/Bełt albo Broń palną. Sieczne i kłute korzystają z zatwierdzonej wspólnej tabeli.</p>
+      <label>Opóźnienie <input name="system.delay" type="number" min="0" value="{{system.delay}}"></label>
+      <label>Ręce <input name="system.hands" type="number" min="0" step="0.5" value="{{system.hands}}"></label>
+      <label>Penetracja <input name="system.penetration" type="number" min="0" value="{{system.penetration}}"></label>
+      <label>Uszkodzenie przedmiotu <input name="system.broken" type="number" min="0" value="{{system.broken}}"></label>
+      <label>Broń dystansowa <input name="system.isRanged" type="checkbox" {{checked system.isRanged}}></label>
+      <label>Przeładowanie <input name="system.reload" type="number" min="0" value="{{system.reload}}"></label>
+      <label>Zasięg <input name="system.range" value="{{system.range}}"></label>
+    </div>
+    <div class="gahla-panel"><h2>Cechy, metal i runy</h2>
+      <label>Cechy <textarea name="system.traits" rows="4" placeholder="Oddziel przecinkiem lub nową linią">{{traitsText}}</textarea></label>
+      <label>Metal <input name="system.metal" value="{{system.metal}}"></label>
+      <label>Sloty run <input name="system.runSlots" type="number" min="0" value="{{system.runSlots}}"></label>
+      <label>Runy <textarea name="system.runes" rows="4" placeholder="Oddziel przecinkiem lub nową linią">{{runesText}}</textarea></label>
+      <label>Statystyka runy <input name="system.runeStat" value="{{system.runeStat}}" placeholder="sf/zr/per/er/um/og/wia/zyw"></label>
+      <label>Żywioł runy <input name="system.runeElement" value="{{system.runeElement}}" placeholder="fire/ice/lightning/earth/water/wind/light/shadow"></label>
+    </div>
+  </section>
+  {{/if}}
+
+  {{#if (eq type "armor")}}
+  <section class="gahla-grid">
+    <div class="gahla-panel"><h2>Zbroja / tarcza</h2>
+      {{#if system.isShield}}
+        <label>Bonus pancerza tarczy <input name="system.armor" type="number" min="0" value="{{system.armor}}"></label>
+        <p class="gahla-note">Bonus jest dodawany wyłącznie na aktualnie wybranych lokacjach tarczy.</p>
+      {{else}}
+        <label>Pancerz bazowy / opisowy <input name="system.armor" type="number" min="0" value="{{system.armor}}"></label>
+        <p class="gahla-note">W walce system czyta przede wszystkim wartości z sekcji „Pancerz na lokacjach”.</p>
+      {{/if}}
+      <label>Modyfikator Obrony <input name="system.defenseMod" type="number" value="{{system.defenseMod}}"></label>
+      <label>Magiczna <input name="system.magical" type="checkbox" {{checked system.magical}}></label>
+      <label>Odporność na żywioł <input name="system.armorElementResistance" value="{{system.armorElementResistance}}"></label>
+      <label>Ignoruj wyniki k10 ≤ <input name="system.ignoreLow" type="number" min="0" value="{{system.ignoreLow}}"></label>
+      <label>Kara do skradania <input name="system.stealthPenalty" type="number" value="{{system.stealthPenalty}}"></label>
+      <label>Kompatybilna z Aurą <input name="system.auraCompatible" type="checkbox" {{checked system.auraCompatible}}></label>
+      <label>Bonus Aury <input name="system.auraBonus" type="number" value="{{system.auraBonus}}"></label>
+      <label>Uszkodzenie przedmiotu <input name="system.broken" type="number" min="0" value="{{system.broken}}"></label>
+      {{#if system.isShield}}
+        <button type="button" data-action="setShieldLocation">Wybierz chronione lokacje tarczy</button>
+      {{/if}}
+    </div>
+    <div class="gahla-panel"><h2>Pancerz na lokacjach</h2>
+      {{#if system.isShield}}<p class="gahla-note">Dla tarczy mechaniczny bonus pochodzi z pola „Bonus pancerza tarczy” i lokacji tarczy.</p>{{/if}}
+      {{#each locations}}<label>{{label}} <input name="system.locations.{{key}}" type="number" min="0" value="{{lookup ../system.locations key}}" {{#if ../system.isShield}}disabled{{/if}}></label>{{/each}}
+      <hr>
+      <label>Cechy <textarea name="system.traits" rows="3" placeholder="Oddziel przecinkiem lub nową linią">{{traitsText}}</textarea></label>
+      <label>Metal <input name="system.metal" value="{{system.metal}}"></label>
+      <label>Sloty run <input name="system.runSlots" type="number" min="0" value="{{system.runSlots}}"></label>
+      <label>Runy <textarea name="system.runes" rows="3" placeholder="Oddziel przecinkiem lub nową linią">{{runesText}}</textarea></label>
+      <label>Lokacja Runy Pancerza <select name="system.runeArmorLocation">{{#each locations}}<option value="{{key}}" {{#if (eq ../system.runeArmorLocation key)}}selected{{/if}}>{{label}}</option>{{/each}}</select></label>
+      <label>Odporność runy <input name="system.runeResistance" value="{{system.runeResistance}}" placeholder="physical/mental/magical/spiritual"></label>
+      <label>Żywioł runy <input name="system.runeElement" value="{{system.runeElement}}"></label>
+    </div>
+  </section>
+  {{/if}}
+
+  {{#if (eq type "rune")}}<section class="gahla-panel"><h2>Parametry runy</h2><p>Wszczepienie, test i usunięcie z ciała: przycisk przy runie w Ekwipunku aktora.</p><label>Cecha Runy Statystyk <input name="system.runeStat" value="{{system.runeStat}}" placeholder="sf, zr, per, er, um, og, wia, zyw"></label><label>Odporność Runy Odporności <input name="system.runeResistance" value="{{system.runeResistance}}" placeholder="physical, mental, magical, spiritual"></label><p>{{#if system.bodyRune}}W ciele · koszt {{system.bodyRuneCost}}{{else}}Niewszczepiona{{/if}}</p></section>{{/if}}
+  {{#if (eq type "talent")}}
+  <section class="gahla-grid">
+    <div class="gahla-panel"><h2>Talent</h2>
+      <label>Kategoria <input name="system.category" value="{{system.category}}"></label>
+      <label>Tier <input name="system.tier" type="number" min="1" max="4" value="{{system.tier}}"></label>
+      <p>Ranga {{system.rank}} / {{system.maxRank}} · efekt T{{system.effectTier}} · wymagany Tier {{system.requiredTier}} · mnożnik EXP {{system.costLevel}}</p><p class="gahla-note">Kolejne rangi kupujesz przez Rozwój / Drzewko talentów.</p>
+      
+      <label>Koszt bazowy EXP <input name="system.costXP" type="number" min="0" value="{{system.costXP}}"></label>
+      <label>Wymóg <input name="system.requirements" value="{{system.requirements}}"></label>
+      <label>Wyuczony <input name="system.learned" type="checkbox" {{checked system.learned}}></label>
+      <label>Bóstwo <input name="system.deity" value="{{system.deity}}"></label>
+    </div>
+    <div class="gahla-panel"><h2>Mechanika</h2><p class="gahla-note">Efekty, których źródło nie definiuje jako prostego modyfikatora, pozostają opisem i nie są automatycznie dopowiadane.</p></div>
+  </section>
+  {{/if}}
+
+  {{#if (eq type "spell")}}
+  <section class="gahla-grid">
+    <div class="gahla-panel"><h2>Zaklęcie / Cud</h2>
+      <label>Test <select name="system.rollStat"><option value="um" {{#if (eq system.rollStat "um")}}selected{{/if}}>UM</option><option value="wia" {{#if (eq system.rollStat "wia")}}selected{{/if}}>WIA</option></select></label>
+      <label>Koszt aspektów <input name="system.spellCost" type="number" min="0" value="{{system.spellCost}}"></label>
+      <label>Max koszt <input name="system.maxCost" type="number" min="0" value="{{system.maxCost}}"></label>
+      <label>Końcowe OP <input name="system.delay" type="number" min="0" value="{{system.delay}}"></label>
+      <label>Minimalne OP <input name="system.minDelay" type="number" min="4" value="{{system.minDelay}}"></label>
+      <label>Bonus testu <input name="system.testBonus" type="number" value="{{system.testBonus}}"></label>
+      <label>Obrażenia <input name="system.damage" value="{{system.damage}}" placeholder="np. 4k10"></label>
+      <label>Penetracja <input name="system.penetration" type="number" min="0" value="{{system.penetration}}"></label>
+      <label>Stałe obrażenia <input name="system.flatDamage" type="number" value="{{system.flatDamage}}"></label>
+      <label>Element <input name="system.element" value="{{system.element}}"></label>
+      <label>Szkoła / klasa <input name="system.school" value="{{system.school}}"></label>
+      <label>Rzucane z księgi/zwoju <input name="system.fromBook" type="checkbox" {{checked system.fromBook}}></label>
+      <label>Cel <input name="system.target" value="{{system.target}}"></label>
+      <label>Zasięg <input name="system.range" value="{{system.range}}"></label>
+      <label>Długość <input name="system.duration" value="{{system.duration}}"></label>
+      <button type="button" data-action="recalculate">Przelicz koszt prostych aspektów</button>
+    </div>
+    <div class="gahla-panel"><h2>Aspekty zapisane w Itemie</h2>
+      {{#each spellAspects}}
+        <label class="gahla-checkbox-row"><input type="checkbox" data-action="toggleAspect" data-aspect="{{name}}" {{checked selected}}> <span><b>{{name}}</b> · {{cost}}</span></label>
+        <small class="gahla-note">{{description}}</small>
+      {{/each}}
+      {{#if system.risks.length}}<h3>Ryzyka</h3>{{#each system.risks}}<span class="gahla-tag">{{this}}</span>{{/each}}{{/if}}
+    </div>
+  </section>
+  {{/if}}
+
+  {{#if (eq type "maneuver")}}
+  <section class="gahla-grid">
+    <div class="gahla-panel"><h2>Manewr — nakładka na atak</h2>
+      <p class="gahla-note">Manewr nie przechowuje własnej bazowej broni. W chwili wykonania wybierasz broń, a system nakłada poniższe delty.</p>
+      <div class="gahla-derived-grid">
+        <div><small>Obrażenia</small><b>{{maneuverView.damageText}}</b></div>
+        <div><small>Opóźnienie</small><b>{{maneuverView.delayText}}</b></div>
+        <div><small>Trafienie</small><b>{{maneuverView.hitText}}</b></div>
+        <div><small>Penetracja</small><b>{{maneuverView.penetrationText}}</b></div>
+      </div>
+      {{#if maneuverView.halfWeaponDice}}<p><b>Użycie obu rąk:</b> + połowa kości aktualnej broni (zaokrąglona w górę).</p>{{/if}}
+      {{#if maneuverView.extraTargets}}<p><b>Zamaszysty:</b> +{{maneuverView.extraTargets}} dodatkowych celów.</p>{{/if}}
+      {{#if system.maneuverWeapon}}<p class="gahla-note">Broń referencyjna kreatora: {{system.maneuverWeapon}}. Jest tylko podglądem.</p>{{/if}}
+      <button type="button" class="gahla-primary" data-action="openBuilder"><i class="fas fa-pen"></i> Edytuj w kreatorze manewru</button>
+    </div>
+    <div class="gahla-panel"><h2>Efekty</h2>
+      {{#each system.effects}}<span class="gahla-tag">{{this}}</span>{{else}}<p class="gahla-note">Brak zapisanych efektów.</p>{{/each}}
+      <p class="gahla-note">Efekty specjalne pozostają opisem, jeśli materiały nie definiują kompletnej procedury automatycznej.</p>
+    </div>
+  </section>
+  {{/if}}
+
+  {{#if (eq type "powerSource")}}
+  <section class="gahla-grid">
+    <div class="gahla-panel"><h2>Źródło Mocy</h2>
+      <label>Tier <input name="system.sourceTier" type="number" min="1" max="4" value="{{system.sourceTier}}"></label>
+      <p>Baza +5 UM/WIA. Każdy Tier = jeden wybór umagicznienia.</p><button type="button" data-action="configureSource">Wybierz umagicznienie</button><p>{{system.enchantments}}</p>
+      {{#if embedded}}<label>Aktywne <input name="system.equipped" type="checkbox" {{checked system.equipped}}></label>{{/if}}
+    </div>
+    <div class="gahla-panel"><p class="gahla-note">Efekty specjalne zależne od talentów pozostają zgodne z opisem talentu; arkusz nie dopowiada ich automatycznie.</p></div>
+  </section>
+  {{/if}}
+
+  {{#if (eq type "rune")}}
+  <section class="gahla-grid">
+    <div class="gahla-panel"><h2>Runa</h2>
+      <label>Tier <input name="system.tier" type="number" min="1" max="4" value="{{system.tier}}"></label>
+      <label>Koszt <input name="system.costXP" type="number" min="0" value="{{system.costXP}}"></label>
+      <label>Wymóg <input name="system.requirements" value="{{system.requirements}}"></label>
+    </div>
+    <div class="gahla-panel"><p class="gahla-note">Runa jako osobny Item jest wzorcem. Aktywne runy przypisuje się do przedmiotu, który posiada sloty runiczne.</p></div>
+  </section>
+  {{/if}}
+
+  {{#if (eq type "equipment")}}
+  <section class="gahla-grid">
+    <div class="gahla-panel"><h2>Ekwipunek</h2>
+      <label>Kategoria <input name="system.category" value="{{system.category}}" placeholder="np. narzędzie, materiał, przedmiot fabularny"></label>
+      <label>Tier <input name="system.tier" type="number" min="1" max="4" value="{{system.tier}}"></label>
+      <label>Wymagania <input name="system.requirements" value="{{system.requirements}}"></label>
+      {{#if embedded}}<label>Wyposażone / aktywne <input name="system.equipped" type="checkbox" {{checked system.equipped}}></label>{{/if}}
+    </div>
+    <div class="gahla-panel"><h2>Cechy</h2>
+      <label>Tagi / cechy <textarea name="system.traits" rows="5" placeholder="Oddziel przecinkiem lub nową linią">{{traitsText}}</textarea></label>
+      <p class="gahla-note">Zwykły ekwipunek nie dostaje automatycznych bonusów, jeśli źródło ich nie definiuje. Opis i cechy pozostają danymi użytkownika.</p>
+    </div>
+  </section>
+  {{/if}}
+</div>
+

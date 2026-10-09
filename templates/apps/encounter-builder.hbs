@@ -1,0 +1,87 @@
+<div class="gahla-encounter-form" data-gahla-scroll="encounter-main">
+  <div class="gahla-center-nav"><button type="button" data-action="deploy">Rozstaw starcie na nowej scenie</button><label><input type="checkbox" name="startEncounter">Uruchom walkę</label><button type="button" data-action="saveTemplate">Zapisz szablon</button></div>
+  <header class="gahla-tool-header">
+    <div class="gahla-tool-title"><i class="fas fa-dragon"></i><div><small>GAHLA RESURRECTED</small><h1>Generator Starć</h1><p>Budżet SBSM + tworzenie gotowych Actorów przeciwników.</p></div></div>
+  </header>
+
+  <section class="gahla-encounter-grid">
+    <div class="gahla-panel">
+      <div class="gahla-section-heading"><div><h2>1. Drużyna</h2><p class="gahla-note">PP v3 liczy każdą postać osobno: Poziom × SZ / 5. Statystyki przeciwników skalują się do średniego poziomu wybranej drużyny.</p></div><button type="button" data-action="partyFromCombat">Z bieżącego Encounteru</button></div>
+      <div class="gahla-party-picker">
+        {{#each party}}
+          <button type="button" class="gahla-party-chip {{#if selected}}selected{{/if}}" data-action="toggleParty" data-actor-id="{{id}}"><b>{{name}}</b><span>Lvl {{level}} · T{{tier}} · SZ {{speed}}</span></button>
+        {{else}}<p>Brak Actorów typu character.</p>{{/each}}
+      </div>
+      <p class="gahla-note">Wybrano: {{partyCount}} · poziom referencyjny statystyk NPC: {{partyReferenceLevel}}. Boss nadal ma SZ × liczba graczy podczas walki; w koszcie MC nie liczymy tego drugi raz.</p>
+    </div>
+
+    <div class="gahla-panel gahla-balance-card">
+      <h2>Budżet starcia</h2>
+      <div class="gahla-balance-grid">
+        <div><small>PP v3</small><b>{{balance.pp}}</b></div><div><small>MC v3</small><b>{{balance.mc}}</b></div><div><small>MC / PP</small><b>{{balance.ratio}}</b></div><div class="difficulty {{balance.difficultyId}}"><small>Ocena</small><b>{{balance.difficulty}}</b></div>
+      </div>
+      <p>{{balance.description}}</p>
+      <details><summary>Porównaj ze starszym SBSM</summary><p class="gahla-note"><b>v2 (Tier):</b> PP {{balance.v2PP}} · MC {{balance.v2MC}} · MC/PP {{balance.v2Ratio}}.<br><b>v1:</b> PP {{balance.legacyPP}} · MC {{balance.legacyMC}} · MC/PP {{balance.legacyRatio}}. Starsze wzory są diagnostyczne; oceną steruje v3.</p></details>
+    </div>
+  </section>
+
+  <section class="gahla-panel">
+    <div class="gahla-section-heading"><div><h2>2. Zbuduj przeciwnika</h2><p class="gahla-note">Tier określa dostęp do tagów/specjalnych zdolności. Surowe statystyki bojowe są skalowane poziomem drużyny, a nie Tierem tagów.</p></div><span class="gahla-count-badge">TP {{tagSpent}} / {{rule.tp}}</span></div>
+    <div class="gahla-encounter-controls">
+      <label>Nazwa<input type="text" name="monsterName" value="{{draft.name}}" placeholder="np. Goblin"></label>
+      <label>Ilość<input type="number" name="monsterCount" min="1" max="99" value="{{draft.count}}"></label>
+      <label>Kategoria<select name="monsterCategory">{{#each categories}}<option value="{{key}}" {{#if selected}}selected{{/if}}>{{label}} · {{tp}} TP · ×{{mult}}</option>{{/each}}</select></label>
+      <label>Tier tagów<select name="monsterTier"><option value="1" {{#if (eq draft.tier 1)}}selected{{/if}}>Tier 1</option><option value="2" {{#if (eq draft.tier 2)}}selected{{/if}}>Tier 2</option><option value="3" {{#if (eq draft.tier 3)}}selected{{/if}}>Tier 3</option><option value="4" {{#if (eq draft.tier 4)}}selected{{/if}}>Tier 4</option></select></label>
+      <label>Archetyp<select name="monsterArchetype">{{#each archetypes}}<option value="{{id}}" {{#if selected}}selected{{/if}}>{{name}}</option>{{/each}}</select></label>
+      <label class="gahla-check-line"><span>Mutacje / tagi innych archetypów</span><input type="checkbox" name="allowForeign" {{#if draft.allowForeign}}checked{{/if}}></label>
+    </div>
+
+    <div class="gahla-monster-preview">
+      <div class="gahla-preview-title"><b>{{archetype.name}}</b><span>{{archetype.role}}</span></div>
+      <div class="gahla-preview-stats">
+        <span><small>Lvl bojowy</small><b>{{preview.combatLevel}}</b></span><span><small>BGŁ</small><b>{{preview.skill}}</b></span><span><small>OBR</small><b>{{preview.defense}}</b></span><span><small>SZ</small><b>{{preview.actualSpeed}}</b></span><span><small>DMG</small><b>{{preview.damageDice}}k10</b></span>
+        {{#if preview.hp}}<span><small>HP</small><b>{{preview.hp}}</b></span>{{else}}<span><small>ŻYW</small><b>{{preview.vitality}}</b></span><span><small>Rany</small><b>{{preview.woundMax}}</b></span>{{/if}}
+        <span><small>MC v3</small><b>{{preview.mc}}</b></span>
+      </div>
+      <div class="gahla-preview-attributes" aria-label="Bazowe cechy przeciwnika">
+        <span><small>SF</small><b>{{preview.attributes.sf}}</b></span><span><small>ZR</small><b>{{preview.attributes.zr}}</b></span><span><small>PER</small><b>{{preview.attributes.per}}</b></span><span><small>ER</small><b>{{preview.attributes.er}}</b></span><span><small>UM</small><b>{{preview.attributes.um}}</b></span><span><small>OG</small><b>{{preview.attributes.og}}</b></span><span><small>WIA</small><b>{{preview.attributes.wia}}</b></span>
+      </div>
+      <div class="gahla-preview-resistances"><small>Odporności:</small><span>Fiz {{preview.resistances.physical}}</span><span>Psych {{preview.resistances.mental}}</span><span>Mag {{preview.resistances.magical}}</span><span>Duch {{preview.resistances.spiritual}}</span></div>
+      {{#if preview.woundBands}}<div class="gahla-preview-thresholds">{{#each preview.woundBands}}<span><b>{{label}}</b> {{range}}</span>{{/each}}</div>{{/if}}
+      <p class="gahla-note"><b>{{archetype.base_bonus.name}}:</b> {{archetype.base_bonus.effect}}</p>{{#if preview.singleHitWoundCap}}<p class="gahla-note"><b>Ochrona Bossa:</b> maks. {{preview.singleHitWoundCap}} Rany z jednego trafienia. Nie ogranicza wielu osobnych trafień ani obrażeń HP.</p>{{/if}}
+    </div>
+
+    <div class="gahla-tag-builder">
+      {{#each tagGroups}}
+        <details class="gahla-tag-group" {{#unless foreign}}open{{/unless}}><summary>{{name}}{{#if foreign}} · obcy archetyp{{/if}}</summary>
+          {{#each tiers}}
+            <div class="gahla-tag-tier {{#if locked}}locked{{/if}}"><h3>Tier {{tier}}{{#if locked}} — zablokowany{{/if}}</h3>
+              <div class="gahla-tag-cards">
+                {{#each tags}}<button type="button" class="gahla-tag-card {{#if selected}}selected{{/if}}" data-action="toggleTag" data-tag-id="{{id}}" {{#if disabled}}disabled{{/if}}><span><b>{{name}}</b><em>{{cost}} TP</em></span><small>{{effect}}</small></button>{{/each}}
+              </div>
+            </div>
+          {{/each}}
+        </details>
+      {{/each}}
+    </div>
+    <div class="gahla-action-row"><button type="button" class="gahla-primary" data-action="addMonster"><i class="fas fa-plus"></i> Dodaj do starcia</button><span class="gahla-note">Pozostało {{tagRemaining}} TP · maksymalny Tier tagu: {{allowedTier}}</span></div>
+  </section>
+
+  <section class="gahla-panel">
+    <div class="gahla-section-heading"><div><h2>3. Projekt starcia</h2><p class="gahla-note">Po zatwierdzeniu system utworzy osobnego Actora dla każdej sztuki.</p></div><div class="gahla-action-row"><button type="button" data-action="clear">Wyczyść</button><button type="button" class="gahla-primary" data-action="createActors"><i class="fas fa-user-ninja"></i> Utwórz Actorów</button></div></div>
+    <div class="gahla-encounter-list">
+      {{#each encounter}}
+        <article class="gahla-encounter-row">
+          <div><h3>{{count}}× {{name}}</h3><p>{{categoryLabel}} · T{{tier}} tagów · Lvl {{stats.combatLevel}} statystyk · {{archetypeName}} · MC {{mc}}</p><small>BGŁ {{stats.skill}} · OBR {{stats.defense}} · SZ {{stats.actualSpeed}} · {{stats.damageDice}}k10{{#if stats.hp}} · HP {{stats.hp}}{{else}} · ŻYW {{stats.vitality}} · Rany {{stats.woundMax}}{{/if}}</small><small>SF {{stats.attributes.sf}} · ZR {{stats.attributes.zr}} · PER {{stats.attributes.per}} · ER {{stats.attributes.er}} · UM {{stats.attributes.um}} · OG {{stats.attributes.og}} · WIA {{stats.attributes.wia}}</small></div>
+          <div class="gahla-encounter-tags">{{#each tags}}<span>{{name}}</span>{{/each}}</div>
+          <button type="button" data-action="removeMonster" data-index="{{index}}" title="Usuń"><i class="fas fa-trash"></i></button>
+        </article>
+      {{else}}<p>Starcie jest jeszcze puste.</p>{{/each}}
+    </div>
+  </section>
+
+  <section class="gahla-panel gahla-warning-panel">
+    <h2>O balansie</h2>
+    <p>Ocena jest heurystyką, nie wyrocznią. SBSM v3 rozdziela <b>Tier</b> (dostęp do tagów) od <b>poziomu bojowego</b> (BGŁ, Obrona, ŻYW/HP, cechy i odporności). PP i MC używają poziomu zamiast Tieru. Kategoria nadal reprezentuje pakiet wytrzymałości, reakcji i budżetu tagów.</p>
+  </section>
+</div>
