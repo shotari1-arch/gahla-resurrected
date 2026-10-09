@@ -1,0 +1,31 @@
+{
+  "races": {
+    "status": "ACTIVE_WITH_WIP",
+    "note": "Dostarczono Rasa.html. Grywalne rasy mają statystyki w systemie; Kevru/Lud Stali/Niziołki pozostają niegrywalne/WIP zgodnie z materiałem."
+  },
+  "archetypes": {
+    "status": "ACTIVE",
+    "known": [
+      "Łowca",
+      "Bestia",
+      "Półmag",
+      "Wojownik",
+      "Kapłan"
+    ]
+  },
+  "lifePaths": {
+    "status": "ACTIVE_WITH_SPECIAL",
+    "note": "Dostarczono Archetyp Sciezka.html; ścieżki specjalne wymagające rytuału pozostają niedostępne na starcie."
+  },
+  "lingeringWounds": {
+    "status": "ACTIVE",
+    "note": "Zatwierdzone tabele 0.11.5: sieczne/kłute, obuchowe, strzały/bełty i wspólna tabela elementów według lokacji. Dawna tabela broni palnej zachowana bez zmian, wraz z jej historycznymi WIP."
+  },
+  "elementalStatuses": {
+    "status": "WIP"
+  },
+  "encounterGenerator": {
+    "status": "ACTIVE",
+    "note": "Natywny Generator Starć jest częścią systemu od 0.9.0."
+  }
+}

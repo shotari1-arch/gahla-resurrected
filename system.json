@@ -1,0 +1,61 @@
+{
+  "id": "gahla-resurrected",
+  "title": "Gahla Resurrected",
+  "description": "Gahla Resurrected — pełny system RPG dla Foundry VTT V14: testy k100, segmentowa walka, rany, aura, talenty, magia, manewry, runy, rozwój i kreator postaci.",
+  "version": "0.11.9-beta",
+  "compatibility": {
+    "minimum": 14,
+    "verified": 14.368
+  },
+  "authors": [
+    {
+      "name": "Gahla Resurrected"
+    }
+  ],
+  "esmodules": [
+    "gahla-resurrected.mjs"
+  ],
+  "styles": [
+    "styles/gahla.css"
+  ],
+  "languages": [
+    {
+      "lang": "pl",
+      "name": "Polski",
+      "path": "lang/pl.json"
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "minion": {},
+      "standard": {},
+      "elite": {},
+      "boss": {},
+      "bossPart": {}
+    },
+    "Item": {
+      "weapon": {},
+      "armor": {},
+      "talent": {},
+      "spell": {},
+      "maneuver": {},
+      "rune": {},
+      "powerSource": {},
+      "equipment": {}
+    }
+  },
+  "socket": false,
+  "initiative": "@system.derived.speedBase",
+  "grid": {
+    "distance": 1,
+    "units": "m",
+    "diagonals": "5105"
+  },
+  "primaryTokenAttribute": "system.combat.wounds.value",
+  "secondaryTokenAttribute": "system.combat.aura.value",
+  "type": "system",
+  "url": "https://github.com/shotari1-arch/gahla-resurrected",
+  "manifest": "https://raw.githubusercontent.com/shotari1-arch/gahla-resurrected/main/system.json",
+  "download": "https://github.com/shotari1-arch/gahla-resurrected/releases/latest/download/gahla-resurrected.zip"
+}

@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {actor,install,NS,applyPatch,hooks,settings} from './helpers/automation-fixtures.mjs';
+import {effectCanonicalPatch,itemCanonicalPatch,migrateCanonical,togglePreparationPlan,registerCanonicalHooks} from '../module/canonical-runtime.mjs';
+install();
+assert.equal(effectCanonicalPatch({duration:{rounds:3,startRound:2,startTime:50}}).duration.value,3);assert.equal(effectCanonicalPatch({duration:{units:"rounds",value:3}}),null);
+const source=(system)=>({id:'src',type:'powerSource',system,flags:{},async update(p){applyPatch(this,p);}});
+const mixed=source({sourceTier:1,sourceTestBonus:10,sourceBonusPoints:1,enchantments:['+10 do testu + 1 punkt bonusowy']});
+await mixed.update(itemCanonicalPatch(mixed));assert(mixed.flags[NS].sourceNeedsReview);assert.equal(mixed.system.sourceTestBonus,5);assert.equal(mixed.flags[NS].legacySource.sourceTestBonus,10);assert.equal(itemCanonicalPatch(mixed),null);
+const exact=source({sourceTier:1,sourceTestBonus:15,sourceBonusPoints:0,enchantments:['+15 do testu']});await exact.update(itemCanonicalPatch(exact));assert.deepEqual(exact.system.enchantments,['test']);assert(!exact.flags[NS].sourceNeedsReview);
+const ambiguous=source({sourceTier:1,sourceTestBonus:10,sourceBonusPoints:1,enchantments:[]});assert(itemCanonicalPatch(ambiguous)[`flags.${NS}.sourceNeedsReview`]);
+const cleric=actor(),spell={id:'sp',name:'Ogień',type:'spell',system:{school:'Kapłan',element:'fire',damageType:'magical',prepared:true},flags:{},async update(p){applyPatch(this,p);}};spell.parent=cleric;cleric.items=[spell];cleric.system.combat.longDebt=9;cleric.flags[NS]={custom:'keep'};
+const synthetic=actor();synthetic.system.combat.wounds.value=15;game.actors=[cleric];game.items=[mixed,exact];game.scenes=[{tokens:[{actor:synthetic,actorLink:false}]}];await migrateCanonical();assert.equal(spell.system.damageType,'spiritual');assert(cleric.flags[NS].trackerNeedsReview);assert.equal(cleric.flags[NS].legacyTracker.longDebt,9);assert.equal(cleric.flags[NS].custom,'keep');assert.equal(synthetic.system.combat.wounds.value,15);assert.equal(cleric.system.xp,500);await migrateCanonical();assert.equal(cleric.flags[NS].legacyTracker.longDebt,9);
+await togglePreparationPlan(spell);assert(spell.system.prepared);assert.deepEqual(cleric.flags[NS].preparationPlan,[]);
+registerCanonicalHooks();assert.equal(settings.get(NS+".fateXPOptional"),false);const pre=hooks.get('preUpdateItem').at(-1);assert.equal(pre(spell,{'system.prepared':false},{}),false);assert.notEqual(pre(spell,{'system.prepared':false},{gahlaPreparation:true}),false);
+console.log('Canonical migrations: ambiguous sources, items, world/synthetic actors, idempotence and preparation locks: PASS');

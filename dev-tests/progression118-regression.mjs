@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {actor,talent,install,applyPatch} from './helpers/automation-fixtures.mjs';
+install();
+class Field{constructor(options={}){this.options=options;}}class SchemaField{constructor(fields){this.fields=fields;}}class ArrayField extends Field{constructor(f,o){super(o);}}
+foundry.data={fields:{NumberField:Field,StringField:Field,BooleanField:Field,SchemaField,ArrayField}};foundry.abstract={TypeDataModel:class{prepareDerivedData(){}}};
+const {GahlaActorData}=await import('../module/data-models.mjs');const {changeLevel,levelView}=await import('../module/progression118.mjs');
+function defaults(schema){return Object.fromEntries(Object.entries(schema).map(([k,f])=>[k,f.fields?defaults(f.fields):structuredClone(f.options.initial)]));}
+const a=actor([talent('Żywotny',4)]),m=new GahlaActorData();Object.assign(m,defaults(GahlaActorData.defineSchema()));m.parent=a;a.system=m;m.archetype='wojownik';m.lifePath='Test';m.base.race={zyw:15,sf:40,zr:40,per:40,er:40,um:40,og:40,wia:40,sz:5};a.update=async p=>{applyPatch(a,p);m.prepareDerivedData();};m.prepareDerivedData();
+const base=JSON.stringify(m.base),items=JSON.stringify(a.items),xp=m.xp;const values=()=>[m.stats.zyw,m.stats.bgl,m.derived.defense,m.derived.speedBase];
+for(const [from,to,tier,delta]of [[1,2,2,[1,10,10,0]],[2,3,2,[1,10,10,1]],[4,5,3,[1,10,10,0]],[5,4,2,[-1,-10,-10,0]],[7,8,4,[1,10,10,0]],[10,11,4,[1,10,10,1]],[11,10,4,[-1,-10,-10,-1]]]){m.level=from;m.prepareDerivedData();const v=values(),res=m.derived.physicalResistance,aura=m.combat.aura.max;await changeLevel(a,to-from,{confirm:async()=>true});assert.equal(m.level,to);assert.equal(m.derived.tier,tier);assert.deepEqual(values().map((x,i)=>x-v[i]),delta);assert.equal(m.derived.physicalResistance-res,to-from);assert.equal(m.combat.aura.max-aura,to-from);assert.equal(JSON.stringify(m.base),base);assert.equal(JSON.stringify(a.items),items);assert.equal(m.xp,xp);}
+m.level=2;assert.deepEqual(Object.fromEntries(Object.entries(levelView(a)).filter(([k])=>['zyw','bgl','defense','speed','milestone'].includes(k))),{milestone:true,zyw:1,bgl:10,defense:10,speed:1});
+game.user.isGM=false;a.isOwner=false;await assert.rejects(()=>changeLevel(a,1),/uprawnień/);a.isOwner=true;await changeLevel(a,1);assert.equal(m.level,3);a.isOwner=false;game.user.isGM=true;await changeLevel(a,1);assert.equal(m.level,4);await changeLevel(a,-1);assert.equal(m.level,4,'Declining downgrade');m.level=11;await assert.rejects(()=>changeLevel(a,1));m.level=1;await assert.rejects(()=>changeLevel(a,-1));
+console.log('PASS 118 level transitions, Tier, exact derived deltas, next-level preview, unchanged base/XP/items, owner/GM/non-owner/bounds/confirmation.');

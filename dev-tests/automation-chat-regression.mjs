@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {actor,install,NS,applyPatch} from './helpers/automation-fixtures.mjs';
+import {handleContextAction,handleDamageCard} from '../module/context-reactions.mjs';
+install();const attacker=actor(),defender=actor();const weapon={uuid:'Item.w'};
+defender.mainWeapon={system:{delay:4}};defender.rollParry=async()=>{defender.system.combat.reactionLeft--;return {success:true};};
+const refs=new Map([[attacker.uuid,attacker],[defender.uuid,defender],[weapon.uuid,weapon]]);globalThis.fromUuid=async id=>refs.get(id);
+const message={id:'m1',flags:{[NS]:{attack:{attacker:attacker.uuid,defender:defender.uuid,weapon:weapon.uuid,success:true,targetNumber:60,roll:30}}},setFlag:()=>{throw Error('Defender must not write another user’s ChatMessage');}};game.messages.set(message.id,message);
+const button={dataset:{action:'gahla-auto-parry'},closest:()=>({dataset:{messageId:message.id}})};
+game.user.isGM=false;await assert.rejects(()=>handleContextAction(button),/przed rzutem/);assert.equal(defender.system.combat.reactionLeft,1);message.flags[NS].attack.stopped=true;
+await assert.rejects(()=>handleContextAction(button),/przed rzutem/);button.dataset.action='gahla-auto-damage';await assert.rejects(()=>handleContextAction(button),/rozstrzygnięty/);
+const damage={id:'m2',flags:{[NS]:{damage:{target:defender.uuid,amount:10,wounds:2,location:'body',options:{}}}}};game.messages.set('m2',damage);
+defender.applyDamage=async(n,options)=>defender.update({'system.combat.wounds.value':defender.system.combat.wounds.value+options.wounds,[`flags.${NS}.resolvedDamage.${options.resolutionId}`]:true});
+const apply={dataset:{action:'gahla-apply-damage'},closest:()=>({dataset:{messageId:'m2'}})};
+const before=defender.system.combat.wounds.value;await handleDamageCard(apply);assert.equal(defender.system.combat.wounds.value,before+2);await assert.rejects(()=>handleDamageCard(apply),/już/);
+defender.isOwner=false;await assert.rejects(()=>handleDamageCard(apply),/uprawnień/);
+console.log('Gahla chat permissions / stale cards / duplicate damage regression: PASS');

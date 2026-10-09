@@ -1,0 +1,24 @@
+import assert from "node:assert/strict";
+import { getLifePath, getArchetype, getRace, evaluateTest, reverseD100, woundCountFromDamage, lingeringWoundScore, pickHitLocation, getAttackTarget, talentCost, LIFE_PATHS, WEAPONS } from "../module/rules.mjs";
+
+const human=getRace("human");
+assert.equal(human.stats.M.sf,18);
+assert.equal(getArchetype("wojownik").bgl,80);
+assert.equal(getLifePath("human","wojownik","Święty Rycerz").values.og,25);
+assert.equal(evaluateTest(4,40).criticalSuccess,true);
+assert.equal(evaluateTest(20,40).bonus,true);
+assert.equal(evaluateTest(96,999).criticalFailure,true);
+assert.equal(reverseD100(21),12);
+assert.equal(woundCountFromDamage(17,9),1);
+assert.equal(woundCountFromDamage(18,9),2);
+assert.equal(woundCountFromDamage(19,9),2);
+assert.equal(woundCountFromDamage(27,9),3);
+assert.equal(woundCountFromDamage(28,9),3);
+assert.equal(lingeringWoundScore({roll:10,woundsOverMax:2,successType:"crit"}),50);
+assert.equal(pickHitLocation(21),"leftArm");
+const actor={system:{stats:{per:34,bgl:80}}};
+assert.equal(getAttackTarget(actor,40),44);
+assert.equal(talentCost({costBase:100},2),200);
+assert.equal(LIFE_PATHS.length>40,true);
+assert.equal(WEAPONS.find(w=>w.name==="Długi Miecz").system.delay,6);
+console.log("Gahla core regression: OK");

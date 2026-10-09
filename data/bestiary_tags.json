@@ -1,0 +1,755 @@
+{
+  "system_info": {
+    "game": "Gahla Resurrected",
+    "version": "1.4",
+    "tag_budget_rules": {
+      "plotka_minion": {
+        "name": "Płotka (Minion)",
+        "tag_points": 0,
+        "max_tag_tier": 0,
+        "mc_multiplier": 0.5,
+        "description": "Mięso armatnie. Brak dostępu do tagów — posiada wyłącznie Cechę Bazową Archetypu. Używa HP zamiast Ran i progów; HP = ŻYW × 5.",
+        "reactions": 0,
+        "stat_mods": {
+          "skill": -10,
+          "defense": -10,
+          "damage_dice": -1,
+          "vitality": 0,
+          "wounds": 0,
+          "wounds_multiplier": 1,
+          "hp_instead_of_wounds": true,
+          "speed_multiplied_by_players": false,
+          "attributes": -10,
+          "resistance": -5,
+          "hp_per_vitality": 5
+        }
+      },
+      "zolnierz_standard": {
+        "name": "Żołnierz",
+        "tag_points": 2,
+        "max_tag_tier": 2,
+        "mc_multiplier": 1,
+        "description": "Podstawowy przeciwnik. Używa prostej puli HP zamiast Ran i progów, ma 1 Reakcję. HP = ŻYW × 10. Wystarczy na 2 tagi T1 lub 1 tag T2.",
+        "reactions": 1,
+        "stat_mods": {
+          "skill": 0,
+          "defense": 0,
+          "damage_dice": 0,
+          "vitality": 0,
+          "wounds": 0,
+          "wounds_multiplier": 1,
+          "hp_instead_of_wounds": true,
+          "speed_multiplied_by_players": false,
+          "attributes": 0,
+          "resistance": 0,
+          "hp_per_vitality": 10
+        }
+      },
+      "elita_lieutenant": {
+        "name": "Elita",
+        "tag_points": 5,
+        "max_tag_tier": 3,
+        "mc_multiplier": 2,
+        "description": "Dowódca lub duża bestia. Podbite statystyki walki, mix tagów T1, T2 i T3.",
+        "reactions": null,
+        "stat_mods": {
+          "skill": 10,
+          "defense": 10,
+          "damage_dice": 1,
+          "vitality": 2,
+          "wounds": 2,
+          "wounds_multiplier": 1,
+          "hp_instead_of_wounds": false,
+          "speed_multiplied_by_players": false,
+          "attributes": 10,
+          "resistance": 5
+        }
+      },
+      "boss": {
+        "name": "Boss",
+        "tag_points": 10,
+        "max_tag_tier": 4,
+        "mc_multiplier": 4,
+        "description": "Finałowe starcie (Solo). 3 Reakcje na rundę, Pula Ran x3, Szybkość x liczba graczy oraz ochrona przed alpha strike: maks. 3 Rany z pojedynczego trafienia. Tier steruje tagami, poziom drużyny statystykami.",
+        "reactions": 3,
+        "stat_mods": {
+          "skill": 20,
+          "defense": 20,
+          "damage_dice": 2,
+          "vitality": 0,
+          "wounds": 0,
+          "wounds_multiplier": 3,
+          "hp_instead_of_wounds": false,
+          "speed_multiplied_by_players": true,
+          "attributes": 15,
+          "resistance": 10
+        }
+      }
+    },
+    "source": "Generator Starć GAHLA R. v1.3 + integracja Foundry 0.9.1",
+    "party_power": {
+      "formula": "PP v3 = Σ(Poziom postaci × Bazowa SZ postaci / 5)",
+      "speed_divisor": 5,
+      "note": "Każda postać liczona osobno. Tier nie zastępuje już poziomu w budżecie."
+    },
+    "monster_cost_formula": "MC v3 = Σ(Mnożnik kategorii × Poziom bojowy przeciwnika × Bazowa SZ przeciwnika / 5 × Ilość)",
+    "difficulty_scale": [
+      {
+        "id": "easy",
+        "label": "Łatwe (Trening)",
+        "max_ratio": 0.7,
+        "inclusive": false,
+        "description": "Walka szkoleniowa lub narracyjna. Gracze nie powinni stracić zasobów."
+      },
+      {
+        "id": "balanced",
+        "label": "Zbalansowane (Standard)",
+        "max_ratio": 1.2,
+        "inclusive": true,
+        "description": "Standardowe starcie. Wymaga użycia manewrów i zaklęć, gracze odniosą lekkie rany."
+      },
+      {
+        "id": "hard",
+        "label": "Trudne (Wymaga taktyki)",
+        "max_ratio": 1.6,
+        "inclusive": true,
+        "description": "Poważne zagrożenie. Gracze będą musieli spalać Punkty Losu i Aurę, aby przeżyć."
+      },
+      {
+        "id": "deadly",
+        "label": "Śmiertelne (Wysokie ryzyko LW)",
+        "max_ratio": null,
+        "inclusive": true,
+        "description": "Ekstremalne ryzyko aktywacji tabeli Trwałych Ran (LW). Starcie z głównym antagonistą."
+      }
+    ],
+    "scaling": {
+      "note": "Tier przeciwnika steruje tagami/specjalnymi zdolnościami. Statystyki bojowe używają poziomu referencyjnego drużyny (średni poziom, zaokrąglony; bez drużyny = minimum poziomu wybranego Tieru). BGŁ/OBR/ŻYW/Rany rosną z poziomem; DMG rośnie według tieru mocy wynikającego z poziomu, nie wybranego Tieru tagów.",
+      "tier_step": {
+        "skill": 10,
+        "defense": 10,
+        "damage_dice": 1,
+        "vitality": 1,
+        "wounds": 1,
+        "legacy_note": "LEGACY v2 — nie steruje już głównym skalowaniem statystyk w generatorze."
+      },
+      "speed_bonus": {
+        "from_tier": 2,
+        "value": 1
+      },
+      "minion_hp": {
+        "per_base_wound": 10,
+        "per_tier_step": 5
+      },
+      "min_damage_dice": 1,
+      "threshold_formula": {
+        "1_wound": "1 do (ŻYW*2 + bonus progu)",
+        "2_wounds": "(ŻYW*2 + bonus progu + 1) do (ŻYW*3 + bonus progu)",
+        "3_wounds": "(ŻYW*3 + bonus progu + 1) do 2× najwyższy próg"
+      },
+      "threshold_bands": [
+        {
+          "wounds": 1,
+          "from_mult": 0,
+          "to_mult": 2
+        },
+        {
+          "wounds": 2,
+          "from_mult": 2,
+          "to_mult": 3
+        },
+        {
+          "wounds": 3,
+          "from_mult": 3,
+          "to_mult": 6
+        }
+      ],
+      "threshold_note": "Bonus do progu wydłuża poprzedni przedział: np. ŻYW 8 +2 => 1 Rana przy 1–18, 2 Rany od 19.",
+      "extra_wounds_note": "Dokładnie 2 × najwyższy próg (3 × ŻYW + bonus) daje 5 Ran. Każde kolejne pełne wielokrotne przekroczenie najwyższego progu dodaje +1 Ranę: 3× = 6 Ran, 4× = 7 Ran itd.",
+      "attribute_scaling": {
+        "tier_step": 10,
+        "minimum": 5,
+        "maximum": 95,
+        "resistance_base": 10,
+        "resistance_tier_step": 5,
+        "note": "Bazowe cechy pochodzą z archetypu. Każdy poziom powyżej 1 daje +5 do cech, kategoria dodaje własny modyfikator; wartości 5–95. Odporności rosną dodatkowo o +2 za poziom powyżej 1."
+      },
+      "hp_formula": {
+        "plotka_minion": "HP = ŻYW × 5",
+        "zolnierz_standard": "HP = ŻYW × 10",
+        "note": "Płotki i Żołnierze nie korzystają z progów Ran. ŻYW nadal skaluje ich pulę HP z Tierem."
+      },
+      "level_step": {
+        "skill": 10,
+        "defense": 10,
+        "vitality": 1,
+        "wounds": 1,
+        "attributes": 5,
+        "resistance": 2
+      },
+      "speed_level_milestones": [
+        3,
+        6,
+        11
+      ],
+      "damage_dice_per_power_tier": 1,
+      "boss_single_hit_wound_cap": 3
+    },
+    "balance_note": "Wzór v2 jest heurystyką do kalibracji playtestami. Szybkość Bossa × liczba graczy wpływa na jego rzeczywistą pulę SZ, ale nie jest ponownie mnożona w MC, ponieważ mnożnik kategorii Boss ×4 już reprezentuje pakiet solo."
+  },
+  "archetypes": [
+    {
+      "id": "bestia_brutal",
+      "name": "Bestia / Brutal",
+      "role": "Walka w zwarciu, agresja, wysokie rany",
+      "base_stats": {
+        "skill": 90,
+        "defense": 30,
+        "speed": 8,
+        "damage_dice": 4,
+        "vitality": 3,
+        "wounds": 3,
+        "threshold_bonus": 1,
+        "attributes": {
+          "sf": 45,
+          "zr": 30,
+          "per": 35,
+          "er": 30,
+          "um": 15,
+          "og": 20,
+          "wia": 25
+        }
+      },
+      "base_bonus": {
+        "name": "Wytrzymały Organizm",
+        "effect": "Otrzymuje pasywnie +1 do Progów Obrażeń."
+      },
+      "tags": {
+        "tier_1": [
+          {
+            "id": "brutal_t1_1",
+            "name": "Krwiożerczy",
+            "cost": 1,
+            "effect": "Udana walka wręcz (nawet bez bonusu) zmusza cel do testu Odporności Fizycznej. Porażka nakłada stan Krwawienie."
+          },
+          {
+            "id": "brutal_t1_2",
+            "name": "Furia Szarży",
+            "cost": 1,
+            "effect": "Może wydać 4 segmenty, aby pokonać cały swój darmowy ruch w linii prostej i zaatakować z premią +10 do trafienia i +1k10 obrażeń."
+          },
+          {
+            "id": "brutal_t1_3",
+            "name": "Gruboskórny",
+            "cost": 1,
+            "effect": "Ignoruje wyniki '1' na kościach obrażeń zadawanych przez graczy."
+          },
+          {
+            "id": "brutal_t1_4",
+            "name": "Zastraszający Ryk",
+            "cost": 1,
+            "effect": "Akcja (3 OP). Wszyscy w promieniu 5m wykonują test Odp. Psychicznej. Porażka nakłada Utrudnienie na najbliższy test trafienia."
+          },
+          {
+            "id": "brutal_t1_5",
+            "name": "Miażdżący Chwyt",
+            "cost": 1,
+            "effect": "Zamiast zadawać obrażenia, potwór chwyta cel. Cel otrzymuje stan Spowolnienie, dopóki nie wyrwie się udanym testem Siły Fizycznej."
+          }
+        ],
+        "tier_2": [
+          {
+            "id": "brutal_t2_1",
+            "name": "Zwierzęcy Szał",
+            "cost": 2,
+            "effect": "Kiedy przeciwnik straci połowę swoich Ran, wpada w szał. Otrzymuje Ułatwienie do wszystkich testów ataku, ale traci możliwość Parowania."
+          },
+          {
+            "id": "brutal_t2_2",
+            "name": "Miażdżący Cios",
+            "cost": 2,
+            "effect": "Wszystkie ataki wręcz potwora zyskują pasywnie cechę Penetracja 1."
+          },
+          {
+            "id": "brutal_t2_3",
+            "name": "Zamaszysty Atak (Cleave)",
+            "cost": 2,
+            "effect": "Manewr. Jeśli potwór trafi atak, może uderzyć drugi cel w zasięgu zwarcia, zadając mu połowę pierwotnych obrażeń (bez dodatkowego OP)."
+          },
+          {
+            "id": "brutal_t2_4",
+            "name": "Odrzucenie",
+            "cost": 2,
+            "effect": "Każdy udany atak potwora odrzuca cel na 2 metry do tyłu. Jeśli gracz wpadnie na przeszkodę, wykonuje test na Powalenie."
+          },
+          {
+            "id": "brutal_t2_5",
+            "name": "Zew Krwi",
+            "cost": 2,
+            "effect": "Za każdą nałożoną na gracza Ranę (przekroczenie progu), potwór natychmiast odzyskuje połowę zużytych segmentów (max 3)."
+          }
+        ],
+        "tier_3": [
+          {
+            "id": "brutal_t3_1",
+            "name": "Nieustępliwość",
+            "cost": 3,
+            "effect": "Pasywna odporność. Kiedy wróg ma otrzymać stan Powalenie, może go zignorować kosztem stałej utraty 2 Szybkości do końca starcia."
+          },
+          {
+            "id": "brutal_t3_2",
+            "name": "Furia Bólu",
+            "cost": 3,
+            "effect": "Za każdą Ranę, którą potwór aktualnie posiada (max 3), dodaje +1k10 do swoich ataków wręcz."
+          },
+          {
+            "id": "brutal_t3_3",
+            "name": "Wstrząs Ziemi",
+            "cost": 3,
+            "effect": "Akcja (5 OP). Potwór uderza w ziemię. Wszyscy gracze w promieniu 4m wykonują test Odp. Fizycznej z utrudnieniem -10. Porażka = Powalenie i 1k10 flat dmg."
+          },
+          {
+            "id": "brutal_t3_4",
+            "name": "Pożarcie",
+            "cost": 3,
+            "effect": "Specjalny atak. Jeśli wróg zaatakuje cel ze stanem Powalenie lub Oszołomienie, ignoruje cały pancerz. Jeśli zada Ranę, leczy 1 własną Ranę."
+          }
+        ],
+        "tier_4": [
+          {
+            "id": "brutal_t4_1",
+            "name": "Tytaniczne Uderzenie",
+            "cost": 4,
+            "effect": "Raz na 2 rundy (Akcja: 6 OP). Potężny cios ignorujący całkowicie Pancerz i Odporność Fizyczną. Trafiony cel od razu otrzymuje +1 dodatkową Ranę ponad próg."
+          },
+          {
+            "id": "brutal_t4_2",
+            "name": "Niepowstrzymany Juggernaut",
+            "cost": 4,
+            "effect": "Całkowita odporność na magię kontrolującą umysł, Spowolnienie, Oszołomienie i Powalenie. Każda próba nałożenia tych stanów kończy się porażką gracza."
+          },
+          {
+            "id": "brutal_t4_3",
+            "name": "Rozpłatanie",
+            "cost": 4,
+            "effect": "Krytyczny atak potwora (rzut 01-10) trwale niszczy 1 punkt Pancerza na trafionej lokacji gracza do czasu kowalskiej naprawy."
+          }
+        ]
+      }
+    },
+    {
+      "id": "skrytobojca_lowca",
+      "name": "Skrytobójca / Łowca",
+      "role": "Wysoka szybkość, taktyka hit&run, obrażenia dystansowe, uniki",
+      "base_stats": {
+        "skill": 80,
+        "defense": 40,
+        "speed": 10,
+        "damage_dice": 3,
+        "vitality": 2,
+        "wounds": 2,
+        "attributes": {
+          "sf": 30,
+          "zr": 50,
+          "per": 50,
+          "er": 30,
+          "um": 15,
+          "og": 35,
+          "wia": 25
+        }
+      },
+      "base_bonus": {
+        "name": "Zwinność Złodzieja",
+        "effect": "Zyskuje +2 do Bazowej Szybkości (wliczone w statystyki)."
+      },
+      "tags": {
+        "tier_1": [
+          {
+            "id": "lowca_t1_1",
+            "name": "Atak z Zaskoczenia",
+            "cost": 1,
+            "effect": "Pierwszy atak potwora w walce, jeśli gracz nie był świadomy jego pozycji, otrzymuje Ułatwienie i automatycznie dodaje +1k10 obrażeń."
+          },
+          {
+            "id": "lowca_t1_2",
+            "name": "Zwinny Krok",
+            "cost": 1,
+            "effect": "Reakcja Uniku przeciwnika kosztuje o 1 segment przyszły mniej (do minimum 1 OP)."
+          },
+          {
+            "id": "lowca_t1_3",
+            "name": "Brudna Walka",
+            "cost": 1,
+            "effect": "Udana walka z Bonusem pozwala zrezygnować z dodatkowego DMG na rzecz nałożenia stanu Ślepota (rzut Odp. Fizyczna)."
+          },
+          {
+            "id": "lowca_t1_4",
+            "name": "Zatrute Strzałki",
+            "cost": 1,
+            "effect": "Ataki dystansowe potwora wymuszają test Odp. Fizycznej na Zatrucie. Porażka to Utrudnienie na rzuty ataku dla gracza w kolejnej turze."
+          },
+          {
+            "id": "lowca_t1_5",
+            "name": "Szybkie Przeładowanie",
+            "cost": 1,
+            "effect": "Przeładowanie broni dystansowej (kusze, łuki) kosztuje przeciwnika 1 OP mniej."
+          }
+        ],
+        "tier_2": [
+          {
+            "id": "lowca_t2_1",
+            "name": "Toksyczne Ostrza",
+            "cost": 2,
+            "effect": "Każde obrażenie, które przejdzie przez próg ran (zada ranę), automatycznie nakłada stan Zatrucie (bez testu obronnego)."
+          },
+          {
+            "id": "lowca_t2_2",
+            "name": "Mobilny Strzelec",
+            "cost": 2,
+            "effect": "Wróg może podzielić swój darmowy ruch dowolnie przed i po oddaniu strzału, zyskując +10 do Obrony przeciwko atakom z broni dystansowej."
+          },
+          {
+            "id": "lowca_t2_3",
+            "name": "Akrobatyczny Unik",
+            "cost": 2,
+            "effect": "Za każdy wykorzystany na Unik segment, wróg dodaje +8 do Obrony (zamiast standardowego +5)."
+          },
+          {
+            "id": "lowca_t2_4",
+            "name": "Krytyczny Punkt",
+            "cost": 2,
+            "effect": "Ataki wroga uznaje się za Krytyczny Sukces na rzutach trafienia w przedziale 01-10 (zamiast 01-05)."
+          },
+          {
+            "id": "lowca_t2_5",
+            "name": "Błyskawiczny Atak",
+            "cost": 2,
+            "effect": "Broń lekka wroga ignoruje limit minimalnego OP 3 i może być używana za 2 OP."
+          }
+        ],
+        "tier_3": [
+          {
+            "id": "lowca_t3_1",
+            "name": "Krok w Cień",
+            "cost": 3,
+            "effect": "Jako reakcja (3 OP), po otrzymaniu trafienia wróg natychmiast odskakuje na 3 metry. Atakujący ma Utrudnienie na ponowne celowanie w niego."
+          },
+          {
+            "id": "lowca_t3_2",
+            "name": "Celne Oko",
+            "cost": 3,
+            "effect": "Ataki dystansowe potwora pasywnie ignorują 2 punkty Pancerza fizycznego i magicznego."
+          },
+          {
+            "id": "lowca_t3_3",
+            "name": "Grad Strzał",
+            "cost": 3,
+            "effect": "Akcja Specjalna (4 OP). Potwór oddaje strzał obszarowy (promień 5m). Wszyscy w zasięgu muszą wykonać test Uniku albo otrzymają 3k10 obrażeń."
+          },
+          {
+            "id": "lowca_t3_4",
+            "name": "Niewidzialność",
+            "cost": 3,
+            "effect": "Za 3 OP wróg znika z pola widzenia. Każdy gracz musi wykonać test Percepcji z Utrudnieniem, by móc w ogóle wycelować w niego atak lub czar."
+          }
+        ],
+        "tier_4": [
+          {
+            "id": "lowca_t4_1",
+            "name": "Taniec Ostrzy",
+            "cost": 4,
+            "effect": "Akcja (8 OP). Sekwencja 3 ataków wręcz, których gracze nie mogą Parować (mogą jedynie wykonać Unik). Każdy cios zadaje osobne Wounds i ma Penetrację 2."
+          },
+          {
+            "id": "lowca_t4_2",
+            "name": "Cios w Serce",
+            "cost": 4,
+            "effect": "Jeśli wróg trafi gracza testem z Bonusem z zaskoczenia, cel natychmiast otrzymuje 2 Rany, bez rzucania kośćmi na obrażenia i omijając progi."
+          },
+          {
+            "id": "lowca_t4_3",
+            "name": "Fantomowy Bieg",
+            "cost": 4,
+            "effect": "Potwór wykonuje Reakcję Uniku całkowicie za darmo raz na rundę (z maksymalnym bonusem 4 OP), bez zużywania własnej puli Szybkości."
+          }
+        ]
+      }
+    },
+    {
+      "id": "adept_mroku_mag",
+      "name": "Adept Mroku / Mag",
+      "role": "Czarowanie, stany, kontrola pola bitwy, obrażenia magiczne",
+      "base_stats": {
+        "skill": 80,
+        "defense": 20,
+        "speed": 7,
+        "damage_dice": 4,
+        "vitality": 2,
+        "wounds": 2,
+        "attributes": {
+          "sf": 20,
+          "zr": 30,
+          "per": 40,
+          "er": 45,
+          "um": 50,
+          "og": 30,
+          "wia": 40
+        }
+      },
+      "base_bonus": {
+        "name": "Esencja Magii",
+        "effect": "Potwór posiada 3 punkty Aury, które odnawiają się co walkę (może ich używać do redukcji obrażeń)."
+      },
+      "tags": {
+        "tier_1": [
+          {
+            "id": "mag_t1_1",
+            "name": "Pocisk Żywiołu",
+            "cost": 1,
+            "effect": "Magiczny atak dystansowy (3k10/4k10 dmg od żywiołu, 4 OP). Pomija połowę zwykłego Pancerza."
+          },
+          {
+            "id": "mag_t1_2",
+            "name": "Osłona Many",
+            "cost": 1,
+            "effect": "Potwór może wydać 1 Punkt Aury jako Reakcję, aby dodać +10 do swojej Obrony przeciwko jednemu atakowi."
+          },
+          {
+            "id": "mag_t1_3",
+            "name": "Wyssanie Energii",
+            "cost": 1,
+            "effect": "Atak magiczny, który nie zadaje obrażeń, ale przy trafieniu wydłuża o 2 OP koszt następnej akcji trafionego gracza."
+          },
+          {
+            "id": "mag_t1_4",
+            "name": "Zarzewie (Podpalenie)",
+            "cost": 1,
+            "effect": "Pociski magiczne potwora wymuszają test Odp. Magicznej. Porażka nakłada stan Podpalenie (1k10 dmg na turę gracza)."
+          },
+          {
+            "id": "mag_t1_5",
+            "name": "Lodowy Dotyk",
+            "cost": 1,
+            "effect": "Dotyk w zwarciu (3 OP). Test Odp. Magicznej. Porażka to stan Zamarznięcie (połowa ruchu i ruch kosztuje +1 segment)."
+          }
+        ],
+        "tier_2": [
+          {
+            "id": "mag_t2_1",
+            "name": "Zakłócacz Zmysłów",
+            "cost": 2,
+            "effect": "Raz na 3 rundy potwór rzuca klątwę (4 OP). Test Odp. Duchowej z utrudnieniem -10. Porażka to stan Ślepota na 1 turę."
+          },
+          {
+            "id": "mag_t2_2",
+            "name": "Wampiryczny Zew",
+            "cost": 2,
+            "effect": "Zadanie Rany graczowi zaklęciem natychmiast leczy 1 Ranę potwora."
+          },
+          {
+            "id": "mag_t2_3",
+            "name": "Kradzież Aury",
+            "cost": 2,
+            "effect": "Ataki magiczne potwora uszkadzają bezpośrednio Aurę gracza. Jeśli zadadzą dmg przewyższający pancerz, gracz traci 1 punkt Aury, a Mag go zyskuje."
+          },
+          {
+            "id": "mag_t2_4",
+            "name": "Bariera Kinetyczna",
+            "cost": 2,
+            "effect": "Całkowicie blokuje obrażenia od pierwszego ataku fizycznego w starciu, niezależnie od wyniku rzutu gracza."
+          },
+          {
+            "id": "mag_t2_5",
+            "name": "Eteryczny Krok",
+            "cost": 2,
+            "effect": "Potwór ignoruje trudny teren i nie może zostać spowolniony żadnymi manewrami fizycznymi."
+          }
+        ],
+        "tier_3": [
+          {
+            "id": "mag_t3_1",
+            "name": "Eksplozja Obszarowa",
+            "cost": 3,
+            "effect": "Atak promieniowy 4m (Koszt 6 OP). Gracze muszą rzucić Unik, inaczej otrzymują 4k10 magicznych obrażeń żywiołowych."
+          },
+          {
+            "id": "mag_t3_2",
+            "name": "Lustrzane Odbicie (Blink)",
+            "cost": 3,
+            "effect": "Gdy wróg ma zostać trafiony atakiem wręcz, może wydać 3 OP jako Reakcję, aby przeteleportować się o 5 metrów. Atak gracza pudłuje automatycznie."
+          },
+          {
+            "id": "mag_t3_3",
+            "name": "Klątwa Słabości",
+            "cost": 3,
+            "effect": "Czar (4 OP). Nałożenie utrudnienia -20 na testy trafienia i testy Siły Fizycznej wybranego gracza do końca starcia."
+          },
+          {
+            "id": "mag_t3_4",
+            "name": "Skupienie (Channelling)",
+            "cost": 3,
+            "effect": "Opóźnia swoje zaklęcie o pełną turę, po czym wypuszcza je z darmowym dodatkiem +4k10 obrażeń i automatycznym bonusem Penetracja 2."
+          }
+        ],
+        "tier_4": [
+          {
+            "id": "mag_t4_1",
+            "name": "Aura Ciemności / Słowa Rozkładu",
+            "cost": 4,
+            "effect": "Pasywna aura (10m). Gracze zaczynający tam turę rzucają Odp. Magiczną. Porażka to utrata -1 Aury i stan Zmęczenie. Brak Aury = 2k10 omijających zbroję."
+          },
+          {
+            "id": "mag_t4_2",
+            "name": "Zatrzymanie Czasu",
+            "cost": 4,
+            "effect": "Raz na walkę. Potwór resetuje swoją Szybkość od nowa natychmiast po jej zużyciu, dając mu praktycznie drugą pełną turę w obrębie tej samej rundy."
+          },
+          {
+            "id": "mag_t4_3",
+            "name": "Słowo Śmierci",
+            "cost": 4,
+            "effect": "Czar (8 OP). Zmusza gracza do testu Odp. Duchowej. W przypadku krytycznej porażki gracz otrzymuje Rany sprowadzające go na krawędź śmierci (do 1 Rany przed progiem śmierci)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "czolg_obronca",
+      "name": "Czołg / Golem / Obrońca",
+      "role": "Absorbcja obrażeń, kontrola pola bitwy (AoE), powalanie",
+      "base_stats": {
+        "skill": 70,
+        "defense": 50,
+        "speed": 6,
+        "damage_dice": 5,
+        "vitality": 4,
+        "wounds": 4,
+        "attributes": {
+          "sf": 50,
+          "zr": 25,
+          "per": 30,
+          "er": 40,
+          "um": 15,
+          "og": 25,
+          "wia": 35
+        }
+      },
+      "base_bonus": {
+        "name": "Twarda Powłoka",
+        "effect": "Potwór pasywnie ma +1 do Pancerza na wszystkich lokacjach."
+      },
+      "tags": {
+        "tier_1": [
+          {
+            "id": "obronca_t1_1",
+            "name": "Nieugięta Postawa",
+            "cost": 1,
+            "effect": "Potwór ignoruje kary do obrony i mobilności wynikające z noszenia ciężkich zbroi i tarcz."
+          },
+          {
+            "id": "obronca_t1_2",
+            "name": "Taran",
+            "cost": 1,
+            "effect": "Jeśli wróg poruszy się minimum o 3 metry przed atakiem, dodaje efekt Powalenia z utrudnieniem -10 do rzutu obronnego gracza."
+          },
+          {
+            "id": "obronca_t1_3",
+            "name": "Mocny Chwyt",
+            "cost": 1,
+            "effect": "Manewr. Atak wręcz, który zamiast dmg próbuje wyrwać broń graczowi z ręki (przeciwstawny test Siły Fizycznej)."
+          },
+          {
+            "id": "obronca_t1_4",
+            "name": "Tarcza z Ciała",
+            "cost": 1,
+            "effect": "Dodaje +2 do Pancerza przeciwko wszystkim atakom z broni dystansowej (łuki/kusze)."
+          },
+          {
+            "id": "obronca_t1_5",
+            "name": "Prowokacja",
+            "cost": 1,
+            "effect": "Rzut na Ogładę przeciw Odp. Psychicznej. Porażka zmusza gracza do zaatakowania Czołgu zamiast innych celów."
+          }
+        ],
+        "tier_2": [
+          {
+            "id": "obronca_t2_1",
+            "name": "Ochroniarz (Bodyguard)",
+            "cost": 2,
+            "effect": "Używa Reakcji (3 OP), aby doskoczyć do 2m i przyjąć na siebie atak wycelowany w sojusznika."
+          },
+          {
+            "id": "obronca_t2_2",
+            "name": "Kolczasty Pancerz",
+            "cost": 2,
+            "effect": "Jeśli atak fizyczny gracza zostanie w 100% zatrzymany przez Pancerz, gracz otrzymuje 1k10 obrażeń kłutych od odbicia."
+          },
+          {
+            "id": "obronca_t2_3",
+            "name": "Blokada",
+            "cost": 2,
+            "effect": "Potwór posiada stały bonus +20 do rzutów na Parowanie za pomocą własnej broni/tarczy."
+          },
+          {
+            "id": "obronca_t2_4",
+            "name": "Zmiażdżenie Pancerza",
+            "cost": 2,
+            "effect": "Trafienie z Bonusem zmniejsza Pancerz gracza na danej lokacji o 1 (nie działa na Aurę)."
+          },
+          {
+            "id": "obronca_t2_5",
+            "name": "Żelazne Płuca",
+            "cost": 2,
+            "effect": "Całkowita odporność na wszelkie gazy, trucizny z powietrza i stan Zatrucie."
+          }
+        ],
+        "tier_3": [
+          {
+            "id": "obronca_t3_1",
+            "name": "Trzęsienie Ziemi (Stomp)",
+            "cost": 3,
+            "effect": "Akcja (5 OP). Uderzenie w ziemię. Zasięg 2m. Gracze rzucają Odp. Fizyczną z Utrudnieniem. Porażka to Powalenie i Oszołomienie na 1 turę."
+          },
+          {
+            "id": "obronca_t3_2",
+            "name": "Żelazna Skóra",
+            "cost": 3,
+            "effect": "Wróg pasywnie ignoruje wszystkie 'flat' obrażenia (np. dodatki od siły, nadmiar z penetracji). Gracze mogą zadać mu ból tylko wysokimi wynikami na k10."
+          },
+          {
+            "id": "obronca_t3_3",
+            "name": "Odbicie Magii",
+            "cost": 3,
+            "effect": "Udana reakcja Parowania wymierzona w magiczny pocisk odsyła go z powrotem w maga (mag otrzymuje obrażenia z własnego czaru)."
+          },
+          {
+            "id": "obronca_t3_4",
+            "name": "Absolutny Zastój",
+            "cost": 3,
+            "effect": "Za każdym razem, gdy potwór nie ma już Segmentów w tej rundzie (zużył całą Szybkość), jego pancerz zyskuje tymczasowo +2."
+          }
+        ],
+        "tier_4": [
+          {
+            "id": "obronca_t4_1",
+            "name": "Pancerz Absolutny",
+            "cost": 4,
+            "effect": "Ciało stwora jest odporne na manewr 'Penetracja' (zawsze redukuje obrażenia pełnymi kośćmi). Otrzymuje również pasywną odporność na żywioł Ziemi/Lodu."
+          },
+          {
+            "id": "obronca_t4_2",
+            "name": "Monolit",
+            "cost": 4,
+            "effect": "Niezależnie od zadanych obrażeń, ten potwór nie może otrzymać więcej niż 1 Rany z pojedynczego ataku. Gracze muszą pokonać go powoli i systematycznie."
+          },
+          {
+            "id": "obronca_t4_3",
+            "name": "Zmiażdżenie Terenu",
+            "cost": 4,
+            "effect": "Raz na walkę. Potwór rujnuje cały teren w promieniu 10m, zamieniając go w strefę \"Trudnego Terenu\". Wszyscy gracze muszą dodatkowo rzucić test Zręczności albo wpaść do wyrw w ziemi i stracić 3 OP."
+          }
+        ]
+      }
+    }
+  ]
+}

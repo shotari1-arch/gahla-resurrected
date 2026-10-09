@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {install,actor,talent,NS} from './helpers/automation-fixtures.mjs';
+import {payDefense119,dodgeCost119,reactions119,concentration119,defenseLabel119} from '../module/talent-defense119.mjs';
+import {availableReactions} from '../module/context-reactions.mjs';
+install();
+const a=actor([talent('Ruch Cienia',3),talent('Garda Weterana',2)]);a.mainWeapon={system:{traits:['Lekka'],delay:4}};a.system.combat.currentSegments=1;
+assert.equal(dodgeCost119(a,2),1);assert.equal(availableReactions(a).find(r=>r.id==='dodge').max,2);
+const dodge=await payDefense119(a,'dodge',{segments:2});assert.equal(dodge.defenseBonus,15);assert.equal(a.system.combat.reservedSZ,1);assert.equal(a.system.combat.reactionLeft,0);
+const b=actor([talent('Duchowa Pięść',4),talent('Osłona Koncentracji',2)]);b.system.combat.aura.value=3;
+const before=JSON.stringify(b);await assert.rejects(()=>payDefense119(b,'spiritDodge',{concentration:true}),/Aury/);assert.equal(JSON.stringify(b),before);
+b.system.combat.aura.value=5;const both=await payDefense119(b,'spiritDodge',{concentration:true});assert.equal(both.defenseBonus,15);assert.equal(both.auraSpent,4);assert.equal(b.system.combat.reservedSZ,0);assert.equal(b.system.combat.reactionLeft,0);assert(!concentration119(b));assert.match(defenseLabel119(both),/Kontrola Aury/);
+b.system.combat.reactionLeft=1;b.system.combat.aura.value=2;await payDefense119(b,'spiritParry');b.system.combat.reactionLeft=1;b.system.combat.aura.value=5;assert(!reactions119(b).some(r=>r.id==='spiritDodge'));game.combat.id='next';assert(reactions119(b).some(r=>r.id==='spiritDodge'));
+const p=actor([talent('Osłona Koncentracji',2)]);p.mainWeapon={system:{delay:4}};p.system.combat.aura.value=1;const old=JSON.stringify(p);await assert.rejects(()=>payDefense119(p,'parry',{concentration:true}));assert.equal(JSON.stringify(p),old);p.system.combat.aura.value=2;await payDefense119(p,'parry',{concentration:true});assert.equal(p.system.combat.aura.value,0);assert.equal(p.system.combat.reservedSZ,2);
+const t=actor([talent('Taktyczny Wybór',3)]);assert(!reactions119(t).some(r=>r.id==='tactical'));const tactical=await payDefense119(t,'tactical',{ranged:true});assert(tactical.attackDisadvantage);assert.equal(t.system.combat.reservedSZ,2);
+console.log('PASS 119 defense payment: legal discounted options, minimum cost, Garda bonus, atomic Aura/reaction, Spirit uses/reset, concentration stacking and tactical ranged restriction.');

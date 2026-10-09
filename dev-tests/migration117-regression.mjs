@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';import {actor,talent,install,applyPatch,NS} from './helpers/automation-fixtures.mjs';
+import {migrateTalents117,talent117Patch} from '../module/talent-migration117.mjs';import {itemSnapshot,undoPurchase} from '../module/development-ledger.mjs';
+install();function item(){const i=talent('Mocna Skóra');i.flags={custom:{keep:true}};i.system.description='Redukcja obrażeń fizycznych równa Tierowi przed sprawdzeniem progu.';i.uuid='Item.'+i.id;i.update=async p=>applyPatch(i,p);return i;}
+const a=actor(),i=item();a.items.push(i);i.delete=async()=>a.items.splice(a.items.indexOf(i),1);a.system.xp=450;a.flags[NS]={development:{opening:500,entries:[{id:'p',kind:'purchase',delta:-50,label:i.name,undo:{before:{},after:{},items:[{id:i.id,before:null,after:itemSnapshot(i)}]}}]}};
+const world=item(),packItem=item(),tokenActor=actor([item()]);let switches=[];const pack={documentName:'Item',metadata:{packageName:'world'},locked:true,async getDocuments(){return [packItem];},async configure(p){switches.push(p.locked);this.locked=p.locked;}};
+game.items=[world];game.actors=[a];game.scenes=[{tokens:[{actor:tokenActor,actorLink:false}]}];game.packs=[pack];await migrateTalents117();
+for(const changed of [i,world,packItem,tokenActor.items[0]]){assert(changed.system.description.includes('Fizycznego Progu'));assert(changed.flags.custom.keep);assert(changed.flags[NS].talent117Previous.description.includes('Redukcja'));assert.equal(talent117Patch(changed),null);}
+assert.deepEqual(switches,[false,true]);assert.equal(a.system.xp,450);assert.equal(a.items[0].id,i.id);await migrateTalents117();assert.deepEqual(switches,[false,true]);await undoPurchase(a,'p');assert.equal(a.system.xp,500);assert.equal(a.items.length,0);
+const bad=item();bad.update=async()=>{throw Error('Database unavailable');};pack.getDocuments=async()=>[bad];await assert.rejects(()=>migrateTalents117());assert.equal(pack.locked,true,'Restore original compendium lock even on failure');
+console.log('117 migration: world/token/compendium, previous descriptions, IDs/XP/custom flags, idempotence, purchase undo, lock restoration: PASS');

@@ -1,0 +1,2449 @@
+{
+  "version": 2,
+  "status": "ACTIVE",
+  "note": "Kanon zatwierdzony przez autora 2026-10-05. Trwałe skutki zapisane osobno na aktorze.",
+  "scoreFormula": "k100 + 10 × Rany ponad max ŻYW + (10 bonus ALBO 20 krytyk) + 10 Śmiertelny Cios",
+  "profiles": {
+    "slashing": {
+      "label": "Sieczne / kłute",
+      "status": "ACTIVE",
+      "locations": {
+        "head": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Rozcięcie. Krwawienie 1, -10 PER do opatrzenia.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": [
+                    "per"
+                  ]
+                }
+              }
+            ],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Rana twarzy. Krwawienie 1, -10 PER i OG do właściwego leczenia.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": [
+                    "per",
+                    "og"
+                  ]
+                }
+              }
+            ],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Ciężkie uszkodzenie zmysłu. -20 PER, Krwawienie 2.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -20,
+                "when": {
+                  "stat": [
+                    "per"
+                  ]
+                }
+              }
+            ],
+            "conditions": {
+              "bleeding": 2
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Utrata lub ciężkie uszkodzenie oka/ucha. Wymaga operacji, zaawansowanego leczenia lub odpowiedniej magii.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Ciężka rana czaszki/szyi. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Krytyczna rana szyi/głowy. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Natychmiastowa śmierć.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": true
+          }
+        ],
+        "arm": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Krwawienie 1, -10 do czynności wykonywanych tą ręką do opatrzenia.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "location": "affected"
+                }
+              }
+            ],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Uszkodzenie mięśnia. -20 czynności tą ręką, Krwawienie 1.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -20,
+                "when": {
+                  "location": "affected"
+                }
+              }
+            ],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Ręka niesprawna do czasu zaawansowanego leczenia.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Przecięte ścięgna. Ręka całkowicie niesprawna.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Częściowe odcięcie / katastrofalne uszkodzenie kończyny. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Kończyna odcięta. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Kończyna zniszczona/utracona + Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          }
+        ],
+        "body": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Głęboka rana. Krwawienie 1.",
+            "modifiers": [],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Krwawienie 2, -10 do testów fizycznych.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": [
+                    "sf",
+                    "zr",
+                    "physicalResistance"
+                  ]
+                }
+              }
+            ],
+            "conditions": {
+              "bleeding": 2
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Głęboka rana organów. Krwawienie 2, Zmęczenie 2.",
+            "modifiers": [],
+            "conditions": {
+              "bleeding": 2,
+              "fatigued": 2
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Trwałe uszkodzenie organu. -2 maksymalnej ŻYW do czasu właściwego leczenia.",
+            "modifiers": [
+              {
+                "target": "zyw",
+                "op": "add",
+                "value": -2,
+                "when": {}
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Przebicie ważnego organu. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Rozległe uszkodzenie organów. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Natychmiastowa śmierć.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": true
+          }
+        ],
+        "leg": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Krwawienie 1, -1 SZ do opatrzenia.",
+            "modifiers": [
+              {
+                "target": "speed",
+                "op": "add",
+                "value": -1,
+                "when": {}
+              }
+            ],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Uszkodzenie ścięgna. -2 SZ, -20 do ruchowych testów ZR.",
+            "modifiers": [
+              {
+                "target": "speed",
+                "op": "add",
+                "value": -2,
+                "when": {}
+              },
+              {
+                "target": "test",
+                "op": "add",
+                "value": -20,
+                "when": {
+                  "stat": "zr",
+                  "movement": true
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Noga niesprawna. Maksymalny ruch zostaje zmniejszony o połowę.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": true,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Zerwane ścięgna. Noga niesprawna.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Częściowe odcięcie / katastrofalne uszkodzenie kończyny. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Kończyna odcięta. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Kończyna zniszczona/utracona + Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          }
+        ]
+      }
+    },
+    "blunt": {
+      "label": "Obuchowe",
+      "status": "ACTIVE",
+      "locations": {
+        "head": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Oszołomienie.",
+            "modifiers": [],
+            "conditions": {
+              "stunned": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Wstrząśnienie. Oszołomienie oraz -10 PER/UM/WIA.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": [
+                    "per",
+                    "um",
+                    "wia"
+                  ]
+                }
+              }
+            ],
+            "conditions": {
+              "stunned": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Poważny uraz głowy. -20 PER/UM/WIA.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -20,
+                "when": {
+                  "stat": [
+                    "per",
+                    "um",
+                    "wia"
+                  ]
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Ciężki uraz mózgu wymagający zaawansowanego leczenia.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Pęknięcie czaszki. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Katastrofalny uraz głowy. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Natychmiastowa śmierć.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": true
+          }
+        ],
+        "arm": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Stłuczenie. -10 czynności tą ręką.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "location": "affected"
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Pęknięcie kości. -20 czynności tą ręką.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -20,
+                "when": {
+                  "location": "affected"
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Złamanie. Ręka niesprawna.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Wieloodłamowe złamanie. Kończyna niesprawna.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Zmiażdżenie kończyny. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Kończyna zniszczona. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Kończyna nie do uratowania + Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          }
+        ],
+        "body": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Zmęczenie 1.",
+            "modifiers": [],
+            "conditions": {
+              "fatigued": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Pęknięte żebra. -10 do testów fizycznych.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": [
+                    "sf",
+                    "zr",
+                    "physicalResistance"
+                  ]
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Wielokrotne złamania żeber. Zmęczenie 2.",
+            "modifiers": [],
+            "conditions": {
+              "fatigued": 2
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Uszkodzenie płuca / organów. -2 maksymalnej ŻYW do leczenia.",
+            "modifiers": [
+              {
+                "target": "zyw",
+                "op": "add",
+                "value": -2,
+                "when": {}
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Ciężkie obrażenia wewnętrzne. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Rozległe obrażenia wewnętrzne. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Natychmiastowa śmierć.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": true
+          }
+        ],
+        "leg": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "-10 do ruchowych testów ZR.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": "zr",
+                  "movement": true
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Pęknięcie kości. -2 SZ.",
+            "modifiers": [
+              {
+                "target": "speed",
+                "op": "add",
+                "value": -2,
+                "when": {}
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Złamanie. Maksymalny ruch zmniejszony o połowę.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": true,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Zmiażdżenie. Noga niesprawna.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Zmiażdżenie kończyny. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Kończyna zniszczona. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Kończyna nie do uratowania + Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          }
+        ]
+      }
+    },
+    "projectile": {
+      "label": "Strzały i bełty",
+      "status": "ACTIVE",
+      "locations": {
+        "head": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Powierzchowne trafienie. Krwawienie 1.",
+            "modifiers": [],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Pocisk w twarzy. -10 PER, Krwawienie 1.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": [
+                    "per"
+                  ]
+                }
+              }
+            ],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Uszkodzony zmysł. -20 PER.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -20,
+                "when": {
+                  "stat": [
+                    "per"
+                  ]
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Ciężkie uszkodzenie oka/czaszki.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Pocisk w czaszce/szyi. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Katastrofalne trafienie głowy. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Natychmiastowa śmierć.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": true
+          }
+        ],
+        "arm": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Pocisk wbity płytko. -10 czynności ręką.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "location": "affected"
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Pocisk w mięśniu. -20 czynności ręką.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -20,
+                "when": {
+                  "location": "affected"
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Uszkodzony staw/ścięgno. Ręka niesprawna.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Staw zniszczony. Wymaga operacji lub zaawansowanego leczenia.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Trafienie tętnicy/stawu. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Rozległe uszkodzenie. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Kończyna zniszczona + Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          }
+        ],
+        "body": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Krwawienie 1.",
+            "modifiers": [],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Pocisk wbity głęboko. Krwawienie 1, -10 testów fizycznych.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": [
+                    "sf",
+                    "zr",
+                    "physicalResistance"
+                  ]
+                }
+              }
+            ],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Trafienie organu. Krwawienie 2.",
+            "modifiers": [],
+            "conditions": {
+              "bleeding": 2
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Poważne przebicie organu. -2 maksymalnej ŻYW do właściwego leczenia.",
+            "modifiers": [
+              {
+                "target": "zyw",
+                "op": "add",
+                "value": -2,
+                "when": {}
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Trafienie ważnego organu. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Katastrofalne przebicie. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Natychmiastowa śmierć.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": true
+          }
+        ],
+        "leg": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "-10 ruchowych testów ZR.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": "zr",
+                  "movement": true
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "-2 SZ, Krwawienie 1.",
+            "modifiers": [
+              {
+                "target": "speed",
+                "op": "add",
+                "value": -2,
+                "when": {}
+              }
+            ],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Uszkodzony staw/ścięgno. Ruch maksymalnie połowa.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": true,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Staw zniszczony.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Trafienie tętnicy. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Rozległe uszkodzenie. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Kończyna zniszczona + Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          }
+        ]
+      }
+    },
+    "element": {
+      "label": "Żywioły",
+      "status": "ACTIVE",
+      "locations": {
+        "head": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Powierzchowny uraz żywiołowy. -10 PER.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": [
+                    "per"
+                  ]
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Uszkodzenie zmysłów. -10 PER.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": [
+                    "per"
+                  ]
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Ciężkie uszkodzenie zmysłu.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Trwałe/poważne uszkodzenie zmysłu.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Natychmiastowa śmierć.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": true
+          }
+        ],
+        "arm": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "-10 czynności kończyną.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "location": "affected"
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "-20 czynności kończyną.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -20,
+                "when": {
+                  "location": "affected"
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Kończyna niesprawna.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Poważne trwałe uszkodzenie kończyny.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Katastrofalne uszkodzenie kończyny + Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          }
+        ],
+        "body": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Zmęczenie 1.",
+            "modifiers": [],
+            "conditions": {
+              "fatigued": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "-10 do testów fizycznych.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": [
+                    "sf",
+                    "zr",
+                    "physicalResistance"
+                  ]
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Zmęczenie 2 i -2 maksymalnej ŻYW do właściwego leczenia.",
+            "modifiers": [
+              {
+                "target": "zyw",
+                "op": "add",
+                "value": -2,
+                "when": {}
+              }
+            ],
+            "conditions": {
+              "fatigued": 2
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Poważne uszkodzenie organów.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Natychmiastowa śmierć.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": true
+          }
+        ],
+        "leg": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "-1 SZ.",
+            "modifiers": [
+              {
+                "target": "speed",
+                "op": "add",
+                "value": -1,
+                "when": {}
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "-2 SZ.",
+            "modifiers": [
+              {
+                "target": "speed",
+                "op": "add",
+                "value": -2,
+                "when": {}
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Ruch maksymalnie połowa.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": true,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Poważne trwałe uszkodzenie kończyny.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Katastrofalne uszkodzenie kończyny + Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          }
+        ]
+      }
+    },
+    "piercing": {
+      "label": "Sieczne / kłute",
+      "status": "ACTIVE",
+      "locations": {
+        "head": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Rozcięcie. Krwawienie 1, -10 PER do opatrzenia.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": [
+                    "per"
+                  ]
+                }
+              }
+            ],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Rana twarzy. Krwawienie 1, -10 PER i OG do właściwego leczenia.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": [
+                    "per",
+                    "og"
+                  ]
+                }
+              }
+            ],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Ciężkie uszkodzenie zmysłu. -20 PER, Krwawienie 2.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -20,
+                "when": {
+                  "stat": [
+                    "per"
+                  ]
+                }
+              }
+            ],
+            "conditions": {
+              "bleeding": 2
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Utrata lub ciężkie uszkodzenie oka/ucha. Wymaga operacji, zaawansowanego leczenia lub odpowiedniej magii.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Ciężka rana czaszki/szyi. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Krytyczna rana szyi/głowy. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Natychmiastowa śmierć.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": true
+          }
+        ],
+        "arm": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Krwawienie 1, -10 do czynności wykonywanych tą ręką do opatrzenia.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "location": "affected"
+                }
+              }
+            ],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Uszkodzenie mięśnia. -20 czynności tą ręką, Krwawienie 1.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -20,
+                "when": {
+                  "location": "affected"
+                }
+              }
+            ],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Ręka niesprawna do czasu zaawansowanego leczenia.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Przecięte ścięgna. Ręka całkowicie niesprawna.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Częściowe odcięcie / katastrofalne uszkodzenie kończyny. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Kończyna odcięta. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Kończyna zniszczona/utracona + Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          }
+        ],
+        "body": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Głęboka rana. Krwawienie 1.",
+            "modifiers": [],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Krwawienie 2, -10 do testów fizycznych.",
+            "modifiers": [
+              {
+                "target": "test",
+                "op": "add",
+                "value": -10,
+                "when": {
+                  "stat": [
+                    "sf",
+                    "zr",
+                    "physicalResistance"
+                  ]
+                }
+              }
+            ],
+            "conditions": {
+              "bleeding": 2
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Głęboka rana organów. Krwawienie 2, Zmęczenie 2.",
+            "modifiers": [],
+            "conditions": {
+              "bleeding": 2,
+              "fatigued": 2
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Trwałe uszkodzenie organu. -2 maksymalnej ŻYW do czasu właściwego leczenia.",
+            "modifiers": [
+              {
+                "target": "zyw",
+                "op": "add",
+                "value": -2,
+                "when": {}
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Przebicie ważnego organu. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Rozległe uszkodzenie organów. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Natychmiastowa śmierć.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": true
+          }
+        ],
+        "leg": [
+          {
+            "range": "01–40",
+            "title": "Uraz",
+            "effect": "Krwawienie 1, -1 SZ do opatrzenia.",
+            "modifiers": [
+              {
+                "target": "speed",
+                "op": "add",
+                "value": -1,
+                "when": {}
+              }
+            ],
+            "conditions": {
+              "bleeding": 1
+            },
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "41–60",
+            "title": "Poważny uraz",
+            "effect": "Uszkodzenie ścięgna. -2 SZ, -20 do ruchowych testów ZR.",
+            "modifiers": [
+              {
+                "target": "speed",
+                "op": "add",
+                "value": -2,
+                "when": {}
+              },
+              {
+                "target": "test",
+                "op": "add",
+                "value": -20,
+                "when": {
+                  "stat": "zr",
+                  "movement": true
+                }
+              }
+            ],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "61–80",
+            "title": "Ciężki uraz",
+            "effect": "Noga niesprawna. Maksymalny ruch zostaje zmniejszony o połowę.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": true,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "81–100",
+            "title": "Okaleczenie",
+            "effect": "Zerwane ścięgna. Noga niesprawna.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 0,
+            "terminal": false
+          },
+          {
+            "range": "101–120",
+            "title": "Krytyczny — Ryzyko Śmierci 3",
+            "effect": "Częściowe odcięcie / katastrofalne uszkodzenie kończyny. Ryzyko Śmierci 3.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": false,
+            "halfMovement": false,
+            "deathRisk": 3,
+            "terminal": false
+          },
+          {
+            "range": "121–140",
+            "title": "Katastrofalny — Ryzyko Śmierci 1",
+            "effect": "Kończyna odcięta. Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          },
+          {
+            "range": "141+",
+            "title": "Terminalny",
+            "effect": "Kończyna zniszczona/utracona + Ryzyko Śmierci 1.",
+            "modifiers": [],
+            "conditions": {},
+            "disabledLocation": true,
+            "halfMovement": false,
+            "deathRisk": 1,
+            "terminal": false
+          }
+        ]
+      }
+    },
+    "firearm": {
+      "label": "Broń palna",
+      "source": "LW Broń Palna.html",
+      "locations": {
+        "head": [
+          {
+            "range": "01 – 09",
+            "title": "Pocisk ociera się o skórę głowy",
+            "effect": "Cel traci 5 Segmentów Szybkości (SZ) w najbliższej rundzie (mechanicznie: Oszołomienie)."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Kula rozcina skórę na podbródku",
+            "effect": "Otrzymuje stan Krwawienie (1k10 obrażeń/rundę)."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Pocisk rozcina skórę nad brwią, krew utrudnia widzenie",
+            "effect": "Cel otrzymuje karę −10 do Biegłości (BGŁ) w najbliższej rundzie. Krew utrudnia widzenie (potencjalne Utrudnienie do testów PER/ZR)."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Kula ociera się o skórę szyi",
+            "effect": "Cel traci 5 Segmentów Szybkości (SZ) w najbliższej rundzie. Jeśli nie poda sobie pierwszej pomocy, traci 1 Segment Szybkości co rundę (max 2 rundy)."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Pocisk trafia w ucho",
+            "effect": "Cel nie może używać akcji Parowania w najbliższej rundzie."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Kula uderza w głowę",
+            "effect": "Cel otrzymuje Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Jeśli nie ma pancerza na głowie, przez ⌈1k10/2⌉ rund na początku każdej rundy ponownie otrzymuje Oszołomienie.",
+            "status": "WIP",
+            "note": "WIP: źródło miało wielorundowe ogłuszenie; zapis dostosowano do obecnej mechaniki Oszołomienia."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Pocisk przebija policzek, łamie 1k10 zębów",
+            "effect": "Cel traci 1 Segment Szybkości za każdy złamany ząb (max 5 Segmentów). Ogłada (OG) trwale obniżona o 1 za każdy złamany ząb."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Kula ociera się o nos",
+            "effect": "Cel ma Utrudnienie do wszystkich testów i ataków. Parowanie wykonuje z dodatkowym −20 do testu BGŁ do czasu opatrzenia rany."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Pocisk trafia w tchawicę",
+            "effect": "Przez 1k10 rund na początku każdej rundy cel otrzymuje Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Trwale traci zdolność mowy (do czasu odpowiedniego leczenia medycznego lub magicznego).",
+            "status": "WIP",
+            "note": "WIP: źródło miało wielorundowe ogłuszenie; zapis dostosowano do obecnej mechaniki Oszołomienia."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Kula rozkawałkowuje kość policzkową",
+            "effect": "Pocisk grzęźnie. Cel musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia. Do czasu leczenia traci 5 Segmentów Szybkości co rundę i ma Utrudnienie do wszystkich testów."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Pocisk rozrywa żyłę szyi",
+            "effect": "Pocisk grzęźnie. Cel ma Utrudnienie do wszystkich testów. Następna Trwała Rana otrzymana przez cel ma +2 do wyniku LW. Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund.",
+            "status": "WIP",
+            "note": "WIP: źródło mówiło o zwiększeniu wartości kolejnego krytyka; przełożono to roboczo na wynik LW."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Kula trafia w oko",
+            "effect": "Pocisk grzęźnie. Cel trwale traci wzrok w oku (testy PER/ZR z Utrudnieniem). Otrzymuje stan Oszołomienie. Ma Utrudnienie do wszystkich testów i ataków. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Kula miażdży żuchwę i rozrywa tętnicę",
+            "effect": "Cel trwale traci zdolność mowy (do śmierci). Ryzyko Śmierci w ciągu 1k10 rund."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Pocisk przewierca się przez nos do wnętrza czaszki",
+            "effect": "Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Kula trafia w czoło, rozrywa mózg",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "arm": [
+          {
+            "range": "01 – 09",
+            "title": "Pocisk ociera się o dłoń",
+            "effect": "Cel musi wykonać test Odporności Psychicznej z Utrudnieniem, aby nie upuścić trzymanych przedmiotów."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Kula uderza w kciuk",
+            "effect": "Cel traci 5 Segmentów Szybkości w tej rundzie. BGŁ obniżona o 10 w najbliższej rundzie."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Pocisk zadraśnięcie nadgarstka",
+            "effect": "BGŁ obniżona o 20 w najbliższej rundzie."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Kula przebija biceps",
+            "effect": "Cel upuszcza przedmioty. Ręka jest nieużywalna przez 1 rundę (skalowanie uproszczone)."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Pocisk przeszywa ramię",
+            "effect": "Cel nie może używać akcji Parowania w najbliższej rundzie."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Kula przebija śródręcze, uszkadza przedmioty, upuszcza",
+            "effect": "Cel upuszcza przedmioty. Ręka jest nieużywalna do czasu leczenia."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Pocisk łamie ⌈1k10/2⌉ palców",
+            "effect": "Cel trwale traci możliwość chwytu. Zręczność (ZR) trwale obniżona o 3 za każdy złamany palec (jeśli bez odpowiedniej pomocy medycznej lub magicznej)."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Kula grzęźnie w przedramieniu",
+            "effect": "Pocisk grzęźnie. Cel upuszcza przedmioty. Ręka nieużywalna. Traci 5 Segmentów Szybkości co rundę, jeśli próbuje używać ręki. Musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Pocisk trafia w łokieć",
+            "effect": "Pocisk grzęźnie. Ręka nieużywalna. BGŁ trwale obniżona o 1k10 (jeśli bez chirurgii). Cel traci 1 Segment Szybkości co rundę."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Pocisk grzęźnie w bicepsie",
+            "effect": "Pocisk grzęźnie. Cel upuszcza przedmioty. Otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów). BGŁ trwale obniżona o 1k10 (jeśli bez chirurgii)."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Pocisk trafia w bark",
+            "effect": "Pocisk grzęźnie. Ręka nieużywalna. Musi zdać test Odporności Psychicznej z Utrudnieniem co rundę, aby podjąć akcję. BGŁ trwale obniżona o 1k10 (jeśli bez chirurgii)."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Pocisk łamie obojczyk",
+            "effect": "Pocisk grzęźnie. Cel nie może wykonywać żadnych akcji przez ⌈1k10/2⌉ rund. Odporność Fizyczna trwale obniżona o 10."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Pocisk rozkawałkowuje obojczyk, rozrywa płuco",
+            "effect": "Pocisk grzęźnie. Cel musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia. Ryzyko Śmierci w ciągu 1k10 rund. Odporność Fizyczna i Odporność Psychiczna trwale obniżone o 10."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Kula miażdży obojczyk, rozrywa tętnicę",
+            "effect": "Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Pocisk przeszywa rękę, żebra, płuco i serce",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "body": [
+          {
+            "range": "01 – 09",
+            "title": "Pocisk ociera się o bok",
+            "effect": "Cel może tylko parować w najbliższej rundzie."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Kula rozcina skórę na boku klatki piersiowej",
+            "effect": "BGŁ obniżona o 10 w najbliższej rundzie."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Kula odbija się od mostka",
+            "effect": "Cel może tylko parować w najbliższej rundzie."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Pocisk rozcina skórę nad obojczykiem",
+            "effect": "Cel otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów)."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Kula rozcina skórę na plecach, mrowienie w nogach",
+            "effect": "Cel może tylko parować w najbliższej rundzie."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Pocisk w brzuch, uszk",
+            "effect": "Pocisk grzęźnie. Cel ma Utrudnienie do wszystkich testów. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Pocisk w brzuch, wypływa krew z kałem",
+            "effect": "Pocisk grzęźnie. Cel ma Utrudnienie do wszystkich testów. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG. Kara −10 do OG do czasu wyleczenia ciężkiego urazu jamy brzusznej.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Pocisk w brzuch",
+            "effect": "Pocisk grzęźnie. Cel musi zdać test Odporności Psychicznej z Utrudnieniem (co rundę), aby wykonać akcję. Ma Utrudnienie do wszystkich testów. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Pocisk przebija żołądek",
+            "effect": "Pocisk grzęźnie. Cel musi zdać test Odporności Psychicznej z Utrudnieniem (co rundę), aby wykonać akcję. Ma Utrudnienie do wszystkich testów. Jeśli przeżyje bez odpowiedniego leczenia, Odporność Fizyczna trwale obniżona o 5."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Kula uszkadza pęcherz moczowy",
+            "effect": "Pocisk grzęźnie. Cel otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów)."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Pocisk rozkawałkowuje obojczyk",
+            "effect": "Pocisk grzęźnie. Cel musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia. Ma Utrudnienie do wszystkich testów."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Kula rozrywa tętnicę",
+            "effect": "Pocisk grzęźnie. Cel otrzymuje Ryzyko Śmierci oraz 3 poziomy Krwawienia. Do czasu stabilizacji ma Utrudnienie do wszystkich testów i ataków. Jeśli przeżyje, do czasu pełnego leczenia otrzymuje −10 do OG i Odporności Psychicznej."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Pocisk przebija płuco",
+            "effect": "Pocisk grzęźnie. Cel musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia. Odporność Psychiczna trwale obniżona o 10 (jeśli przeżyje)."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Kula przeszywa aortę",
+            "effect": "Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Pocisk łamie żebro, które trafia w serce",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "leg": [
+          {
+            "range": "01 – 09",
+            "title": "Pocisk ociera się o kostkę",
+            "effect": "BGŁ obniżona o 10 w najbliższej rundzie."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Kula ociera się o palec",
+            "effect": "Cel może tylko parować w najbliższej rundzie."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Pocisk ociera się o łydkę",
+            "effect": "Cel traci 5 Segmentów Szybkości w tej rundzie."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Kula rozcina skórę nad kolanem",
+            "effect": "Cel otrzymuje stan Powalenie. Szybkość (SZ) obniżona o 1 w najbliższej rundzie."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Pocisk odbija się od rzepki",
+            "effect": "Cel otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów)."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Kula grzęźnie w udzie",
+            "effect": "Pocisk grzęźnie. BGŁ obniżona o 20. Szybkość (SZ) obniżona o 1. Musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Pocisk miażdży kości stopy",
+            "effect": "Pocisk grzęźnie. Szybkość (SZ) obniżona o połowę. Cel ma Utrudnienie do wszystkich testów."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Kula w podudzie",
+            "effect": "Pocisk grzęźnie. Cel może tylko parować. Jeśli próbuje się ruszać/stąpać, musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Oszołomienia. Szybkość (SZ) obniżona o połowę."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Pocisk rozkawałkowuje ⌈1k10/2⌉ palców",
+            "effect": "Pocisk grzęźnie. BGŁ obniżona o 20. Szybkość (SZ) obniżona o 1 (trwale, jeśli utrata >3 palców)."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Kula rozkawałkowuje kości biodra",
+            "effect": "Pocisk grzęźnie. Cel upada (Powalenie) i otrzymuje Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Musi zdać test Odporności Fizycznej z Utrudnieniem co rundę, aby uniknąć Oszołomienia. Szybkość (SZ) obniżona o połowę."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Pocisk przebija udo i kość",
+            "effect": "Pocisk grzęźnie. Cel upada (Powalenie). Ma Utrudnienie do wszystkich testów i ataków. Szybkość (SZ) obniżona o połowę."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Kula rozkawałkowuje podudzie",
+            "effect": "Cel otrzymuje stan Powalenie. Musi zdać test Odporności Psychicznej z Utrudnieniem co rundę, aby podjąć akcję. Ma Utrudnienie do wszystkich testów i ataków."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Pocisk gruchocze rzepkę",
+            "effect": "Pocisk grzęźnie. Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu 1k10 rund. Szybkość (SZ) trwale obniżona o połowę (jeśli przeżyje)."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Kula trafia w pachwinę, rozrywa tętnicę",
+            "effect": "Ryzyko Śmierci w ciągu 1k10 rund."
+          },
+          {
+            "range": "127+",
+            "title": "Pocisk trafia w udo i rozrywa tętnicę",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ]
+      },
+      "status": "ACTIVE"
+    }
+  },
+  "elements": {
+    "label": "Obrażenia żywiołowe",
+    "status": "ACTIVE",
+    "flavour": {
+      "fire": "Oparzenie / zwęglenie",
+      "ice": "Odmrożenie / martwica",
+      "lightning": "Układ nerwowy / serce",
+      "earth": "Zmiażdżenie / złamania",
+      "water": "Obrażenia ciśnieniowe / wyniszczenie energii",
+      "wind": "Uraz ciśnieniowy / uderzeniowy",
+      "light": "Uszkodzenia zmysłów / duchowe",
+      "shadow": "Uszkodzenia psychiczne / duchowe"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+import assert from 'node:assert/strict';
+import {migrateItemData119,migrateLedger119} from '../module/migration119.mjs';
+const NS='gahla-resurrected';
+const raw={_id:'abcdefghijklmnop',name:'Chwyt Tytana',type:'talent',system:{rank:2,level:2,effectTier:2,costLevel:2,requiredTier:4,learned:true},flags:{[NS]:{monkWeapon:'sword',custom:'keep'}}};
+const [fixed]=migrateItemData119(raw);assert.equal(fixed._id,raw._id);assert.equal(fixed.system.rank,2);assert.equal(fixed.system.requiredTier,2);assert.equal(fixed.flags[NS].monkWeapon,'sword');assert.equal(fixed.flags[NS].legacy119.requiredTier,4);assert.deepEqual(migrateItemData119(fixed),[fixed]);assert.equal(raw.system.requiredTier,4);
+const split={...raw,name:'Mistrz Ukrywania / Cichy Ruch',system:{...raw.system,level:3,effectTier:3}};const parts=migrateItemData119(split);assert.equal(parts.length,2);assert.equal(parts[0]._id,raw._id);assert.notEqual(parts[1]._id,parts[0]._id);assert.deepEqual(parts.map(i=>[i.name,i.system.rank,i.system.effectTier]),[['Mistrz Ukrywania',2,3],['Cichy Ruch',1,2]]);
+const ledger={entries:[{id:'purchase',delta:-50,undo:{before:{'system.xp':100},after:{'system.xp':50},items:[{id:raw._id,before:null,after:split}]}}]};const migrated=migrateLedger119(ledger);assert.equal(migrated.entries[0].delta,-50);assert.equal(migrated.entries[0].undo.items.length,2);assert.deepEqual(migrated.entries[0].undo.items.map(x=>x.id),parts.map(x=>x._id));assert.deepEqual(migrateLedger119(migrated),migrated);
+const [early]=migrateItemData119({...raw,name:'Sanktuarium Eruela',system:{level:1,rank:1}});assert.equal(early.system.effectTier,1);assert(early.flags[NS].legacyEffectPending119);
+console.log('PASS 119 migration: stable IDs, exact rank/Tier correction, choices, split, XP/history snapshots, no free low-tier upgrade, item and ledger idempotence.');

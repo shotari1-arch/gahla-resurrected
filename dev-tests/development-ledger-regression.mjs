@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import {actor,install,applyPatch,hooks,NS} from './helpers/automation-fixtures.mjs';
+install();globalThis.Actor=class{};globalThis.Item=class{};
+const {GahlaActor}=await import('../module/documents.mjs');
+const {awardSessionXP,undoPurchase,ledgerView,registerDevelopmentHooks,levelProgressionPatch,migrateDevelopment}=await import('../module/development-ledger.mjs');
+const {buyGrowth}=await import('../module/automation-runtime.mjs');
+registerDevelopmentHooks();let seq=0;
+function buyer(){const a=actor();Object.setPrototypeOf(a,GahlaActor.prototype);a.system.xp=100;a.system.appliedLevel=1;a.system.level=1;
+ a.update=async p=>{for(const fn of hooks.get('preUpdateActor')??[])fn(a,p);applyPatch(a,p);return a;};
+ a.createEmbeddedDocuments=async(_type,docs)=>docs.map(data=>{const item={...structuredClone(data),id:data._id??'item'+(++seq),toObject(){return {name:this.name,type:this.type,system:structuredClone(this.system),flags:structuredClone(this.flags??{})};},async update(p){applyPatch(this,p);},async delete(){a.items.splice(a.items.indexOf(this),1);}};a.items.push(item);return item;});return a;}
+const a=buyer();game.actors=[a];await migrateDevelopment();await migrateDevelopment();assert.equal(ledgerView(a).opening,100);assert.equal(ledgerView(a).entries.length,0);
+await awardSessionXP(a,'Sesja 1',75);await awardSessionXP(a,'Sesja 2',25);assert.equal(a.system.xp,200);assert.equal(ledgerView(a).earned,100);
+await buyGrowth(a,['sf','zr','per']);assert.equal(a.system.xp,150);assert.equal(a.system.base.statUpgradeCounts.sf,1);
+const growth=ledgerView(a).rows.find(e=>e.kind==='purchase').id;
+assert(await a.buyTalent('Żywotny',1));const t1=ledgerView(a).rows.find(e=>e.canUndo).id;
+await assert.rejects(()=>undoPurchase(a,growth),/najnowszego/);
+await undoPurchase(a,t1);assert.equal(a.items.length,0);assert.equal(a.system.xp,150);
+await assert.rejects(()=>undoPurchase(a,t1));await undoPurchase(a,growth);assert.equal(a.system.xp,200);assert.equal(a.system.base.statUpgradeCounts.sf,0);
+assert(await a.buyTalent('Żywotny',1));assert(await a.buyTalent('Żywotny',2));let latest=ledgerView(a).rows.find(e=>e.canUndo).id;
+await undoPurchase(a,latest);assert.equal(a.items[0].system.level,1);
+latest=ledgerView(a).rows.find(e=>e.canUndo).id;a.items[0].system.description='Manual';await assert.rejects(()=>undoPurchase(a,latest),/poza historią/);
+await a.update({'system.level':6});assert.equal(a.system.appliedLevel,6);assert.equal(a.system.experiences.length,2);assert.equal(a.system.classFeatures.length,2);
+await a.update({'system.level':6});assert.equal(a.system.experiences.length,2);await a.update({'system.level':3});await a.update({'system.level':6});assert.equal(a.system.experiences.length,2);
+assert.deepEqual(levelProgressionPatch(a,6),{});
+const xp=a.system.xp;await a.update({'system.xp':xp+10});assert.equal(ledgerView(a).rows[0].kind,'adjustment');assert.equal(ledgerView(a).opening+ledgerView(a).entries.reduce((s,e)=>s+e.delta,0),a.system.xp);
+await assert.rejects(()=>awardSessionXP(a,'',50));await assert.rejects(()=>awardSessionXP(a,'Sesja',-2));a.isOwner=false;game.user.isGM=false;await assert.rejects(()=>awardSessionXP(a,'Sesja',20),/uprawnień/);
+console.log('Development ledger: sessions, growth, talent purchase/upgrade/undo, ordering, duplicate undo, drift protection, automatic level milestones and idempotent migration: PASS');

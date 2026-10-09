@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {install,actor,talent,NS,applyPatch} from './helpers/automation-fixtures.mjs';
+import {saveAuraManeuver119,releaseAura119,reservedAura119} from '../module/talent-aura119.mjs';
+import {calculateActorAbility} from '../module/ability-automation.mjs';
+install();const a=actor([talent('Duchowa Pięść',3)]);a.createEmbeddedDocuments=async(_kind,data)=>data.map(raw=>{const item={...raw,id:raw._id,update:async p=>applyPatch(item,p)};a.items.push(item);return item;});
+const doc=amount=>({name:'Test',type:'maneuver',system:{builderState:JSON.stringify({pay_aura:amount})}});
+const m=await saveAuraManeuver119(a,null,doc(2));assert.equal(a.system.combat.aura.value,3);assert.equal(reservedAura119(a),2);await assert.rejects(()=>saveAuraManeuver119(a,m,doc(3)),/limit/);assert.equal(a.system.combat.aura.value,3);
+a.items[0].system.level=4;await saveAuraManeuver119(a,m,doc(3));assert.equal(a.system.combat.aura.value,2);assert.equal(reservedAura119(a),3);await saveAuraManeuver119(a,m,doc(1));assert.equal(a.system.combat.aura.value,4);assert.equal(reservedAura119(a),1);
+const before=JSON.stringify(a.flags);m.update=async()=>{throw Error('save failed');};await assert.rejects(()=>saveAuraManeuver119(a,m,doc(2)),/save failed/);assert.equal(JSON.stringify(a.flags),before);assert.equal(a.system.combat.aura.value,4);
+await releaseAura119(a,m.id);assert.equal(a.system.combat.aura.value,5);assert.equal(reservedAura119(a),0);await releaseAura119(a,m.id);assert.equal(a.system.combat.aura.value,5);
+a.system.combat.aura.value=1;await assert.rejects(()=>saveAuraManeuver119(a,null,doc(2)),/Aury/);
+const w={id:'w',type:'weapon',system:{equipped:true}};a.items.push(w);a.system.combat.aura.value=5;const c=calculateActorAbility({mode:'maneuver',weaponId:'w',w_op:4,w_min_op:3,w_dmg:3,strong:2,pay_aura:2},a);assert(c.balanced);assert(c.valid,c.errors.join(';'));assert.equal(c.finalDmg,5);assert.equal(c.totalPaid,2);
+console.log('PASS Spirit Aura reservation: T3/T4 limits, real resource payment/refund, failure rollback, duplicate release, actual maneuver calculator balance.');

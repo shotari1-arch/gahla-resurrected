@@ -1,0 +1,8 @@
+import assert from 'node:assert/strict';
+import {install,actor,talent,NS} from './helpers/automation-fixtures.mjs';
+import {activateTalent} from '../module/automation-runtime.mjs';
+import {modified} from '../module/effects-engine.mjs';
+import {healSanctuary119} from '../module/talent-zones119.mjs';
+install();
+for(const tier of [2,3,4]){const item=talent('Sanktuarium Eruela',tier),caster=actor([item]),ally=actor();game.actors=[caster,ally];game.combat={id:'c'+tier,started:true,round:1,combatants:[{id:'caster',actor:caster}],scene:{id:'scene',grid:{size:100,distance:1},tokens:[{actor:caster,x:0,y:0,width:1,height:1},{actor:ally,x:100,y:0,width:1,height:1}]},spendSegments:async cost=>{assert.equal(cost,10);return true;}};foundry.applications.api.DialogV2.input=async()=>({ally0:true,ally1:true});await activateTalent(caster,item.id);for(const type of ['physical','magical','spiritual','mental'])assert.equal(modified(ally,20,type+'Resistance'),tier===2?30:35);const wounds=ally.system.combat.wounds.value;await healSanctuary119(ally,game.combat);assert.equal(ally.system.combat.wounds.value,wounds-(tier===4?1:0));await healSanctuary119(ally,game.combat);assert.equal(ally.system.combat.wounds.value,wounds-(tier===4?1:0));game.combat.scene.tokens[1].x=1100;assert.equal(modified(ally,20,'physicalResistance'),20);game.combat.scene.tokens[1].x=100;game.combat.round=3;assert.equal(modified(ally,20,'physicalResistance'),20);assert.equal(await healSanctuary119(ally,game.combat),false);}
+console.log('PASS Sanctuary actual activation, 10 segments, all resistances T2/T3/T4, live distance, expiry and once-per-round wound healing.');

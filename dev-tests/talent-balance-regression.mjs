@@ -1,0 +1,58 @@
+import assert from "node:assert/strict";
+import { ALL_TALENTS, ARCHETYPE_TALENTS, SPECIAL_TALENTS } from "../module/content.mjs";
+import { talentMaxLevel, vitalityTalentBonus, meleeAccuracyTalentBonus, auraMasteryBonus, rerollTalentUses, weaponTrainingBonusPoints, barkSkinBonuses, monkTrainingBonuses, taurosChargeBonusDice, bloodMetabolismUses, enforceActionMinimum } from "../module/talent-balance.mjs";
+import { archetypeTalentTierForActor, monkBridgeTier, talentAllowedForSpecial } from "../module/talent-eligibility.mjs";
+
+const byName=name=>ALL_TALENTS.find(t=>t.name===name);
+assert.equal(vitalityTalentBonus(4),4);
+assert.equal(meleeAccuracyTalentBonus(4),20);
+assert.equal(auraMasteryBonus(1),2);
+assert.equal(auraMasteryBonus(4),5);
+assert.equal(rerollTalentUses(1),1);
+assert.equal(rerollTalentUses(2),1);
+assert.equal(rerollTalentUses(3),2);
+assert.equal(rerollTalentUses(4),2);
+assert.equal(weaponTrainingBonusPoints(4,{bonus:true}),4);
+assert.equal(weaponTrainingBonusPoints(4,{criticalSuccess:true}),4,"critical must not double Szkolenie Oręża talent bonus");
+assert.deepEqual(barkSkinBonuses(1),{armor:1,physicalResistance:0});
+assert.deepEqual(barkSkinBonuses(2),{armor:1,physicalResistance:5});
+assert.deepEqual(barkSkinBonuses(3),{armor:2,physicalResistance:10});
+assert.deepEqual(barkSkinBonuses(4),{armor:2,physicalResistance:10});
+assert.deepEqual(monkTrainingBonuses(1),{bgl:20,defense:0,speed:0,unarmedBonusDice:1});
+assert.deepEqual(monkTrainingBonuses(2),{bgl:30,defense:10,speed:1,unarmedBonusDice:1});
+assert.equal(taurosChargeBonusDice(140,1),3,"T1 Tauros charge must be capped at Tier+2 dice");
+assert.equal(taurosChargeBonusDice(140,4),6,"T4 Tauros charge cap is +6k10");
+assert.equal(bloodMetabolismUses(4),4);
+assert.equal(enforceActionMinimum(1,4),4);
+assert.equal(enforceActionMinimum(7,4),7);
+
+assert.equal(talentMaxLevel("Widzenie w Ciemności"),1);
+assert.equal(talentMaxLevel("Szkolenie Mnicha"),2);
+assert.equal(talentMaxLevel("Skóra jak Kora"),3);
+assert.equal(byName("Szkolenie Mnicha").maxLevel,2);
+assert.equal(byName("Wszechstronny").maxLevel,1);
+assert.match(byName("Żywotny").description,/\+1\/\+2\/\+3\/\+4/);
+assert.match(byName("Celny Cios").description,/\+5\/\+10\/\+15\/\+20/);
+assert.match(byName("Mistrz Broni").description,/\+10 do trafienia/);
+assert.match(byName("Krwisty Metabolizm").description,/1\/2\/3\/4 użyć Ułatwienia/);
+assert.match(byName("Przeczucie Przyszłości").description,/przed wykonaniem/);
+
+const items={contents:[{type:"talent",name:"Szkolenie Mnicha",system:{learned:true,level:1}}],[Symbol.iterator](){return this.contents[Symbol.iterator]();}};
+const monkT1={items,system:{species:"human",archetype:"kaplan",lifePath:"Ojczulek / Księżyna",derived:{tier:1},deity:"Gida"}};
+const monkT2={items,system:{species:"human",archetype:"kaplan",lifePath:"Ojczulek / Księżyna",derived:{tier:2},deity:"Gida"}};
+const monkT4={items,system:{species:"human",archetype:"kaplan",lifePath:"Ojczulek / Księżyna",derived:{tier:4},deity:"Gida"}};
+const normalCleric={items:{contents:[],[Symbol.iterator](){return this.contents[Symbol.iterator]();}},system:{species:"human",archetype:"kaplan",lifePath:"Namiestnik Światła",derived:{tier:4},deity:"Gida"}};
+const mocny=ARCHETYPE_TALENTS.find(t=>t.name==="Mocny Cios");
+const zelazne=ARCHETYPE_TALENTS.find(t=>t.name==="Żelazne Natarcie");
+const monkDef=SPECIAL_TALENTS.find(t=>t.name==="Szkolenie Mnicha");
+assert.equal(monkBridgeTier(monkT1),1,"T1 Monk must already function as a real bridge to T1 Warrior/Hunter talents");
+assert.equal(monkBridgeTier(monkT2),1);
+assert.equal(monkBridgeTier(monkT4),2);
+assert.equal(archetypeTalentTierForActor(mocny,monkT1),1,"T1 cleric monk may buy T1 Warrior/Hunter bridge talents");
+assert.equal(archetypeTalentTierForActor(mocny,monkT2),1,"T2 cleric monk may buy T1 Warrior/Hunter bridge talents");
+assert.equal(archetypeTalentTierForActor(zelazne,monkT4),0,"even T4 cleric monk bridge is only T2, so T3 Warrior talent stays locked");
+assert.equal(archetypeTalentTierForActor(mocny,normalCleric),0);
+assert.equal(talentAllowedForSpecial(monkDef,monkT2),true);
+assert.equal(talentAllowedForSpecial(monkDef,normalCleric),false);
+
+console.log("Gahla talent balance regression: PASS");

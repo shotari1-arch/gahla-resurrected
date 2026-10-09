@@ -1,0 +1,12 @@
+{
+  "source": "Gahla Resurrected - Kompendium Mechaniczne",
+  "status": "ALPHA",
+  "note": "Dane demonstracyjne; nie stanowią kompletnego bestiariusza ani pełnej bazy talentów.",
+  "items": [
+    {"type":"weapon","name":"Zwykły miecz","system":{"damage":"4k10","damageType":"physical","delay":5,"hands":1,"traits":["Podstawowa"],"equipped":true}},
+    {"type":"armor","name":"Lekkie","system":{"armor":1,"defenseMod":5,"equipped":true,"locations":{"head":0,"leftArm":1,"rightArm":1,"body":1,"rightLeg":1,"leftLeg":1}}},
+    {"type":"talent","name":"Walka wręcz","system":{"tier":1,"level":1,"learned":true,"costXP":100,"requirements":"Wojownik/Łowca/Bestia"}},
+    {"type":"talent","name":"Mocny Cios","system":{"tier":1,"level":1,"learned":true,"costXP":100,"requirements":"Wojownik/Łowca/Bestia"}},
+    {"type":"spell","name":"Ognisty pocisk (DEMO)","system":{"tier":1,"spellCost":5,"maxCost":5,"delay":6,"minDelay":4,"rollStat":"um","damage":"6k10","damageType":"magical","element":"ogień","range":"daleki","target":"1 cel","duration":"natychmiastowy"}}
+  ]
+}
