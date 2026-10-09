@@ -1,0 +1,77 @@
+Syntax: 119 modules; JSON: 7; errors: 0
+PASS ability-builder-regression.mjs
+PASS armor-regression.mjs
+PASS attack-116-regression.mjs
+PASS automation-ability-regression.mjs
+PASS automation-chat-regression.mjs
+PASS automation-encounter-regression.mjs
+PASS automation-engine-regression.mjs
+PASS automation-purchase-regression.mjs
+PASS automation-runtime-regression.mjs
+PASS boot-smoke.mjs
+PASS boss-116-regression.mjs
+PASS canon115-actor-regression.mjs
+PASS canon115-model-regression.mjs
+PASS canon115-regression.mjs
+PASS canon119-actions-regression.mjs
+PASS canon119-attack-regression.mjs
+PASS canon119-aura-regression.mjs
+PASS canon119-catalog-regression.mjs
+PASS canon119-defense-regression.mjs
+PASS canon119-foundation-regression.mjs
+PASS canon119-infusion-regression.mjs
+PASS canon119-zone-regression.mjs
+PASS canonical-actor-regression.mjs
+PASS canonical-effects-regression.mjs
+PASS canonical-migration-regression.mjs
+PASS canonical-rules-regression.mjs
+PASS combat-integration-regression.mjs
+PASS core-regression.mjs
+PASS d100-116-regression.mjs
+PASS defense-declarations-regression.mjs
+PASS development-ledger-regression.mjs
+PASS encounter-regression.mjs
+PASS encounter-template-regression.mjs
+PASS failure-tables-regression.mjs
+PASS form119-regression.mjs
+PASS haste-minimum-regression.mjs
+PASS injury-runtime-regression.mjs
+PASS item-data-regression.mjs
+PASS lingering-wounds-regression.mjs
+PASS maneuver-overlay-regression.mjs
+PASS migration117-regression.mjs
+PASS migration118-regression.mjs
+PASS migration119-regression.mjs
+PASS progression118-regression.mjs
+PASS ranks118-regression.mjs
+PASS rules-regression.mjs
+PASS source119-regression.mjs
+PASS talent-balance-regression.mjs
+PASS talent-eligibility-regression.mjs
+PASS talent-tree-regression.mjs
+PASS talents117-regression.mjs
+PASS talents118-regression.mjs
+PASS tracker-regression.mjs
+PASS ui-regression.mjs
+54/54 PASS
+
+Manifest version: 0.11.9-beta
+VERIFIEDPASS ability-dom
+{"cost":"3","extraControls":24,"validation":"Walidacja✓ Zdolność spełnia sprawdzane wymagania.UwagiBrak wyposażonego Źródła Mocy: brak premii źródła.Podsumowanie kosztuPrzed zniżkami i ryzykami8Po zniżkach i ryzykach6 / 20Źródło — test / punkty bonusu+0 / +0Zastosowane modyfikatoryŚwięty Płomień: 3 → 2"}
+Responsive creator DOM/CSS: 1200, 760, 480 px PASS
+
+PASS defense-handoff
+Two isolated browser clients: owner-only prompt, no pre-declaration k100, one payment, attack revealed after confirmation: PASS
+
+PASS encounter-template
+Browser fragment: one root; all toolbar actions and fields inside it; old two-root defect reproduced: PASS
+
+PASS sheet117
+PASS sheet117: real template/context/listeners; thresholds, filters, tab/scroll preservation, GM visibility and execution guard, magic bridge, talent hotbar, 4 viewports. Foundry document lifecycle mocked.
+
+PASS sheet118
+PASS sheet118: real template/context/listeners; thresholds, filters, tab/scroll preservation, GM visibility and execution guard, magic bridge, talent hotbar, 4 viewports. Foundry document lifecycle mocked.
+
+PASS templates117
+PASS 11 Handlebars templates compile and render one HTML root; CSS loads 807 top-level rules in Edge. This checks parser acceptance, not every conditional branch or full CSS conformance.
+

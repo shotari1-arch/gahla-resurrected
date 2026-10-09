@@ -1,0 +1,60 @@
+Syntax: 97 modules; JSON: 7; errors: 0
+PASS ability-builder-regression.mjs
+PASS armor-regression.mjs
+PASS attack-116-regression.mjs
+PASS automation-ability-regression.mjs
+PASS automation-chat-regression.mjs
+PASS automation-encounter-regression.mjs
+PASS automation-engine-regression.mjs
+PASS automation-purchase-regression.mjs
+PASS automation-runtime-regression.mjs
+PASS boot-smoke.mjs
+PASS boss-116-regression.mjs
+PASS canon115-actor-regression.mjs
+PASS canon115-model-regression.mjs
+PASS canon115-regression.mjs
+PASS canonical-actor-regression.mjs
+PASS canonical-effects-regression.mjs
+PASS canonical-migration-regression.mjs
+PASS canonical-rules-regression.mjs
+PASS combat-integration-regression.mjs
+PASS core-regression.mjs
+PASS d100-116-regression.mjs
+PASS defense-declarations-regression.mjs
+PASS development-ledger-regression.mjs
+PASS encounter-regression.mjs
+PASS encounter-template-regression.mjs
+PASS failure-tables-regression.mjs
+PASS haste-minimum-regression.mjs
+PASS injury-runtime-regression.mjs
+PASS item-data-regression.mjs
+PASS lingering-wounds-regression.mjs
+PASS maneuver-overlay-regression.mjs
+PASS migration117-regression.mjs
+PASS migration118-regression.mjs
+PASS progression118-regression.mjs
+PASS ranks118-regression.mjs
+PASS rules-regression.mjs
+PASS talent-balance-regression.mjs
+PASS talent-eligibility-regression.mjs
+PASS talent-tree-regression.mjs
+PASS talents117-regression.mjs
+PASS talents118-regression.mjs
+PASS tracker-regression.mjs
+PASS ui-regression.mjs
+43/43 PASS
+
+Manifest version: 0.11.8-beta
+VERIFIED
+Browser Edge / Playwright (local fixtures): 6/6 PASS
+ability-dom: live cost recalculation, 24 controls, 1200/760/480 px PASS
+defense-handoff: two isolated clients, owner-only reaction, no k100 before confirmation, single payment PASS
+encounter-template: single HTML root and contained controls PASS
+sheet117: existing thresholds, filters, GM tools, hotbar and scroll in four viewports PASS
+sheet118: same checks plus actual changeLevel action, next-level +1 SZ, monk selection warning PASS
+templates117: 11 Handlebars templates compile/render single root; 807 CSS rules parsed PASS
+
+Coverage: level transitions 1-2, 2-3, 4-5, 5-4, 7-8, 10-11, 11-10; owner/GM/non-owner; rank/cost/prerequisites/refund; stable split IDs, preserved XP and undo; Monk attack/damage/profile/maneuver matrix; Natural Defense; Strength combat limit/end fatigue; Hybrid form/time/owner/limit; HP NPC resistance; shared legacy reroll pool.
+
+Limits: no licensed running Foundry V14 world was available. Document/socket lifecycle uses fixtures, not a claim of live Foundry acceptance. CSS parsing is not exhaustive CSS conformance. Full Foundry should be checked on a copy of the campaign before replacing the live world.
+No unresolved failed test. Final: 43 regression suites, 6 browser scripts PASS; 97 module syntax checks and 7 JSON parses, 0 errors.

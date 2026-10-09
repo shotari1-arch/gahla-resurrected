@@ -1,0 +1,2278 @@
+{
+  "version": 1,
+  "status": "ACTIVE",
+  "note": "Tabele z dostarczonych arkuszy HTML. Terminologię znormalizowano do Gahla Resurrected; skutki trwałe pozostają do zatwierdzenia przez MG. Pozycje źródłowo WIP pozostają WIP.",
+  "scoreFormula": "k100 + 10 × aktualne Rany ponad ŻYW + 10 za sukces z bonusem / +20 za krytyk + ewentualne bonusy talentów",
+  "profiles": {
+    "slashing": {
+      "label": "Broń sieczna",
+      "source": "LW BRON SIECZNA.html",
+      "locations": {
+        "arm": [
+          {
+            "range": "01 – 09",
+            "title": "Nadgarstek",
+            "effect": "Cel musi wykonać test Siły Fizycznej (SF) z Utrudnieniem. Nieudany test powoduje upuszczenie trzymanych przedmiotów."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Palec",
+            "effect": "Cel musi wykonać test Odporności Fizycznej z Utrudnieniem. Nieudany test powoduje upuszczenie trzymanych przedmiotów."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Biceps",
+            "effect": "Cel musi wykonać test Odporności Fizycznej z Utrudnieniem. Nieudany test powoduje upuszczenie trzymanych przedmiotów. Parowanie z użyciem tej ręki jest wykonywane z Utrudnieniem do końca walki."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Mięsień naramienny",
+            "effect": "Cel upuszcza trzymane przedmioty. Biegłość (BGŁ) celu jest obniżona o 5 do końca walki."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Ramię",
+            "effect": "Cel upuszcza trzymane przedmioty w trafionej dłoni. Musi zdać test Odporności Psychicznej z Utrudnieniem (jeśli trzyma coś w drugiej ręce), aby ich nie upuścić. BGŁ celu trwale obniżona o 10."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Nadgarstek (na kości)",
+            "effect": "Cel upuszcza przedmioty. Nie może używać ręki przez ⌈1k10/2⌉ rund. BGŁ obniżona o 20 do momentu opatrzenia rany (np. Pierwsza Pomoc)."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Przedramię (zaklinowana broń)",
+            "effect": "Cel upuszcza przedmioty. Otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 Segmentów). Broń zaklinowana – usunięcie wymaga testu SF z Ułatwieniem. Nieudane usunięcie zadaje celowi dodatkowe 2k10 obrażeń. Ręka nieużywalna."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Ścięgno bicepsa",
+            "effect": "Cel upuszcza przedmioty. Otrzymuje stan Krwawienie (1k10 obrażeń/rundę). BGŁ obniżona o 30 do opatrzenia rany. Ręka nieużywalna."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Ramię (głęboko)",
+            "effect": "Cel upuszcza przedmioty. Otrzymuje 2 poziomy Krwawienia (2k10 obrażeń/rundę). BGŁ i Siła Fizyczna (SF) trwale obniżone o 20. Musi zdać test Odporności Psychicznej z Utrudnieniem, aby uniknąć stanu Powalenie."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Utrata ⌈1k10/2⌉ palców",
+            "effect": "Cel upuszcza przedmioty. Zręczność (ZR) trwale obniżona o 3 za każdy utracony palec. Musi wykonać test Odporności Psychicznej z Utrudnieniem, aby uniknąć stanu Przerażenie."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Ręka odrąbana w łokciu",
+            "effect": "Cel trwale traci możliwość używania ręki. ZR trwale obniżona o 15. Otrzymuje 3 poziomy Krwawienia (3k10 obrażeń/rundę). Musi wykonać test Odporności Psychicznej z Utrudnieniem, aby uniknąć stanu Przerażenie."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Przecięcie barku/obojczyka",
+            "effect": "Cel upuszcza przedmioty. Jeśli trafienie uszkodziło narządy wewnętrzne: Ryzyko Śmierci z czasem 1k10 rund. W przeciwnym razie BGŁ, Odporność Fizyczna, Odporność Psychiczna, Odporność Magiczna obniżone o 20 do czasu leczenia.",
+            "status": "WIP",
+            "note": "WIP: arkusz źródłowy używał procentowej szansy śmierci, której Gahla nie ma; MG ustala czas Ryzyka Śmierci."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Ręka odrąbana w barku",
+            "effect": "Cel traci możliwość używania ręki i traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund (wymaga odpowiedniego leczenia medycznego lub magicznego). ZR trwale obniżona o połowę."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Przecięcie ramienia i klatki",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Rozrąbanie w pół",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "head": [
+          {
+            "range": "01 – 09",
+            "title": "Uderzenie płazem (bez pancerza)",
+            "effect": "Jeśli cel nie nosi pancerza na głowie, traci wszystkie pozostałe Segmenty Szybkości w bieżącej rundzie z powodu silnego oszołomienia."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Tył głowy",
+            "effect": "W najbliższej rundzie BGŁ celu obniżona o 10."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Skroń",
+            "effect": "W najbliższej rundzie BGŁ celu obniżona o 20."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Czoło",
+            "effect": "Cel otrzymuje stan Ślepota (Połowa trafienia) na ⌈1k10/2⌉ rund. BGŁ obniżona o 30 na ten czas."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Uderzenie płazem",
+            "effect": "Przez ⌈1k10/2⌉ rund na początku każdej rundy cel otrzymuje Oszołomienie (następna akcja jest pustą stratą 5 segmentów)."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Skóra szyi",
+            "effect": "Cel otrzymuje stan Krwawienie (1k10 obrażeń/rundę). Musi zdać test Odporności Fizycznej (bez modyfikatorów) co rundę, aby uniknąć stanu Oszołomienie (utrata Segmentów)."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Ucho",
+            "effect": "Ogłada (OG) trwale obniżona o 5. Zyskuje pasywny modyfikator +5 do testów zastraszania."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Nos",
+            "effect": "Otrzymuje 2 poziomy Krwawienia (2k10 obrażeń/rundę). OG trwale obniżona o 10. Zyskuje pasywny modyfikator +10 do testów zastraszania."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Czaszka/Hełm (zaklinowana broń)",
+            "effect": "Cel otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Broń zaklinowana. Usunięcie wymaga testu SF z Ułatwieniem. Nieudane usunięcie zadaje celowi dodatkowe 3k10 obrażeń."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Ucho",
+            "effect": "Cel otrzymuje stan Krwawienie (1k10 obrażeń/rundę). OG trwale obniżona o 15. Wszystkie testy (w tym ataku) wykonywane z Utrudnieniem. Testy Percepcji (PER) oparte na słuchu mają Utrudnienie."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Głęboka rana",
+            "effect": "Cel otrzymuje stan Krwawienie (1k10 obrażeń/rundę). Co rundę BGŁ celu obniżana o 5. Jeśli BGŁ spadnie do 0, cel mdleje (mechanicznie: Uśpienie po utracie przytomności)."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Pół twarzy/oko",
+            "effect": "Cel trwale traci wzrok w oku (testy PER/ZR z Utrudnieniem). Musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć stanu Oszołomienie. OG trwale obniżona o 20. Wszystkie testy oparte na Percepcji (PER) trwale obniżone o połowę."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Żuchwa/Język",
+            "effect": "Cel trwale traci zdolność mowy (nie może używać zaklęć ani cudów wymagających mowy). Otrzymuje 1k10 poziomów Krwawienia (każdy poziom zadaje 1k10 obrażeń/rundę). OG trwale obniżona o 30. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć stanu Oszołomienie."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Rozrąbanie głowy",
+            "effect": "Cel Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Odcięcie głowy",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "body": [
+          {
+            "range": "01 – 09",
+            "title": "Powierzchowne cięcie / uszkodzenie pancerza",
+            "effect": "Jeśli cel nie nosi pancerza, traci 3 Segmenty Szybkości w tej rundzie. Jeśli nosi pancerz inny niż Ciężki, pancerz na trafionej lokacji zostaje uszkodzony o 1."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Rozcięcie boku",
+            "effect": "W najbliższej rundzie wszystkie testy (w tym atak) wykonywane są z Utrudnieniem."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Bok tułowia (zebra)",
+            "effect": "Cel musi zdać test Odporności Fizycznej z Utrudnieniem. Nieudany test powoduje utratę 5 Segmentów Szybkości (Oszołomienie). Musi także zdać test Odporności Psychicznej z Utrudnieniem, aby nie upuścić trzymanych przedmiotów."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Mięśnie nad obojczykiem",
+            "effect": "Cel musi wykonać test Odporności Psychicznej z Utrudnieniem, aby nie upuścić trzymanych przedmiotów."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Rozcięcie piersi",
+            "effect": "Pancerz na trafionej lokacji traci 2 punkty do czasu naprawy. Cel musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Oszołomienia (następna akcja jest pustą stratą 5 segmentów)."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Brzuch (uszkodzenie woreczka)",
+            "effect": "Cel musi wykonać test Odporności Fizycznej z Utrudnieniem (co rundę, przez ⌈1k10/2⌉ rund), aby nie otrzymać Utrudnienia na wszystkie akcje (z powodu wymiotów). Ryzyko infekcji; dalsze skutki ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Bok/Kość biodrowa (zaklinowana broń)",
+            "effect": "Broń zaklinowana. Cel otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Usunięcie wymaga testu SF z Ułatwieniem. Nieudane usunięcie zadaje celowi dodatkowe 2k10 obrażeń."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Krocze",
+            "effect": "Cel otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów). W przyszłości cel musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć efektu trwałej bezpłodności."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Brzuch/Pęcherz",
+            "effect": "Cel otrzymuje Utrudnienie do wszystkich testów i ataków. Musi zdać test Odporności Psychicznej z Utrudnieniem. Porażka oznacza trwałą traumę: −10 do Odporności Psychicznej; sposób leczenia ustala MG. Ryzyko infekcji; dalsze skutki ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Brzuch/Uszkodzenie jelit",
+            "effect": "Cel musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć stanu Oszołomienie. Jeśli uniknie, ma Utrudnienie do wszystkich testów i ataków. Ryzyko Śmierci (wymaga natychmiastowego leczenia magicznego/chirurgicznego)."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Brzuch/Uszkodzenie śledziony",
+            "effect": "Cel upuszcza przedmioty. Traci 3 Segmenty Szybkości. Co rundę BGŁ, Odporność Fizyczna, Odporność Psychiczna, Odporność Magiczna celu obniżane o 5. Jeśli którakolwiek cecha spadnie do 0, cel mdleje. Ryzyko Śmierci (wymaga odpowiedniego leczenia medycznego lub magicznego)."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Rozcięcie brzucha/Wylanie jelit",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w 1k10 rund (wymaga odpowiedniego leczenia medycznego lub magicznego). Trwała kara do OG i Odporności Psychicznej jest WIP: źródłowy arkusz podaje sprzeczny zakres (−5 do −50) i rzut. MG ustala wartość po zatwierdzeniu zasady."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Bok tułowia/Nerka/Nerwy",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Otrzymuje 1k10 poziomów Krwawienia (każdy poziom zadaje 1k10 obrażeń/rundę) do czasu leczenia. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć trwałego paraliżu (Szybkość=0, Powalenie)."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Przecięcie klatki/Narządy",
+            "effect": "Cel Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Rozrąbanie w pół",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "leg": [
+          {
+            "range": "01 – 09",
+            "title": "Piszczel",
+            "effect": "Cel musi wykonać test Odporności Psychicznej z Utrudnieniem, aby nie upuścić trzymanych przedmiotów."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Podudzie",
+            "effect": "Cel musi wykonać test Odporności Psychicznej z Utrudnieniem, aby nie upuścić trzymanych przedmiotów."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Skóra uda",
+            "effect": "Cel musi wykonać test Odporności Fizycznej z Utrudnieniem. Nieudany test powoduje stan Powalenie i utratę 3 Segmentów Szybkości w najbliższej rundzie."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Mięśnie uda",
+            "effect": "Cel musi wykonać test Odporności Fizycznej z Utrudnieniem. Nieudany test powoduje stan Powalenie i utratę 3 Segmentów Szybkości w najbliższej rundzie."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Mięśnie uda (krocze)",
+            "effect": "Cel musi wykonać test Odporności Fizycznej z Utrudnieniem. Nieudany test powoduje upuszczenie trzymanych przedmiotów i Oszołomienie na początku każdej rundy przez ⌈1k10/2⌉ rund (każde: następna akcja jest pustą stratą 5 segmentów).",
+            "status": "WIP",
+            "note": "WIP: źródło miało wielorundowe ogłuszenie; zapis dostosowano do obecnej mechaniki Oszołomienia."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Mięśnie uda (zaklinowana broń)",
+            "effect": "Broń zaklinowana. Cel otrzymuje stan Powalenie i otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 Segmentów). Usunięcie wymaga testu SF z Ułatwieniem. Nieudane usunięcie zadaje celowi dodatkowe 2k10 obrażeń."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Ścięgno kolana",
+            "effect": "Szybkość (SZ) czasowo obniżona o 1. Musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć stanu Powalenie."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Rzepka",
+            "effect": "Cel musi wykonać test Odporności Psychicznej z Utrudnieniem. Nieudany test powoduje upuszczenie trzymanych przedmiotów i Oszołomienie na początku każdej rundy przez 1k10 rund (każde: następna akcja jest pustą stratą 5 segmentów).",
+            "status": "WIP",
+            "note": "WIP: źródło miało wielorundowe ogłuszenie; zapis dostosowano do obecnej mechaniki Oszołomienia."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Rzepka/Więzadła kolana",
+            "effect": "Cel otrzymuje stan Powalenie. Przez 1k10 rund może tylko parować (nie może używać akcji ataku). Szybkość obniżona o połowę do czasu odpowiedniego leczenia medycznego lub magicznego."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Ścięgno pięty",
+            "effect": "Szybkość obniżona o 2 do czasu leczenia. Musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć stanu Powalenie. Przez 1k10 rund BGŁ, Odporność Fizyczna, Odporność Psychiczna, Odporność Magiczna obniżone o 10."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Paluchy stopy",
+            "effect": "Przez 1k10 rund BGŁ, Odporność Fizyczna, Odporność Psychiczna, Odporność Magiczna obniżone o 10. Jeśli utraci duży paluch (wynik 10 na k10), Szybkość trwale obniża się o 1."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Odcięcie stopy",
+            "effect": "Otrzymuje 1 poziom Krwawienia (1k10 obrażeń/rundę) do czasu opatrzenia rany. Przez 1k10 rund BGŁ, Odporność Fizyczna, Odporność Psychiczna, Odporność Magiczna obniżone o 20. Jeśli przeżyje, Szybkość trwale obniżona o połowę."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Przecięcie w kolanie",
+            "effect": "Otrzymuje 3 poziomy Krwawienia (3k10 obrażeń/rundę). Ryzyko Śmierci w ciągu 1k10 rund (wymaga odpowiedniego leczenia medycznego lub magicznego). Przez 1k10 rund BGŁ, Odporność Fizyczna, Odporność Psychiczna, Odporność Magiczna obniżone o 30. Jeśli przeżyje, Szybkość trwale obniżona do 1."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Kość udowa/Tętnica",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Rozrąbanie miednicy",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ]
+      },
+      "status": "ACTIVE"
+    },
+    "piercing": {
+      "label": "Broń kłuta",
+      "source": "Autorska adaptacja Gahla 0.9.3 na podstawie tabeli strzał/bełt; bez mechaniki utkniętego pocisku.",
+      "locations": {
+        "arm": [
+          {
+            "range": "01 – 09",
+            "title": "Skóra dłoni",
+            "effect": "Cel musi wykonać test Odporności Psychicznej z Utrudnieniem, aby nie upuścić trzymanych przedmiotów. W najbliższej rundzie cel działa jako ostatni (traci wszystkie Segmenty Szybkości w bieżącej rundzie)."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Nadgarstek",
+            "effect": "W najbliższej rundzie cel wykonuje BGŁ obniżona o 10."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Łokieć",
+            "effect": "Cel upuszcza trzymane przedmioty. Ręka jest nieużywalna przez 1 rundę."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Biceps",
+            "effect": "W najbliższej rundzie cel wykonuje BGŁ obniżona o 20."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Mięsień naramienny",
+            "effect": "Cel upuszcza przedmioty trzymane w obu dłoniach, chyba że zda test Odporności Psychicznej z Utrudnieniem (druga ręka). Trafiona ręka jest nieużywalna przez 1 rundę."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Palce (ścięgna)",
+            "effect": "Cel upuszcza przedmioty. W najbliższej rundzie ataki i testy oparte na BGŁ mają Utrudnienie. Jeśli rany zagoją się naturalnie (bez odpowiedniego leczenia), Zręczność (ZR) obniża się trwale o −3 za każdy zraniony palec."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Przebija dłoń/przedmiot",
+            "effect": "Głęboka rana kłuta. Żywotność (ŻYW) celu obniżona o 1 (do minimum 1) do czasu opatrzenia rany. Ataki i testy oparte na BGŁ mają Utrudnienie. Ręka nieużywalna."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Przebija nadgarstek",
+            "effect": "Głęboka rana kłuta. ŻYW celu obniżona o 2 (do minimum 1) do czasu opatrzenia rany. Ataki i testy oparte na BGŁ mają Utrudnienie. Ręka nieużywalna."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Przebija przedramię",
+            "effect": "Głęboka rana kłuta. Cel traci wszystkie pozostałe Segmenty Szybkości w tej rundzie. Musi zdać test Odporności Fizycznej z Utrudnieniem w następnej rundzie, aby podjąć akcję. Ręka nieużywalna."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Przebija łokieć",
+            "effect": "Głęboka rana kłuta. Cel otrzymuje stan Oszołomienie. ŻYW celu obniżona o 3 (do minimum 1) do czasu opatrzenia rany. Ręka nieużywalna."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Przebija ramię/tętnica",
+            "effect": "Głęboka rana kłuta. Co rundę BGŁ, Odporność Fizyczna, Odporność Psychiczna, Odporność Magiczna obniżają się o −10. Kiedy którakolwiek spadnie do 0, cel traci przytomność (mechanicznie: Uśpienie)."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Uszkadza nerwy/obojczyk",
+            "effect": "Głęboka rana kłuta. Ręka sparaliżowana (upuszcza przedmioty). Jeśli nie otrzyma magicznego leczenia w ciągu 1k10 rund, paraliż staje się trwały."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Rozłupuje obojczyk/tętnica",
+            "effect": "Głęboka rana kłuta. Cel musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia. Otrzymuje Krwawienie (1k10 obrażeń/rundę). Ryzyko Śmierci; czas do śmierci ustala MG",
+            "status": "WIP",
+            "note": "WIP: arkusz źródłowy używał procentowej szansy śmierci, której Gahla nie ma; MG ustala czas Ryzyka Śmierci."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Przebicie barku / szyi",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund (zaokrąglij w górę)."
+          },
+          {
+            "range": "127+",
+            "title": "Przebicie ramienia i klatki",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "head": [
+          {
+            "range": "01 – 09",
+            "title": "Ucho",
+            "effect": "W najbliższej rundzie BGŁ celu obniżona o 10."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Policzek",
+            "effect": "W najbliższej rundzie cel wykonuje testy Parowania z modyfikatorem −10."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Szyja (skóra)",
+            "effect": "Do końca walki każdy kolejny rzut na Trwałą Ranę przeciw temu celowi otrzymuje +9 do wyniku LW (o jeden przedział tabeli)."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Ucho (rozerwane)",
+            "effect": "Cel musi zdać test Odporności Psychicznej z Utrudnieniem, aby w najbliższej rundzie wykonać jakąkolwiek akcję. Nieudany test powoduje utratę 5 Segmentów Szybkości (Oszołomienie). Utrata 1 Segmentu Szybkości na 1 rundę (Utrata akcji)."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Skóra głowy/Czoło",
+            "effect": "Cel traci wszystkie Segmenty Szybkości (działa jako ostatni) w bieżącej rundzie. BGŁ celu obniżona o 20 do czasu opatrzenia rany."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Policzek (kość)",
+            "effect": "Cel musi zdać test Odporności Fizycznej z Utrudnieniem (co rundę), aby uniknąć stanu Oszołomienie (nie może nic robić)."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Nos (rozerwany)",
+            "effect": "Cel traci 1 Segment Szybkości w każdej rundzie. Jeśli nie poświęci całej następnej rundy na wymiotowanie, wykonuje wszystkie testy z Utrudnieniem. Ogłada (OG) trwale obniżona o 10, zyskuje +5 do zastraszania."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Szyja (nie naczynia)",
+            "effect": "Głęboka rana kłuta. Do czasu opatrzenia rany cel wykonuje wszystkie testy z Utrudnieniem. Prowizoryczne opatrzenie: test ZR z Utrudnieniem; porażka zadaje 3k10 obrażeń i nakłada 2 poziomy Krwawienia. Musi zdać test Odporności Psychicznej z Utrudnieniem, aby uniknąć urazu psychicznego (−10 do Odporności Psychicznej do czasu odpowiedniego leczenia/terapii; decyzja MG)."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Odcina część ucha",
+            "effect": "Głęboka rana kłuta. Cel otrzymuje 1 poziom Krwawienia. OG trwale obniżona o 15, +10 do zastraszania. Percepcja (PER) oparta na słuchu obarczona Utrudnieniem."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Szczęka/zęby",
+            "effect": "Głęboka rana kłuta. Cel traci zdolność mowy. −1 Segment Szybkości za każdy złamany ząb (max 5 Segmentów). Ogłada (OG) trwale obniżona o 1 za każdy złamany ząb."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Trafia w oko/oczodół",
+            "effect": "Głęboka rana kłuta. Cel trwale traci wzrok w oku (testy PER/ZR z Utrudnieniem). BGŁ, Odporność Fizyczna, Odporność Psychiczna obniżone o 20. Co rundę: test na Ryzyko Śmierci; czas do śmierci ustala MG.",
+            "status": "WIP",
+            "note": "WIP: arkusz źródłowy używał procentowej szansy śmierci, której Gahla nie ma; MG ustala czas Ryzyka Śmierci."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Czoło/Czaszka",
+            "effect": "Głęboka rana kłuta. Cel musi zdać test Odporności Fizycznej z Utrudnieniem, aby zachować przytomność na 1k10 rund. Do czasu leczenia BGŁ, Odporność Fizyczna, Odporność Psychiczna, Odporność Magiczna obniżone o 30."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Przebicie oko/czaszkę",
+            "effect": "Głęboka rana kłuta. Cel traci przytomność (mechanicznie: Uśpienie). Otrzymuje Krwawienie (1k10 obrażeń/rundę). Ryzyko Śmierci; czas do śmierci ustala MG Cel trwale traci wzrok w oku.",
+            "status": "WIP",
+            "note": "WIP: arkusz źródłowy używał procentowej szansy śmierci, której Gahla nie ma; MG ustala czas Ryzyka Śmierci."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Przebija szczękę/kręgosłup",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund (zaokrąglij w górę)."
+          },
+          {
+            "range": "127+",
+            "title": "Trafia w nos/Mózg",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "body": [
+          {
+            "range": "01 – 09",
+            "title": "Obrażenia/Pancerz",
+            "effect": "Pancerz na lokacji obniżony o 1 (zbroja inna niż Ciężka). Brak pancerza: cel traci 5 Segmentów Szybkości."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Klatka (powierzchniowo)",
+            "effect": "W najbliższej rundzie cel może tylko parować."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Żebra (kilka)",
+            "effect": "Cel może tylko parować przez 1 rundę."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Mostek",
+            "effect": "Cel upada na kolana (Powalenie). Traci wszystkie pozostałe Segmenty Szybkości w najbliższej rundzie."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Bok klatki",
+            "effect": "BGŁ celu obniżona o 10 do czasu opatrzenia rany."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Brzuch (uszk. woreczek)",
+            "effect": "Głęboka rana kłuta. BGŁ obniżona o 10 do czasu opatrzenia rany. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Brzuch (głęboko)",
+            "effect": "Głęboka rana kłuta. BGŁ obniżona o 20 do czasu opatrzenia rany. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Brzuch (wydzieliny)",
+            "effect": "Głęboka rana kłuta. Cel musi zdać test Odporności Psychicznej z Utrudnieniem (co rundę), aby wykonać akcję. Do usunięcia rany Utrudnienie do wszystkich testów i ataków. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Brzuch (silny ból)",
+            "effect": "Głęboka rana kłuta. Musi zdać test Odporności Psychicznej z Utrudnieniem (co rundę), aby wykonać akcję. Utrudnienie do wszystkich testów i ataków. Jeśli przeżyje bez odpowiedniego leczenia medycznego lub magicznego, Odporność Fizyczna trwale obniżona o 5."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Bark/Obojczyk",
+            "effect": "Cel upada (Powalenie). Traci wszystkie Segmenty Szybkości na 1 rundę. Otrzymuje 2 poziomy Krwawienia (2k10 obrażeń/rundę). Ryzyko Śmierci; czas do śmierci ustala MG.",
+            "status": "WIP",
+            "note": "WIP: arkusz źródłowy używał procentowej szansy śmierci, której Gahla nie ma; MG ustala czas Ryzyka Śmierci."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Brzuch/Tętnica",
+            "effect": "Głęboka rana kłuta. Co rundę BGŁ, Odporność Fizyczna, Odporność Psychiczna, Odporność Magiczna obniżają się o −10. Kiedy którakolwiek spadnie do 0, cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu 1k10 rund."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Klatka/Uszkodzone płuco",
+            "effect": "Głęboka rana kłuta. Cel ma Utrudnienie do wszystkich testów i ataków. Otrzymuje 1 poziom Krwawienia (1k10 obrażeń/rundę). Ryzyko Śmierci; czas do śmierci ustala MG",
+            "status": "WIP",
+            "note": "WIP: arkusz źródłowy używał procentowej szansy śmierci, której Gahla nie ma; MG ustala czas Ryzyka Śmierci."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Żebro/Przepona",
+            "effect": "Cel ma Utrudnienie do wszystkich testów i ataków. Co rundę musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia. Jeśli zemdleje, Ryzyko Śmierci w ciągu 1k10 rund."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Przebija brzuch/Kręgosłup",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu 1k10 rund."
+          },
+          {
+            "range": "127+",
+            "title": "Przebija mostek/Serce",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "leg": [
+          {
+            "range": "01 – 09",
+            "title": "Stopa",
+            "effect": "W najbliższej rundzie cel wykonuje testy Parowania z modyfikatorem −10."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Kostka",
+            "effect": "Cel może tylko parować. Szybkość (SZ) obniżona o 1 do końca rundy."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Piszczel",
+            "effect": "Cel może tylko parować. Szybkość (SZ) obniżona o połowę do końca rundy."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Rzepka",
+            "effect": "Cel musi zdać test Odporności Psychicznej z Utrudnieniem, aby nie upuścić trzymanych przedmiotów. W najbliższej rundzie cel traci wszystkie pozostałe Segmenty Szybkości."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Biodro/Udo",
+            "effect": "Cel może tylko parować z modyfikatorem −10 przez 1 rundę."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Ścięgna/Stopa",
+            "effect": "Szybkość (SZ) obniżona o 1 do czasu leczenia. BGŁ obniżona o 10 do końca walki."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Przebicie stopy",
+            "effect": "Głęboka rana kłuta. Szybkość (SZ) = 0 do czasu opatrzenia rany. Cel ma Utrudnienie do wszystkich testów i ataków."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Podudzie/Kość",
+            "effect": "Głęboka rana kłuta. BGŁ obniżona o 20 do końca walki. Szybkość (SZ) obniżona o 2."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Przebija podudzie",
+            "effect": "Głęboka rana kłuta. Cel upada (Powalenie) i otrzymuje Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Do czasu zrośnięcia się kości Szybkość obniżona o połowę."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Rzepka/Kolano",
+            "effect": "Głęboka rana kłuta. Cel otrzymuje stan Oszołomienie. Szybkość (SZ) obniżona do 1 na 1 rundę."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Udo/Kość",
+            "effect": "Głęboka rana kłuta. Szybkość (SZ) obniżona do 1 do czasu leczenia. Utrudnienie do wszystkich testów i ataków. Otrzymuje 2 poziomy Krwawienia (2k10 obrażeń/rundę)."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Biodro/Kość",
+            "effect": "Głęboka rana kłuta. Szybkość (SZ) obniżona do 1. Cel musi zdać test Odporności Psychicznej z Utrudnieniem, aby podjąć akcję. Jeśli przeżyje, Szybkość (SZ) trwale obniżona o 2."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Biodro (rozłupuje)",
+            "effect": "Głęboka rana kłuta. Cel otrzymuje 3 poziomy Krwawienia (3k10 obrażeń/rundę). Ryzyko Śmierci; czas do śmierci ustala MG. Wszystkie testy z Utrudnieniem. Jeśli przeżyje, Szybkość (SZ) trwale obniżona o 3.",
+            "status": "WIP",
+            "note": "WIP: arkusz źródłowy używał procentowej szansy śmierci, której Gahla nie ma; MG ustala czas Ryzyka Śmierci."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Udo/Tętnica",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu 1k10 rund."
+          },
+          {
+            "range": "127+",
+            "title": "Udo/Kość/Tętnica",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ]
+      },
+      "status": "WIP",
+      "note": "WIP: tabela dodana jako adaptacja do Gahli na prośbę autora systemu; wymaga playtestu i zatwierdzenia."
+    },
+    "blunt": {
+      "label": "Broń obuchowa",
+      "source": "LW BRON OBUCHOWA.html",
+      "locations": {
+        "arm": [
+          {
+            "range": "01 – 09",
+            "title": "Uderzenie w palce",
+            "effect": "Cel traci 3 Segmenty Szybkości (SZ) w najbliższej rundzie z powodu bólu i dezorientacji."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Trafienie w rękę",
+            "effect": "Cel musi wykonać test Odporności Fizycznej z Utrudnieniem, aby nie upuścić trzymanych przedmiotów."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Uderzenie w łokieć",
+            "effect": "Cel musi wykonać test Odporności Fizycznej z Utrudnieniem, aby nie upuścić trzymanych przedmiotów. W najbliższej rundzie ręka jest nieużywalna."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Trafienie w biceps",
+            "effect": "Cel musi wykonać test Odporności Fizycznej z Utrudnieniem, aby nie upuścić trzymanych przedmiotów. Jego Siła Fizyczna (SF) jest obniżona o 10 (do końca walki)."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Uderzenie w bark",
+            "effect": "Cel upuszcza trzymane przedmioty. Jego Biegłość (BGŁ) jest obniżona o 20 (do końca walki)."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Złamanie ⌈1k10/2⌉ palców",
+            "effect": "Cel traci możliwość efektywnego chwytu. Zręczność (ZR) i Biegłość (BGŁ) obniżone o 3 za każdy złamany palec do czasu leczenia."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Miażdży rękę",
+            "effect": "Cel upuszcza przedmioty. Ręka nieużywalna. BGŁ obniżona o 20, a Zręczność (ZR) obniżona o 10 (do czasu leczenia)."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Miażdży nadgarstek",
+            "effect": "Cel upuszcza przedmioty. Musi wykonać test Odporności Psychicznej z Utrudnieniem. Nieudany test powoduje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów)."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Łamie kości przedramienia",
+            "effect": "Cel upuszcza przedmioty. Musi wykonać test Odporności Fizycznej z Utrudnieniem. Nieudany test powoduje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Do czasu odpowiedniego leczenia medycznego lub magicznego SF obniżona o połowę."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Łamie rękę w łokciu. Wyje z bólu",
+            "effect": "Cel upuszcza przedmioty. Otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Siła Fizyczna (SF) trwale obniżona o połowę, jeśli nie otrzyma natychmiastowej odpowiedniej pomocy medycznej lub magicznej."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Zwichnięcie barku",
+            "effect": "Cel traci 5 Segmentów Szybkości. Jeśli bark nie zostanie nastawiony (magiczna/medyczna pomoc), BGŁ trwale obniżona o 20."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Miażdży nerwy ręki",
+            "effect": "Ręka trwale sparaliżowana (nieużywalna). SF trwale obniżona o połowę."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Miażdży bark",
+            "effect": "Cel trwale traci możliwość używania ręki. Otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia. SF trwale obniżona o połowę."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Miażdży bark i kości do klatki",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Miażdży bark, obojczyk, łamie kręgosłup. Natychmiastowa Śmierć",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "head": [
+          {
+            "range": "01 – 09",
+            "title": "Krótkotrwałe oszołomienie",
+            "effect": "Cel otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 Segmentów). W najbliższej rundzie BGŁ obniżona o 10."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Uderzenie w policzek",
+            "effect": "Cel traci wszystkie Segmenty Szybkości w następnej rundzie (Oszołomienie)."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Trafienie w nasadę nosa",
+            "effect": "W najbliższej rundzie BGŁ celu obniżona o 10."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Uderzenie w kark",
+            "effect": "W najbliższej rundzie BGŁ celu obniżona o 20."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Pęknięcie błony bębenkowej",
+            "effect": "Cel musi wykonać test Odporności Psychicznej z Utrudnieniem, aby uniknąć stanu Oszołomienie. Otrzymuje −20 do testów Percepcji (PER) opartych na słuchu (do czasu leczenia)."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Przewraca",
+            "effect": "Cel otrzymuje stan Powalenie. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Oszołomienia. Jeśli przeżyje, musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć trwałej kary do ER."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Łamie nos",
+            "effect": "Cel otrzymuje Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Jeśli nie zda testu Odporności Fizycznej z Utrudnieniem, do końca rundy ma Utrudnienie do wszystkich testów i ataków. Ogłada (OG) obniżona o 1k10; trwałość kary zależy od leczenia i decyzji MG."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Łamie 1k10 zębów",
+            "effect": "Cel traci 1 następny Segment za każdego złamanego zęba (max 5 Segmentów). Ogłada (OG) trwale obniżona o 1 za każdy złamany ząb (maks −10)."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Zwichnięcie żuchwy",
+            "effect": "Cel traci zdolność mowy (nie może rzucać zaklęć/cudów). BGŁ i wszystkie Odporności obniżone o 20 do czasu nastawienia."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Uraz tchawicy",
+            "effect": "Cel musi wykonać test Odporności Fizycznej z Utrudnieniem co rundę, aby uniknąć kar −10 do wszystkich cech bojowych. Jeśli cecha spadnie do 0, cel mdleje."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Łamie kości oczodołu",
+            "effect": "Cel traci wzrok w uszkodzonym oku. Otrzymuje Krwawienie (1k10 obrażeń/rundę). Ryzyko Śmierci w ciągu 1k10 godzin."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Uraz szyi/rdzenia",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć trwałego paraliżu od szyi w dół (Szybkość=0). ER, Odporność Psychiczna, OG trwale obniżone o 10."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Krwotok śródczaszkowy",
+            "effect": "Cel otrzymuje Krwawienie (1k10 obrażeń/rundę). Czas na Ryzyko Śmierci wynosi ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Łamie czaszkę",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu 1k10 rund."
+          },
+          {
+            "range": "127+",
+            "title": "Miażdży głowę",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "body": [
+          {
+            "range": "01 – 09",
+            "title": "Trafia w brzuch",
+            "effect": "Cel otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 Segmentów). Może wykonać tylko jedną akcję w najbliższej rundzie."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Uderzenie w klatkę",
+            "effect": "Cel musi wykonać test Odporności Fizycznej z Utrudnieniem. Nieudany test nakłada karę −10 na wszystkie testy w najbliższej rundzie."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Poniżej mostka",
+            "effect": "Cel traci wszystkie pozostałe Segmenty Szybkości. W najbliższej rundzie może tylko parować (z Utrudnieniem do rzutu)."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Uderzenie w brzuch",
+            "effect": "Cel musi zdać test Odporności Fizycznej z Utrudnieniem. Porażka: otrzymuje Oszołomienie (następna akcja jest pustą stratą 5 segmentów) z powodu bólu i wymiotów."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Mocne uderzenie w żebra",
+            "effect": "Cel otrzymuje Utrudnienie do wszystkich testów (BGŁ, PER, ER, itp.)."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Uszkodzenie śledziony",
+            "effect": "Cel otrzymuje Utrudnienie na testy SF i Odporność Fizyczna. Co rundę jego SF jest obniżana o 5 (aż do zera). Jeśli SF = 0, cel traci przytomność (mechanicznie: Uśpienie)."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Złamanie żebra",
+            "effect": "Cel otrzymuje Utrudnienie do wszystkich testów (BGŁ, PER, ER, itp.)."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Trafienie w krocze",
+            "effect": "Cel pada (Powalenie) i jest Oszołomiony (następna akcja jest pustą stratą 5 segmentów). Musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć trwałej bezpłodności."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Zaparcie tchu",
+            "effect": "Cel musi wykonać test Odporności Psychicznej z Utrudnieniem, aby uniknąć stanu Przerażenie. Nawet w przypadku sukcesu, ma Utrudnienie do wszystkich testów."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Mdleje po 1k10 rundach. Zasada Nagłej Śmierci",
+            "effect": "Cel otrzymuje 1 poziom Krwawienia (1k10 obrażeń/rundę). Musi zdać test Odporności Fizycznej z Utrudnieniem co rundę, aby uniknąć Uśpienia. Przy następnym trafieniu krytycznym, natychmiast stosuj Śmierć/Uśpienie."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Łamie obojczyk",
+            "effect": "Ryzyko Śmierci z czasem 1k10 rund, jeśli ciężki uraz nie zostanie szybko ustabilizowany. W przeciwnym razie BGŁ, SF i wszystkie Odporności obniżone o 20 do czasu leczenia.",
+            "status": "WIP",
+            "note": "WIP: arkusz źródłowy używał procentowej szansy śmierci, której Gahla nie ma; MG ustala czas Ryzyka Śmierci."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Łamie kręgosłup",
+            "effect": "Cel otrzymuje trwały paraliż nóg (Szybkość=0). Otrzymuje 1k10 poziomów Krwawienia (każdy poziom zadaje 1k10 obrażeń/rundę). Musi zdać test Odporności Fizycznej z Utrudnieniem co rundę, aby uniknąć Uśpienia."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Łamie mostek i uszkadza serce",
+            "effect": "Ciężki uraz mostka i serca. Cel otrzymuje Ryzyko Śmierci. Do czasu stabilizacji ma Utrudnienie do wszystkich testów i ataków. Czas do śmierci ustala MG zgodnie z zasadą Ryzyka Śmierci."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Uderzenie w klatkę piersiową, łamie mostek, płuca",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Miażdży klatkę piersiową",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "leg": [
+          {
+            "range": "01 – 09",
+            "title": "Uderzenie w kolano",
+            "effect": "W najbliższej rundzie BGŁ celu obniżona o 10."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Uderzenie w biodro",
+            "effect": "Cel musi wykonać test Zręczności (ZR) z Utrudnieniem, aby uniknąć Powalenia. Nawet w przypadku sukcesu, traci 5 Segmentów Szybkości."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Uderzenie w kolano",
+            "effect": "W najbliższej rundzie BGŁ celu obniżona o 20."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Uderzenie w piszczel",
+            "effect": "Cel musi wykonać test Odporności Psychicznej z Utrudnieniem, aby nie upuścić trzymanych przedmiotów. Jeśli nie zda, otrzymuje stan Powalenie."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Trafienie w udo. Klęka z bólu",
+            "effect": "Cel otrzymuje stan Powalenie. Traci 5 Segmentów Szybkości (Oszołomienie) dopóki nie zda testu ZR z Utrudnieniem (aby wstać)."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Uderzenie w biodro, obala z nóg",
+            "effect": "Cel otrzymuje stan Powalenie i otrzymuje Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Wszystkie testy z Utrudnieniem do czasu wstania."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Miażdży duży paluch",
+            "effect": "Cel musi wykonać test Odporności Psychicznej z Utrudnieniem, aby uniknąć stanu Przerażenie. Nawet w przypadku sukcesu, ma Utrudnienie do wszystkich testów. Szybkość (SZ) trwale obniżona o 1."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Złamanie kości śródstopia",
+            "effect": "Cel otrzymuje stan Powalenie. BGŁ obniżona o 20 do końca walki. Szybkość (SZ) obniżona o 2."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Złamanie kostki. Upada",
+            "effect": "Cel otrzymuje stan Powalenie. Musi wykonać test Odporności Psychicznej z Utrudnieniem co rundę, aby uniknąć Oszołomienia. Szybkość (SZ) obniżona o 2. BGŁ i wszystkie Odporności obniżone o 10."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Łamie kości podudzia",
+            "effect": "Cel otrzymuje stan Powalenie i otrzymuje Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Szybkość (SZ) trwale obniżona o 1."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Rozkawałkowuje rzepkę",
+            "effect": "Cel otrzymuje Powalenie i Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Do czasu odpowiedniego leczenia nie może normalnie obciążać trafionej nogi; Szybkość (SZ) obniżona o 1. Dalsze skutki uszkodzenia stawu ustala MG.",
+            "status": "WIP",
+            "note": "WIP: źródło opisywało wielorundowe ogłuszenie i test wstawania niezgodny z obecną zasadą Powalenia; efekt uproszczono do zasad Gahli."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Przetrąca kolano",
+            "effect": "Cel otrzymuje Krwawienie (1k10 obrażeń/rundę). Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia. Jeśli nie otrzyma magicznej/chirurgicznej pomocy, Szybkość (SZ) trwale obniżona o połowę."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Miażdży mięśnie uda, łamie kość, rozrywa tętnicę. Umiera w 1k10 rund. Straci nogę. Szybkość trwale -1",
+            "effect": "Cel otrzymuje Krwawienie (3k10 obrażeń/rundę). Ryzyko Śmierci w ciągu 1k10 rund. Jeśli przeżyje, Szybkość (SZ) trwale obniżona do 1."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Uderzenie w biodro. Rozkawałkowuje kość udową",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Miażdży miednicę, rozrywa aortę",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ]
+      },
+      "status": "ACTIVE"
+    },
+    "projectile": {
+      "label": "Strzały i bełty",
+      "source": "LW Strzały i bełty.html",
+      "locations": {
+        "arm": [
+          {
+            "range": "01 – 09",
+            "title": "Skóra dłoni",
+            "effect": "Cel musi wykonać test Odporności Psychicznej z Utrudnieniem, aby nie upuścić trzymanych przedmiotów. W najbliższej rundzie cel działa jako ostatni (traci wszystkie Segmenty Szybkości w bieżącej rundzie)."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Nadgarstek",
+            "effect": "W najbliższej rundzie cel wykonuje BGŁ obniżona o 10."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Łokieć",
+            "effect": "Cel upuszcza trzymane przedmioty. Ręka jest nieużywalna przez 1 rundę."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Biceps",
+            "effect": "W najbliższej rundzie cel wykonuje BGŁ obniżona o 20."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Mięsień naramienny",
+            "effect": "Cel upuszcza przedmioty trzymane w obu dłoniach, chyba że zda test Odporności Psychicznej z Utrudnieniem (druga ręka). Trafiona ręka jest nieużywalna przez 1 rundę."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Palce (ścięgna)",
+            "effect": "Cel upuszcza przedmioty. W najbliższej rundzie ataki i testy oparte na BGŁ mają Utrudnienie. Jeśli rany zagoją się naturalnie (bez odpowiedniego leczenia), Zręczność (ZR) obniża się trwale o −3 za każdy zraniony palec."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Przebija dłoń/przedmiot",
+            "effect": "Pocisk grzęźnie (wymaga usunięcia). Żywotność (ŻYW) celu obniżona o 1 (do minimum 1) do czasu usunięcia pocisku. Ataki i testy oparte na BGŁ mają Utrudnienie. Ręka nieużywalna."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Przebija nadgarstek",
+            "effect": "Pocisk grzęźnie. ŻYW celu obniżona o 2 (do minimum 1) do czasu usunięcia pocisku. Ataki i testy oparte na BGŁ mają Utrudnienie. Ręka nieużywalna."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Przebija przedramię",
+            "effect": "Pocisk grzęźnie. Cel traci wszystkie pozostałe Segmenty Szybkości w tej rundzie. Musi zdać test Odporności Fizycznej z Utrudnieniem w następnej rundzie, aby podjąć akcję. Ręka nieużywalna."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Przebija łokieć",
+            "effect": "Pocisk grzęźnie. Cel otrzymuje stan Oszołomienie. ŻYW celu obniżona o 3 (do minimum 1) do czasu usunięcia pocisku. Ręka nieużywalna."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Przebija ramię/tętnica",
+            "effect": "Pocisk grzęźnie. Co rundę BGŁ, Odporność Fizyczna, Odporność Psychiczna, Odporność Magiczna obniżają się o −10. Kiedy którakolwiek spadnie do 0, cel traci przytomność (mechanicznie: Uśpienie)."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Uszkadza nerwy/obojczyk",
+            "effect": "Pocisk grzęźnie. Ręka sparaliżowana (upuszcza przedmioty). Jeśli nie otrzyma magicznego leczenia w ciągu 1k10 rund, paraliż staje się trwały."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Rozłupuje obojczyk/tętnica",
+            "effect": "Pocisk grzęźnie. Cel musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia. Otrzymuje Krwawienie (1k10 obrażeń/rundę). Ryzyko Śmierci; czas do śmierci ustala MG",
+            "status": "WIP",
+            "note": "WIP: arkusz źródłowy używał procentowej szansy śmierci, której Gahla nie ma; MG ustala czas Ryzyka Śmierci."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Przeszywa bark/szyja",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Przeszywa ramię i klatkę",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "head": [
+          {
+            "range": "01 – 09",
+            "title": "Ucho",
+            "effect": "W najbliższej rundzie BGŁ celu obniżona o 10."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Policzek",
+            "effect": "W najbliższej rundzie cel wykonuje testy Parowania z modyfikatorem −10."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Szyja (skóra)",
+            "effect": "Do końca walki każdy kolejny rzut na Trwałą Ranę przeciw temu celowi otrzymuje +9 do wyniku LW (o jeden przedział tabeli)."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Ucho (rozerwane)",
+            "effect": "Cel musi zdać test Odporności Psychicznej z Utrudnieniem, aby w najbliższej rundzie wykonać jakąkolwiek akcję. Nieudany test powoduje utratę 5 Segmentów Szybkości (Oszołomienie). Utrata 1 Segmentu Szybkości na 1 rundę (Utrata akcji)."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Skóra głowy/Czoło",
+            "effect": "Cel traci wszystkie Segmenty Szybkości (działa jako ostatni) w bieżącej rundzie. BGŁ celu obniżona o 20 do czasu opatrzenia rany."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Policzek (kość)",
+            "effect": "Cel musi zdać test Odporności Fizycznej z Utrudnieniem (co rundę), aby uniknąć stanu Oszołomienie (nie może nic robić)."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Nos (rozerwany)",
+            "effect": "Cel traci 1 Segment Szybkości w każdej rundzie. Jeśli nie poświęci całej następnej rundy na wymiotowanie, wykonuje wszystkie testy z Utrudnieniem. Ogłada (OG) trwale obniżona o 10, zyskuje +5 do zastraszania."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Szyja (nie naczynia)",
+            "effect": "Pocisk grzęźnie. Do czasu usunięcia pocisku cel wykonuje wszystkie testy z Utrudnieniem. Usunięcie bez chirurgii: test ZR z Utrudnieniem; porażka zadaje 3k10 obrażeń i nakłada 2 poziomy Krwawienia. Musi zdać test Odporności Psychicznej z Utrudnieniem, aby uniknąć urazu psychicznego (−10 do Odporności Psychicznej do czasu odpowiedniego leczenia/terapii; decyzja MG)."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Odcina część ucha",
+            "effect": "Pocisk grzęźnie. Cel otrzymuje 1 poziom Krwawienia. OG trwale obniżona o 15, +10 do zastraszania. Percepcja (PER) oparta na słuchu obarczona Utrudnieniem."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Szczęka/zęby",
+            "effect": "Pocisk grzęźnie. Cel traci zdolność mowy. −1 Segment Szybkości za każdy złamany ząb (max 5 Segmentów). Ogłada (OG) trwale obniżona o 1 za każdy złamany ząb."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Trafia w oko/oczodół",
+            "effect": "Pocisk grzęźnie. Cel trwale traci wzrok w oku (testy PER/ZR z Utrudnieniem). BGŁ, Odporność Fizyczna, Odporność Psychiczna obniżone o 20. Co rundę: test na Ryzyko Śmierci; czas do śmierci ustala MG.",
+            "status": "WIP",
+            "note": "WIP: arkusz źródłowy używał procentowej szansy śmierci, której Gahla nie ma; MG ustala czas Ryzyka Śmierci."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Czoło/Czaszka",
+            "effect": "Pocisk grzęźnie. Cel musi zdać test Odporności Fizycznej z Utrudnieniem, aby zachować przytomność na 1k10 rund. Do czasu leczenia BGŁ, Odporność Fizyczna, Odporność Psychiczna, Odporność Magiczna obniżone o 30."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Przeszywa oko/czaszkę",
+            "effect": "Pocisk grzęźnie. Cel traci przytomność (mechanicznie: Uśpienie). Otrzymuje Krwawienie (1k10 obrażeń/rundę). Ryzyko Śmierci; czas do śmierci ustala MG Cel trwale traci wzrok w oku.",
+            "status": "WIP",
+            "note": "WIP: arkusz źródłowy używał procentowej szansy śmierci, której Gahla nie ma; MG ustala czas Ryzyka Śmierci."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Przebija szczękę/kręgosłup",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Trafia w nos/Mózg",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "body": [
+          {
+            "range": "01 – 09",
+            "title": "Obrażenia/Pancerz",
+            "effect": "Pancerz na lokacji obniżony o 1 (zbroja inna niż Ciężka). Brak pancerza: cel traci 5 Segmentów Szybkości."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Klatka (powierzchniowo)",
+            "effect": "W najbliższej rundzie cel może tylko parować."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Żebra (kilka)",
+            "effect": "Cel może tylko parować przez 1 rundę."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Mostek",
+            "effect": "Cel upada na kolana (Powalenie). Traci wszystkie pozostałe Segmenty Szybkości w najbliższej rundzie."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Bok klatki",
+            "effect": "BGŁ celu obniżona o 10 do czasu opatrzenia rany."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Brzuch (uszk. woreczek)",
+            "effect": "Pocisk grzęźnie. BGŁ obniżona o 10 do czasu usunięcia pocisku. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Brzuch (głęboko)",
+            "effect": "Pocisk grzęźnie. BGŁ obniżona o 20 do czasu usunięcia. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Brzuch (wydzieliny)",
+            "effect": "Pocisk grzęźnie. Cel musi zdać test Odporności Psychicznej z Utrudnieniem (co rundę), aby wykonać akcję. Do usunięcia pocisku Utrudnienie do wszystkich testów i ataków. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Brzuch (silny ból)",
+            "effect": "Pocisk grzęźnie. Musi zdać test Odporności Psychicznej z Utrudnieniem (co rundę), aby wykonać akcję. Utrudnienie do wszystkich testów i ataków. Jeśli przeżyje bez odpowiedniego leczenia medycznego lub magicznego, Odporność Fizyczna trwale obniżona o 5."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Bark/Obojczyk",
+            "effect": "Cel upada (Powalenie). Traci wszystkie Segmenty Szybkości na 1 rundę. Otrzymuje 2 poziomy Krwawienia (2k10 obrażeń/rundę). Ryzyko Śmierci; czas do śmierci ustala MG.",
+            "status": "WIP",
+            "note": "WIP: arkusz źródłowy używał procentowej szansy śmierci, której Gahla nie ma; MG ustala czas Ryzyka Śmierci."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Brzuch/Tętnica",
+            "effect": "Pocisk grzęźnie. Co rundę BGŁ, Odporność Fizyczna, Odporność Psychiczna, Odporność Magiczna obniżają się o −10. Kiedy którakolwiek spadnie do 0, cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu 1k10 rund."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Klatka/Uszkodzone płuco",
+            "effect": "Pocisk grzęźnie. Cel ma Utrudnienie do wszystkich testów i ataków. Otrzymuje 1 poziom Krwawienia (1k10 obrażeń/rundę). Ryzyko Śmierci; czas do śmierci ustala MG",
+            "status": "WIP",
+            "note": "WIP: arkusz źródłowy używał procentowej szansy śmierci, której Gahla nie ma; MG ustala czas Ryzyka Śmierci."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Żebro/Przepona",
+            "effect": "Cel ma Utrudnienie do wszystkich testów i ataków. Co rundę musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia. Jeśli zemdleje, Ryzyko Śmierci w ciągu 1k10 rund."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Przebija brzuch/Kręgosłup",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu 1k10 rund."
+          },
+          {
+            "range": "127+",
+            "title": "Przebija mostek/Serce",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "leg": [
+          {
+            "range": "01 – 09",
+            "title": "Stopa",
+            "effect": "W najbliższej rundzie cel wykonuje testy Parowania z modyfikatorem −10."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Kostka",
+            "effect": "Cel może tylko parować. Szybkość (SZ) obniżona o 1 do końca rundy."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Piszczel",
+            "effect": "Cel może tylko parować. Szybkość (SZ) obniżona o połowę do końca rundy."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Rzepka",
+            "effect": "Cel musi zdać test Odporności Psychicznej z Utrudnieniem, aby nie upuścić trzymanych przedmiotów. W najbliższej rundzie cel traci wszystkie pozostałe Segmenty Szybkości."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Biodro/Udo",
+            "effect": "Cel może tylko parować z modyfikatorem −10 przez 1 rundę."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Ścięgna/Stopa",
+            "effect": "Szybkość (SZ) obniżona o 1 do czasu leczenia. BGŁ obniżona o 10 do końca walki."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Przeszywa stopę",
+            "effect": "Pocisk grzęźnie. Szybkość (SZ) = 0 do czasu usunięcia pocisku. Cel ma Utrudnienie do wszystkich testów i ataków."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Podudzie/Kość",
+            "effect": "Pocisk grzęźnie. BGŁ obniżona o 20 do końca walki. Szybkość (SZ) obniżona o 2."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Przebija podudzie",
+            "effect": "Pocisk grzęźnie. Cel upada (Powalenie) i otrzymuje Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Do czasu zrośnięcia się kości Szybkość obniżona o połowę."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Rzepka/Kolano",
+            "effect": "Pocisk grzęźnie. Cel otrzymuje stan Oszołomienie. Szybkość (SZ) obniżona do 1 na 1 rundę."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Udo/Kość",
+            "effect": "Pocisk grzęźnie. Szybkość (SZ) obniżona do 1 do czasu leczenia. Utrudnienie do wszystkich testów i ataków. Otrzymuje 2 poziomy Krwawienia (2k10 obrażeń/rundę)."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Biodro/Kość",
+            "effect": "Pocisk grzęźnie. Szybkość (SZ) obniżona do 1. Cel musi zdać test Odporności Psychicznej z Utrudnieniem, aby podjąć akcję. Jeśli przeżyje, Szybkość (SZ) trwale obniżona o 2."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Biodro (rozłupuje)",
+            "effect": "Pocisk grzęźnie. Cel otrzymuje 3 poziomy Krwawienia (3k10 obrażeń/rundę). Ryzyko Śmierci; czas do śmierci ustala MG. Wszystkie testy z Utrudnieniem. Jeśli przeżyje, Szybkość (SZ) trwale obniżona o 3.",
+            "status": "WIP",
+            "note": "WIP: arkusz źródłowy używał procentowej szansy śmierci, której Gahla nie ma; MG ustala czas Ryzyka Śmierci."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Udo/Tętnica",
+            "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu 1k10 rund."
+          },
+          {
+            "range": "127+",
+            "title": "Udo/Kość/Tętnica",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ]
+      },
+      "status": "ACTIVE"
+    },
+    "firearm": {
+      "label": "Broń palna",
+      "source": "LW Broń Palna.html",
+      "locations": {
+        "head": [
+          {
+            "range": "01 – 09",
+            "title": "Pocisk ociera się o skórę głowy",
+            "effect": "Cel traci 5 Segmentów Szybkości (SZ) w najbliższej rundzie (mechanicznie: Oszołomienie)."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Kula rozcina skórę na podbródku",
+            "effect": "Otrzymuje stan Krwawienie (1k10 obrażeń/rundę)."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Pocisk rozcina skórę nad brwią, krew utrudnia widzenie",
+            "effect": "Cel otrzymuje karę −10 do Biegłości (BGŁ) w najbliższej rundzie. Krew utrudnia widzenie (potencjalne Utrudnienie do testów PER/ZR)."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Kula ociera się o skórę szyi",
+            "effect": "Cel traci 5 Segmentów Szybkości (SZ) w najbliższej rundzie. Jeśli nie poda sobie pierwszej pomocy, traci 1 Segment Szybkości co rundę (max 2 rundy)."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Pocisk trafia w ucho",
+            "effect": "Cel nie może używać akcji Parowania w najbliższej rundzie."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Kula uderza w głowę",
+            "effect": "Cel otrzymuje Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Jeśli nie ma pancerza na głowie, przez ⌈1k10/2⌉ rund na początku każdej rundy ponownie otrzymuje Oszołomienie.",
+            "status": "WIP",
+            "note": "WIP: źródło miało wielorundowe ogłuszenie; zapis dostosowano do obecnej mechaniki Oszołomienia."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Pocisk przebija policzek, łamie 1k10 zębów",
+            "effect": "Cel traci 1 Segment Szybkości za każdy złamany ząb (max 5 Segmentów). Ogłada (OG) trwale obniżona o 1 za każdy złamany ząb."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Kula ociera się o nos",
+            "effect": "Cel ma Utrudnienie do wszystkich testów i ataków. Parowanie wykonuje z dodatkowym −20 do testu BGŁ do czasu opatrzenia rany."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Pocisk trafia w tchawicę",
+            "effect": "Przez 1k10 rund na początku każdej rundy cel otrzymuje Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Trwale traci zdolność mowy (do czasu odpowiedniego leczenia medycznego lub magicznego).",
+            "status": "WIP",
+            "note": "WIP: źródło miało wielorundowe ogłuszenie; zapis dostosowano do obecnej mechaniki Oszołomienia."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Kula rozkawałkowuje kość policzkową",
+            "effect": "Pocisk grzęźnie. Cel musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia. Do czasu leczenia traci 5 Segmentów Szybkości co rundę i ma Utrudnienie do wszystkich testów."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Pocisk rozrywa żyłę szyi",
+            "effect": "Pocisk grzęźnie. Cel ma Utrudnienie do wszystkich testów. Następna Trwała Rana otrzymana przez cel ma +2 do wyniku LW. Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund.",
+            "status": "WIP",
+            "note": "WIP: źródło mówiło o zwiększeniu wartości kolejnego krytyka; przełożono to roboczo na wynik LW."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Kula trafia w oko",
+            "effect": "Pocisk grzęźnie. Cel trwale traci wzrok w oku (testy PER/ZR z Utrudnieniem). Otrzymuje stan Oszołomienie. Ma Utrudnienie do wszystkich testów i ataków. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Kula miażdży żuchwę i rozrywa tętnicę",
+            "effect": "Cel trwale traci zdolność mowy (do śmierci). Ryzyko Śmierci w ciągu 1k10 rund."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Pocisk przewierca się przez nos do wnętrza czaszki",
+            "effect": "Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Kula trafia w czoło, rozrywa mózg",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "arm": [
+          {
+            "range": "01 – 09",
+            "title": "Pocisk ociera się o dłoń",
+            "effect": "Cel musi wykonać test Odporności Psychicznej z Utrudnieniem, aby nie upuścić trzymanych przedmiotów."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Kula uderza w kciuk",
+            "effect": "Cel traci 5 Segmentów Szybkości w tej rundzie. BGŁ obniżona o 10 w najbliższej rundzie."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Pocisk zadraśnięcie nadgarstka",
+            "effect": "BGŁ obniżona o 20 w najbliższej rundzie."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Kula przebija biceps",
+            "effect": "Cel upuszcza przedmioty. Ręka jest nieużywalna przez 1 rundę (skalowanie uproszczone)."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Pocisk przeszywa ramię",
+            "effect": "Cel nie może używać akcji Parowania w najbliższej rundzie."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Kula przebija śródręcze, uszkadza przedmioty, upuszcza",
+            "effect": "Cel upuszcza przedmioty. Ręka jest nieużywalna do czasu leczenia."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Pocisk łamie ⌈1k10/2⌉ palców",
+            "effect": "Cel trwale traci możliwość chwytu. Zręczność (ZR) trwale obniżona o 3 za każdy złamany palec (jeśli bez odpowiedniej pomocy medycznej lub magicznej)."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Kula grzęźnie w przedramieniu",
+            "effect": "Pocisk grzęźnie. Cel upuszcza przedmioty. Ręka nieużywalna. Traci 5 Segmentów Szybkości co rundę, jeśli próbuje używać ręki. Musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Pocisk trafia w łokieć",
+            "effect": "Pocisk grzęźnie. Ręka nieużywalna. BGŁ trwale obniżona o 1k10 (jeśli bez chirurgii). Cel traci 1 Segment Szybkości co rundę."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Pocisk grzęźnie w bicepsie",
+            "effect": "Pocisk grzęźnie. Cel upuszcza przedmioty. Otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów). BGŁ trwale obniżona o 1k10 (jeśli bez chirurgii)."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Pocisk trafia w bark",
+            "effect": "Pocisk grzęźnie. Ręka nieużywalna. Musi zdać test Odporności Psychicznej z Utrudnieniem co rundę, aby podjąć akcję. BGŁ trwale obniżona o 1k10 (jeśli bez chirurgii)."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Pocisk łamie obojczyk",
+            "effect": "Pocisk grzęźnie. Cel nie może wykonywać żadnych akcji przez ⌈1k10/2⌉ rund. Odporność Fizyczna trwale obniżona o 10."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Pocisk rozkawałkowuje obojczyk, rozrywa płuco",
+            "effect": "Pocisk grzęźnie. Cel musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia. Ryzyko Śmierci w ciągu 1k10 rund. Odporność Fizyczna i Odporność Psychiczna trwale obniżone o 10."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Kula miażdży obojczyk, rozrywa tętnicę",
+            "effect": "Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Pocisk przeszywa rękę, żebra, płuco i serce",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "body": [
+          {
+            "range": "01 – 09",
+            "title": "Pocisk ociera się o bok",
+            "effect": "Cel może tylko parować w najbliższej rundzie."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Kula rozcina skórę na boku klatki piersiowej",
+            "effect": "BGŁ obniżona o 10 w najbliższej rundzie."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Kula odbija się od mostka",
+            "effect": "Cel może tylko parować w najbliższej rundzie."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Pocisk rozcina skórę nad obojczykiem",
+            "effect": "Cel otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów)."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Kula rozcina skórę na plecach, mrowienie w nogach",
+            "effect": "Cel może tylko parować w najbliższej rundzie."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Pocisk w brzuch, uszk",
+            "effect": "Pocisk grzęźnie. Cel ma Utrudnienie do wszystkich testów. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Pocisk w brzuch, wypływa krew z kałem",
+            "effect": "Pocisk grzęźnie. Cel ma Utrudnienie do wszystkich testów. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG. Kara −10 do OG do czasu wyleczenia ciężkiego urazu jamy brzusznej.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Pocisk w brzuch",
+            "effect": "Pocisk grzęźnie. Cel musi zdać test Odporności Psychicznej z Utrudnieniem (co rundę), aby wykonać akcję. Ma Utrudnienie do wszystkich testów. Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Pocisk przebija żołądek",
+            "effect": "Pocisk grzęźnie. Cel musi zdać test Odporności Psychicznej z Utrudnieniem (co rundę), aby wykonać akcję. Ma Utrudnienie do wszystkich testów. Jeśli przeżyje bez odpowiedniego leczenia, Odporność Fizyczna trwale obniżona o 5."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Kula uszkadza pęcherz moczowy",
+            "effect": "Pocisk grzęźnie. Cel otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów)."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Pocisk rozkawałkowuje obojczyk",
+            "effect": "Pocisk grzęźnie. Cel musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia. Ma Utrudnienie do wszystkich testów."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Kula rozrywa tętnicę",
+            "effect": "Pocisk grzęźnie. Cel otrzymuje Ryzyko Śmierci oraz 3 poziomy Krwawienia. Do czasu stabilizacji ma Utrudnienie do wszystkich testów i ataków. Jeśli przeżyje, do czasu pełnego leczenia otrzymuje −10 do OG i Odporności Psychicznej."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Pocisk przebija płuco",
+            "effect": "Pocisk grzęźnie. Cel musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia. Odporność Psychiczna trwale obniżona o 10 (jeśli przeżyje)."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Kula przeszywa aortę",
+            "effect": "Ryzyko Śmierci w ciągu ⌈1k10/2⌉ rund."
+          },
+          {
+            "range": "127+",
+            "title": "Pocisk łamie żebro, które trafia w serce",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ],
+        "leg": [
+          {
+            "range": "01 – 09",
+            "title": "Pocisk ociera się o kostkę",
+            "effect": "BGŁ obniżona o 10 w najbliższej rundzie."
+          },
+          {
+            "range": "10 – 18",
+            "title": "Kula ociera się o palec",
+            "effect": "Cel może tylko parować w najbliższej rundzie."
+          },
+          {
+            "range": "19 – 27",
+            "title": "Pocisk ociera się o łydkę",
+            "effect": "Cel traci 5 Segmentów Szybkości w tej rundzie."
+          },
+          {
+            "range": "28 – 36",
+            "title": "Kula rozcina skórę nad kolanem",
+            "effect": "Cel otrzymuje stan Powalenie. Szybkość (SZ) obniżona o 1 w najbliższej rundzie."
+          },
+          {
+            "range": "37 – 45",
+            "title": "Pocisk odbija się od rzepki",
+            "effect": "Cel otrzymuje stan Oszołomienie (następna akcja jest pustą stratą 5 segmentów)."
+          },
+          {
+            "range": "46 – 54",
+            "title": "Kula grzęźnie w udzie",
+            "effect": "Pocisk grzęźnie. BGŁ obniżona o 20. Szybkość (SZ) obniżona o 1. Musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć infekcji; dalsze skutki infekcji ustala MG.",
+            "status": "WIP",
+            "note": "WIP: Gahla nie ma jeszcze osobnej, pełnej mechaniki infekcji; dalsze skutki rozstrzyga MG."
+          },
+          {
+            "range": "55 – 63",
+            "title": "Pocisk miażdży kości stopy",
+            "effect": "Pocisk grzęźnie. Szybkość (SZ) obniżona o połowę. Cel ma Utrudnienie do wszystkich testów."
+          },
+          {
+            "range": "64 – 72",
+            "title": "Kula w podudzie",
+            "effect": "Pocisk grzęźnie. Cel może tylko parować. Jeśli próbuje się ruszać/stąpać, musi wykonać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Oszołomienia. Szybkość (SZ) obniżona o połowę."
+          },
+          {
+            "range": "73 – 81",
+            "title": "Pocisk rozkawałkowuje ⌈1k10/2⌉ palców",
+            "effect": "Pocisk grzęźnie. BGŁ obniżona o 20. Szybkość (SZ) obniżona o 1 (trwale, jeśli utrata >3 palców)."
+          },
+          {
+            "range": "82 – 90",
+            "title": "Kula rozkawałkowuje kości biodra",
+            "effect": "Pocisk grzęźnie. Cel upada (Powalenie) i otrzymuje Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Musi zdać test Odporności Fizycznej z Utrudnieniem co rundę, aby uniknąć Oszołomienia. Szybkość (SZ) obniżona o połowę."
+          },
+          {
+            "range": "91 – 99",
+            "title": "Pocisk przebija udo i kość",
+            "effect": "Pocisk grzęźnie. Cel upada (Powalenie). Ma Utrudnienie do wszystkich testów i ataków. Szybkość (SZ) obniżona o połowę."
+          },
+          {
+            "range": "100 – 108",
+            "title": "Kula rozkawałkowuje podudzie",
+            "effect": "Cel otrzymuje stan Powalenie. Musi zdać test Odporności Psychicznej z Utrudnieniem co rundę, aby podjąć akcję. Ma Utrudnienie do wszystkich testów i ataków."
+          },
+          {
+            "range": "109 – 117",
+            "title": "Pocisk gruchocze rzepkę",
+            "effect": "Pocisk grzęźnie. Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w ciągu 1k10 rund. Szybkość (SZ) trwale obniżona o połowę (jeśli przeżyje)."
+          },
+          {
+            "range": "118 – 126",
+            "title": "Kula trafia w pachwinę, rozrywa tętnicę",
+            "effect": "Ryzyko Śmierci w ciągu 1k10 rund."
+          },
+          {
+            "range": "127+",
+            "title": "Pocisk trafia w udo i rozrywa tętnicę",
+            "effect": "Śmierć natychmiastowa."
+          }
+        ]
+      },
+      "status": "ACTIVE"
+    }
+  },
+  "elements": {
+    "label": "Obrażenia żywiołowe",
+    "source": "LW Tabelka full AI ELEMENTY.html",
+    "tables": {
+      "fire": [
+        {
+          "range": "01 – 09",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Lekkie poparzenie, BGŁ −10 na 1 rundę."
+        },
+        {
+          "range": "10 – 18",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Podpalenie (1k10 obrażeń), gaśnie za 1/2 SZ."
+        },
+        {
+          "range": "19 – 27",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Podpalenie (2k10), gaśnie za 1/2 SZ. BGŁ −20."
+        },
+        {
+          "range": "28 – 36",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Podpalenie (2k10). Musi zdać test Odporności Fizycznej z Utrudnieniem, aby nie Oszołomić się."
+        },
+        {
+          "range": "37 – 45",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Podpalenie (3k10). Cel ma Utrudnienie do wszystkich testów."
+        },
+        {
+          "range": "46 – 54",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Podpalenie (3k10). BGŁ −20 trwale (od bólu)."
+        },
+        {
+          "range": "55 – 63",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Trwała kara −10 do Odporności Fizycznej (od blizn/poparzeń)."
+        },
+        {
+          "range": "64 – 72",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Podpalenie (4k10). Krwawienie (1k10/rundę)."
+        },
+        {
+          "range": "73 – 81",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Podpalenie (5k10). BGŁ i SF −20 do leczenia."
+        },
+        {
+          "range": "82 – 90",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Trwały Paraliż (np. kończyny) z powodu uszkodzenia nerwów (wymaga specjalistycznego leczenia; sposób ustala MG)."
+        },
+        {
+          "range": "91 – 99",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (1k10 rund). Trwałe Utrudnienie do wszystkich testów fizyczne."
+        },
+        {
+          "range": "100 – 108",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (⌈1k10/2⌉ rund). Trwale −20 do Odporności Fizycznej."
+        },
+        {
+          "range": "109 – 117",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (⌈1k10/2⌉ rund). Trwałe Utrudnienie do wszystkich testów."
+        },
+        {
+          "range": "118 – 126",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci: bez stabilizacji cel umiera po 1–2 rundach."
+        },
+        {
+          "range": "127+",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Śmierć natychmiastowa."
+        }
+      ],
+      "ice": [
+        {
+          "range": "01 – 09",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "BGŁ −10, dodatkowy ruch kosztuje +1 Segment."
+        },
+        {
+          "range": "10 – 18",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Zamarznięcie (1 runda). Testy ZR z Utrudnieniem."
+        },
+        {
+          "range": "19 – 27",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Zamarznięcie (1 runda). Darmowy ruch = 0 do początku następnej rundy."
+        },
+        {
+          "range": "28 – 36",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Zamarznięcie. Cel traci 1 Segment Szybkości trwale (do leczenia)."
+        },
+        {
+          "range": "37 – 45",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Zamarznięcie. Otrzymuje 1k10 obrażeń (zimno). ZR trwale −5."
+        },
+        {
+          "range": "46 – 54",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Zamarznięcie. Powalenie. Odporność Fizyczna trwale −5."
+        },
+        {
+          "range": "55 – 63",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Trwałe Utrudnienie do testów ZR. SF −10 do leczenia."
+        },
+        {
+          "range": "64 – 72",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Zamarznięcie. Trwała kara −10 do BGŁ i ZR."
+        },
+        {
+          "range": "73 – 81",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Zamarznięcie. Ryzyko Śmierci; czas do śmierci ustala MG."
+        },
+        {
+          "range": "82 – 90",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Trwałe Utrudnienie do wszystkich testów fizyczne."
+        },
+        {
+          "range": "91 – 99",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Trwała Utrata Kończyny (wymaga specjalistycznego leczenia; sposób ustala MG). Ryzyko Śmierci (1k10 rund)."
+        },
+        {
+          "range": "100 – 108",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (⌈1k10/2⌉ rund). Trwale −20 do Odporności Fizycznej."
+        },
+        {
+          "range": "109 – 117",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (⌈1k10/2⌉ rund). Trwałe Utrudnienie do wszystkich testów."
+        },
+        {
+          "range": "118 – 126",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci: bez stabilizacji cel umiera po 1–2 rundach."
+        },
+        {
+          "range": "127+",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Śmierć natychmiastowa."
+        }
+      ],
+      "lightning": [
+        {
+          "range": "01 – 09",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Krótki wstrząs, utrata 3 Segmentów Szybkości (SZ) w tej rundzie."
+        },
+        {
+          "range": "10 – 18",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Przerwanie akcji."
+        },
+        {
+          "range": "19 – 27",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Oszołomienie (następna akcja jest pustą stratą 5 segmentów). Utrata 1 punktów Aury."
+        },
+        {
+          "range": "28 – 36",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Utrata zdolności do rzucania czarów/cudów w najbliższej rundzie."
+        },
+        {
+          "range": "37 – 45",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Szok: Przerwanie akcji. −10 do wszystkich Odporności na 1 rundę."
+        },
+        {
+          "range": "46 – 54",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Szok: Musi zdać test Odporności Fizycznej z Utrudnieniem, aby uniknąć Uśpienia."
+        },
+        {
+          "range": "55 – 63",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Szok: Traci zdolność reakcji w tej rundzie i następnej."
+        },
+        {
+          "range": "64 – 72",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Szok: Trwałe Utrudnienie do testów UM/WIA."
+        },
+        {
+          "range": "73 – 81",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Szok: ER trwale −10. Cel ma Utrudnienie do wszystkich testów Magicznej/Duchowej."
+        },
+        {
+          "range": "82 – 90",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Szok: Cel traci przytomność (mechanicznie: Uśpienie). UM/WIA trwale −15."
+        },
+        {
+          "range": "91 – 99",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Szok: Traci zdolność rzucania czarów/cudów (wymaga specjalistycznego leczenia; sposób ustala MG). Ryzyko Śmierci (1k10 rund)."
+        },
+        {
+          "range": "100 – 108",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Szok: Ryzyko Śmierci (⌈1k10/2⌉ rund). UM/WIA trwale −20."
+        },
+        {
+          "range": "109 – 117",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Szok: Cel traci przytomność (mechanicznie: Uśpienie). Ryzyko Śmierci w 1 rundę."
+        },
+        {
+          "range": "118 – 126",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci: bez stabilizacji cel umiera po 1–2 rundach."
+        },
+        {
+          "range": "127+",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Śmierć natychmiastowa."
+        }
+      ],
+      "earth": [
+        {
+          "range": "01 – 09",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Lekki wstrząs, Powalenie; wstanie odbywa się według zwykłych zasad."
+        },
+        {
+          "range": "10 – 18",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Powalenie. Utrudnienie na 1 akcję."
+        },
+        {
+          "range": "19 – 27",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Powalenie. BGŁ −20 do końca rundy."
+        },
+        {
+          "range": "28 – 36",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Cel musi zdać Odporność Fizyczna z Utrudnieniem, by uniknąć Oszołomienia."
+        },
+        {
+          "range": "37 – 45",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Powalenie. Traci 5 Segmentów Szybkości co rundę (Oszołomienie)."
+        },
+        {
+          "range": "46 – 54",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Traci 1 Segment Szybkości trwale. BGŁ trwale −10."
+        },
+        {
+          "range": "55 – 63",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Trwała kara −10 do SF i ZR (do leczenia)."
+        },
+        {
+          "range": "64 – 72",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Powalenie. BGŁ i SF trwale −10."
+        },
+        {
+          "range": "73 – 81",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Powalenie. Ryzyko Śmierci; czas do śmierci ustala MG."
+        },
+        {
+          "range": "82 – 90",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Trwałe Utrudnienie do wszystkich testów fizyczne."
+        },
+        {
+          "range": "91 – 99",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Trwała Utrata Kończyny. Ryzyko Śmierci (1k10 rund)."
+        },
+        {
+          "range": "100 – 108",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (⌈1k10/2⌉ rund). Trwale −20 do Odporności Fizycznej."
+        },
+        {
+          "range": "109 – 117",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (⌈1k10/2⌉ rund). Trwałe Utrudnienie do wszystkich testów."
+        },
+        {
+          "range": "118 – 126",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci: bez stabilizacji cel umiera po 1–2 rundach."
+        },
+        {
+          "range": "127+",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Śmierć natychmiastowa."
+        }
+      ],
+      "water": [
+        {
+          "range": "01 – 09",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Traci 1 punkt Aury (nie poniżej 0). Trafienie dystansowe −5."
+        },
+        {
+          "range": "10 – 18",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Traci do 2 punktów Aury (nie poniżej 0). Utrudnienie na testy PER."
+        },
+        {
+          "range": "19 – 27",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Traci do 3 punktów Aury (nie poniżej 0). Utrudnienie do wszystkich testów UM/WIA do końca walki."
+        },
+        {
+          "range": "28 – 36",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Traci do 4 punktów Aury (nie poniżej 0). UM/WIA trwale −5."
+        },
+        {
+          "range": "37 – 45",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Traci do 5 punktów Aury (nie poniżej 0). ER trwale −5."
+        },
+        {
+          "range": "46 – 54",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Traci do 6 punktów Aury (nie poniżej 0). Utrudnienie do wszystkich testów BGŁ."
+        },
+        {
+          "range": "55 – 63",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Traci do 7 punktów Aury (nie poniżej 0). Test UM/WIA z Utrudnieniem."
+        },
+        {
+          "range": "64 – 72",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Traci do 8 punktów Aury (nie poniżej 0). Test UM/WIA z Utrudnieniem."
+        },
+        {
+          "range": "73 – 81",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Traci do 9 punktów Aury (nie poniżej 0). UM/WIA trwale −10."
+        },
+        {
+          "range": "82 – 90",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Traci do 10 punktów Aury (nie poniżej 0). ER trwale −10."
+        },
+        {
+          "range": "91 – 99",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Cel traci całą Aurę i 1 Ranę. Trwale Utrudnienie do testów UM/WIA."
+        },
+        {
+          "range": "100 – 108",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (⌈1k10/2⌉ rund). Strata 2 Ran."
+        },
+        {
+          "range": "109 – 117",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (⌈1k10/2⌉ rund). Trwałe Utrudnienie do wszystkich testów."
+        },
+        {
+          "range": "118 – 126",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci: bez stabilizacji cel umiera po 1–2 rundach."
+        },
+        {
+          "range": "127+",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Śmierć natychmiastowa."
+        }
+      ],
+      "wind": [
+        {
+          "range": "01 – 09",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Odepchnięcie 2 metry. BGŁ −5."
+        },
+        {
+          "range": "10 – 18",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Odepchnięcie 4 metry. Otrzymuje Oszołomienie (następna akcja jest pustą stratą 5 segmentów)."
+        },
+        {
+          "range": "19 – 27",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Odepchnięcie 6 metrów. Powalenie."
+        },
+        {
+          "range": "28 – 36",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Odepchnięcie 8 metrów. Oszołomienie."
+        },
+        {
+          "range": "37 – 45",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Odepchnięcie 10 metrów. Utrudnienie do wszystkich testów i ataków."
+        },
+        {
+          "range": "46 – 54",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Powalenie. Traci 5 Segmentów Szybkości."
+        },
+        {
+          "range": "55 – 63",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Utrudnienie do Uniku i Parowania na 1 rundę."
+        },
+        {
+          "range": "64 – 72",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Powalenie. Wszyscy sojusznicy w 5m Odepchnięci 2m."
+        },
+        {
+          "range": "73 – 81",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Powalenie. Ryzyko Śmierci; czas do śmierci ustala MG."
+        },
+        {
+          "range": "82 – 90",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Cel Powalony/Odepchnięty. Trwałe Utrudnienie do wszystkich testów fizyczne."
+        },
+        {
+          "range": "91 – 99",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Trwała Utrata Kończyny (jeśli trafiło w kończynę)."
+        },
+        {
+          "range": "100 – 108",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (⌈1k10/2⌉ rund). Trwale −20 do Odporności Fizycznej."
+        },
+        {
+          "range": "109 – 117",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (⌈1k10/2⌉ rund). Trwałe Utrudnienie do wszystkich testów."
+        },
+        {
+          "range": "118 – 126",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci: bez stabilizacji cel umiera po 1–2 rundach."
+        },
+        {
+          "range": "127+",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Śmierć natychmiastowa."
+        }
+      ],
+      "light": [
+        {
+          "range": "01 – 09",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Przejściowe rozproszenie. PER −5."
+        },
+        {
+          "range": "10 – 18",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ślepota (1 runda)."
+        },
+        {
+          "range": "19 – 27",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ślepota (⌈1k10/2⌉ rund)."
+        },
+        {
+          "range": "28 – 36",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Otrzymuje stan Uśpienie."
+        },
+        {
+          "range": "37 – 45",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ślepota (1k10 rund)."
+        },
+        {
+          "range": "46 – 54",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Otrzymuje Krwawienie (1k10/rundę)."
+        },
+        {
+          "range": "55 – 63",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ślepota (trwale)."
+        },
+        {
+          "range": "64 – 72",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ślepota (trwale). Wszyscy rzucający czary/cuda w 10m Oślepieni."
+        },
+        {
+          "range": "73 – 81",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ślepota (trwale). Ryzyko Śmierci; czas do śmierci ustala MG."
+        },
+        {
+          "range": "82 – 90",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Odporność Psychiczna trwale −10."
+        },
+        {
+          "range": "91 – 99",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ślepota (trwale). Odporność Psychiczna trwale −15."
+        },
+        {
+          "range": "100 – 108",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (⌈1k10/2⌉ rund). Trwale −20 do Odporności Psychicznej."
+        },
+        {
+          "range": "109 – 117",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (⌈1k10/2⌉ rund). Trwałe Utrudnienie do wszystkich testów."
+        },
+        {
+          "range": "118 – 126",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci: bez stabilizacji cel umiera po 1–2 rundach."
+        },
+        {
+          "range": "127+",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Śmierć natychmiastowa."
+        }
+      ],
+      "shadow": [
+        {
+          "range": "01 – 09",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Chwilowy lęk. BGŁ −5."
+        },
+        {
+          "range": "10 – 18",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Przerażenie (1 runda)."
+        },
+        {
+          "range": "19 – 27",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Przerażenie (⌈1k10/2⌉ rund)."
+        },
+        {
+          "range": "28 – 36",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Otrzymuje stan Uśpienie."
+        },
+        {
+          "range": "37 – 45",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Przerażenie (1k10 rund)."
+        },
+        {
+          "range": "46 – 54",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Otrzymuje Krwawienie (1k10/rundę)."
+        },
+        {
+          "range": "55 – 63",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Przerażenie (trwale)."
+        },
+        {
+          "range": "64 – 72",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Przerażenie (trwale). Wszyscy sojusznicy w 5m Oszołomieni."
+        },
+        {
+          "range": "73 – 81",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Przerażenie (trwale). Ryzyko Śmierci; czas do śmierci ustala MG."
+        },
+        {
+          "range": "82 – 90",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Cel traci przytomność (mechanicznie: Uśpienie). Odporność Duchowa trwale −10."
+        },
+        {
+          "range": "91 – 99",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Przerażenie (trwale). Odporność Duchowa trwale −15."
+        },
+        {
+          "range": "100 – 108",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (⌈1k10/2⌉ rund). Trwale −20 do Odporności Duchowej."
+        },
+        {
+          "range": "109 – 117",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci (⌈1k10/2⌉ rund). Trwałe Utrudnienie do wszystkich testów."
+        },
+        {
+          "range": "118 – 126",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Ryzyko Śmierci: bez stabilizacji cel umiera po 1–2 rundach."
+        },
+        {
+          "range": "127+",
+          "title": "Trwała Rana żywiołowa",
+          "effect": "Śmierć natychmiastowa."
+        }
+      ]
+    },
+    "status": "WIP",
+    "note": "WIP: źródłowy arkusz był oznaczony jako tabela AI. Zachowano jako WIP i znormalizowano wyłącznie terminologię do Gahli."
+  },
+  "normalization_note": "Opisy z arkuszy zostały znormalizowane do terminologii Gahli. Wpisy bez bezpośredniego odpowiednika mechanicznego są oznaczone WIP; Foundry nie nakłada trwałych konsekwencji automatycznie."
+}
+

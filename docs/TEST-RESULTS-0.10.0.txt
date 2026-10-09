@@ -1,0 +1,27 @@
+Syntax: 54 modules; JSON: 6; errors: 0
+PASS ability-builder-regression.mjs
+PASS armor-regression.mjs
+PASS automation-ability-regression.mjs
+PASS automation-chat-regression.mjs
+PASS automation-encounter-regression.mjs
+PASS automation-engine-regression.mjs
+PASS automation-purchase-regression.mjs
+PASS automation-runtime-regression.mjs
+PASS boot-smoke.mjs
+PASS combat-integration-regression.mjs
+PASS core-regression.mjs
+PASS encounter-regression.mjs
+PASS failure-tables-regression.mjs
+PASS item-data-regression.mjs
+PASS lingering-wounds-regression.mjs
+PASS maneuver-overlay-regression.mjs
+PASS rules-regression.mjs
+PASS talent-balance-regression.mjs
+PASS talent-eligibility-regression.mjs
+PASS talent-tree-regression.mjs
+PASS tracker-regression.mjs
+PASS ui-regression.mjs
+22/22 PASS
+
+Manifest version: 0.10.0-beta
+VERIFIED

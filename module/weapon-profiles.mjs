@@ -1,0 +1,2 @@
+export const WEAPON_PROFILES=Object.freeze({dagger:'Sztylet',parryingDagger:'Lewak',shortSword:'Krótki Miecz',longSword:'Długi Miecz',bastardSword:'Miecz Półtoraręczny',greatSword:'Dwuręczny Miecz',hatchet:'Toporek',battleAxe:'Topór Bojowy',greatAxe:'Dwuręczny Topór Bojowy',club:'Maczuga',mace:'Buzdygan',warHammer:'Młot Bojowy',greatHammer:'Młot Dwuręczny',spear:'Włócznia',halberd:'Halabarda'});
+export function profileForName(name){return name==='Walka bez broni'?'unarmed':Object.entries(WEAPON_PROFILES).find(([,v])=>v===name)?.[0]??'';}
